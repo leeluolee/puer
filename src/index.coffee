@@ -1,7 +1,6 @@
 'use strict'
 fs = require 'fs'
 sysPath = require 'path'
-mkdirp = require 'mkdirp' # mkdirp
 express = require 'express'
 http = require 'http'
 io = require 'socket.io'
@@ -88,14 +87,8 @@ autoReload = (server, app, path = pwd) ->
 # 1.exposure
 ##############################################
 
-module.exports =
-    create: (from, root, callback) ->
-      fs.unlink (sysPath.join ['__dirname', '..', 'tfs']) ,(err) ->
-        throw err if err?
-        console.log 'successfully unlink file', arguments
-    server: (port = 8008, hasAutoreload = true) ->
+module.exports = (port = 8008, hasAutoreload = true) ->
       app = express()
-
       if hasAutoreload 
         # watch all html request and inject /reload.js 
         app.get /^(.*(\.html))$/,(req,res,next) ->
@@ -126,8 +119,4 @@ module.exports =
         console.log "server start at localhost:8008"
         console.log "your computer has no-interval ip as follow: #{ipInfo}. choose one for outer watching"
         (require "open") "http://localhost:#{port}/index.html"
-
-    copy: require "./copy"      
-    wrap: require "./wrapper"
-
 

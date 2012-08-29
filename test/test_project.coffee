@@ -1,3 +1,4 @@
-# project = require "../lib"
+OptionParser = require "../lib/OptionParser"
+
 
 
