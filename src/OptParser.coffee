@@ -19,17 +19,11 @@ class OptParser extends EventEmitter
     opts = JSON.parse fs.readFileSync opts if typeof opts is "string" 
     @on opts if opts?
   config: (opts) ->
-  options: (char..., callback) ->
+  options: (opts..., callback) ->
     # ...
   parse: (argv) ->
     # ...
-  
-  
-
-
-      
-      
-  _action: () ->
+  action: () ->
   
   run:(argv) ->
 

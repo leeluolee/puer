@@ -1,0 +1,233 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/bin/npm', 'install' ]
+info using npm@1.1.4
+info using node@v0.6.12
+verbose config file /home/luobo/.npmrc
+verbose config file /usr/etc/npmrc
+verbose config file /usr/share/npm/npmrc
+verbose caching /home/code/cla/puer/package.json
+verbose loadDefaults puer@0.0.1
+verbose readDependencies: using package.json deps
+verbose where, deps [ '/home/code/cla/puer',
+verbose where, deps   [ 'coffee-script',
+verbose where, deps     'mkdirp',
+verbose where, deps     'express',
+verbose where, deps     'socket.io',
+verbose where, deps     'watch-tree-maintained',
+verbose where, deps     'open',
+verbose where, deps     'marked',
+verbose where, deps     'nodeunit' ] ]
+verbose from cache /home/code/cla/puer/package.json
+info preinstall puer@0.0.1
+verbose caching /home/code/cla/puer/node_modules/socket.io/package.json
+verbose caching /home/code/cla/puer/node_modules/marked/package.json
+verbose caching /home/code/cla/puer/node_modules/watch-tree-maintained/package.json
+verbose caching /home/code/cla/puer/node_modules/open/package.json
+verbose caching /home/code/cla/puer/node_modules/nodeunit/package.json
+verbose caching /home/code/cla/puer/node_modules/mkdirp/package.json
+verbose caching /home/code/cla/puer/node_modules/express/package.json
+verbose from cache /home/code/cla/puer/package.json
+verbose readDependencies: using package.json deps
+verbose from cache /home/code/cla/puer/node_modules/open/package.json
+verbose from cache /home/code/cla/puer/node_modules/socket.io/package.json
+verbose from cache /home/code/cla/puer/node_modules/express/package.json
+verbose from cache /home/code/cla/puer/node_modules/watch-tree-maintained/package.json
+verbose from cache /home/code/cla/puer/node_modules/nodeunit/package.json
+verbose from cache /home/code/cla/puer/node_modules/marked/package.json
+verbose from cache /home/code/cla/puer/node_modules/mkdirp/package.json
+verbose cache add [ 'coffee-script@>0.1', null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'coffee-script@>0.1',
+silly cache add: name, spec, args   [ 'coffee-script@>0.1', null ] ]
+verbose parsed url { pathname: 'coffee-script@',
+verbose parsed url   path: 'coffee-script@',
+verbose parsed url   href: 'coffee-script@' }
+silly cache add: name, spec, args [ 'coffee-script', '>0.1', [ 'coffee-script', '>0.1' ] ]
+verbose parsed url { pathname: '0.1', path: '0.1', href: '0.1' }
+verbose addNamed [ 'coffee-script', '>0.1' ]
+verbose addNamed [ null, '>0.1.0-' ]
+silly name, range, hasData [ 'coffee-script', '>0.1.0-', false ]
+verbose already installed in /home/code/cla/puer skipping mkdirp@>0.3
+verbose already installed in /home/code/cla/puer skipping express@>= 3.0
+verbose already installed in /home/code/cla/puer skipping socket.io@>= 0.1
+verbose already installed in /home/code/cla/puer skipping watch-tree-maintained@>=0.1.2
+verbose already installed in /home/code/cla/puer skipping open@>0.0.1
+verbose already installed in /home/code/cla/puer skipping marked@~0.2
+verbose already installed in /home/code/cla/puer skipping nodeunit@>=0.5.0
+verbose raw, before any munging coffee-script
+verbose url resolving [ 'https://registry.npmjs.org/', './coffee-script' ]
+verbose url resolved https://registry.npmjs.org/coffee-script
+verbose etag "EA1ZFI3UENAOJYFXH3C1M3LCX"
+http GET https://registry.npmjs.org/coffee-script
+http 304 https://registry.npmjs.org/coffee-script
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"EA1ZFI3UENAOJYFXH3C1M3LCX"',
+silly get cb     date: 'Thu, 30 Aug 2012 08:07:30 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag coffee-script from cache
+silly name, range, hasData 2 [ 'coffee-script', '>0.1.0-', true ]
+silly versions [ 'coffee-script',
+silly versions   [ '0.7.0',
+silly versions     '0.7.1',
+silly versions     '0.7.2',
+silly versions     '0.9.0',
+silly versions     '0.9.1',
+silly versions     '0.9.2',
+silly versions     '0.9.3',
+silly versions     '0.9.4',
+silly versions     '0.9.5',
+silly versions     '0.9.6',
+silly versions     '1.0.0',
+silly versions     '1.0.1',
+silly versions     '1.1.0',
+silly versions     '1.1.1',
+silly versions     '1.1.2',
+silly versions     '1.1.3',
+silly versions     '1.2.0',
+silly versions     '1.3.0',
+silly versions     '1.3.1',
+silly versions     '1.3.2',
+silly versions     '1.3.3' ] ]
+verbose bin dist [ '0.6-ares1.7.5-evundefined-openssl1.0.1-v83.7.12.22-linux-x64-3.2.0-27-generic',
+verbose bin dist   { shasum: '150d6b4cb522894369efed6a2101c20bc7f4a4f4',
+verbose bin dist     tarball: 'http://registry.npmjs.org/coffee-script/-/coffee-script-1.3.3.tgz' } ]
+verbose caching /home/luobo/.npm/coffee-script/1.3.3/package/package.json
+verbose loadDefaults coffee-script@1.3.3
+silly resolved [ { name: 'coffee-script',
+silly resolved     description: 'Unfancy JavaScript',
+silly resolved     keywords: [ 'javascript', 'language', 'coffeescript', 'compiler' ],
+silly resolved     author: { name: 'Jeremy Ashkenas' },
+silly resolved     version: '1.3.3',
+silly resolved     licenses: 
+silly resolved      [ { type: 'MIT',
+silly resolved          url: 'https://raw.github.com/jashkenas/coffee-script/master/LICENSE' } ],
+silly resolved     engines: { node: '>=0.4.0' },
+silly resolved     directories: { lib: './lib/coffee-script' },
+silly resolved     main: './lib/coffee-script/coffee-script',
+silly resolved     bin: { coffee: './bin/coffee', cake: './bin/cake' },
+silly resolved     homepage: 'http://coffeescript.org',
+silly resolved     bugs: { name: 'https://github.com/jashkenas/coffee-script/issues' },
+silly resolved     repository: 
+silly resolved      { type: 'git',
+silly resolved        url: 'git://github.com/jashkenas/coffee-script.git' },
+silly resolved     devDependencies: { 'uglify-js': '>=1.0.0', jison: '>=0.2.0' },
+silly resolved     _npmUser: { name: 'leeluolee', email: '87399126@163.com' },
+silly resolved     _id: 'coffee-script@1.3.3',
+silly resolved     dependencies: {},
+silly resolved     optionalDependencies: {},
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.1.4',
+silly resolved     _nodeVersion: 'v0.6.12',
+silly resolved     _defaultsLoaded: true,
+silly resolved     _from: 'coffee-script@>0.1',
+silly resolved     scripts: {} } ]
+info into /home/code/cla/puer coffee-script@1.3.3
+info installOne coffee-script@1.3.3
+verbose from cache /home/luobo/.npm/coffee-script/1.3.3/package/package.json
+info unbuild /home/code/cla/puer/node_modules/coffee-script
+verbose mkdir (expected) error ENOENT, no such file or directory '/home/code/cla/puer/node_modules/___coffee-script.npm'
+verbose mkdir done: /home/code/cla/puer/node_modules/___coffee-script.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /home/code/cla/puer/node_modules/coffee-script
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar ok
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/package.json
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/CNAME
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/LICENSE
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/README
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/Rakefile
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/.npmignore
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/extras
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/extras/jsl.conf
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/bin
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/bin/coffee
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/bin/cake
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/index.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/helpers.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/optparse.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/grammar.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/cake.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/nodes.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/command.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/parser.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/rewriter.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/scope.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/coffee-script.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/browser.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/repl.js
+silly asyncMap in gTP /home/code/cla/puer/node_modules/___coffee-script.npm/package/lib/coffee-script/lexer.js
+silly chmod package 755
+verbose gunzed /home/code/cla/puer/node_modules/___coffee-script.npm/package
+verbose rm'ed /home/code/cla/puer/node_modules/coffee-script
+verbose renamed [ '/home/code/cla/puer/node_modules/___coffee-script.npm/package',
+verbose renamed   '/home/code/cla/puer/node_modules/coffee-script' ]
+verbose caching /home/code/cla/puer/node_modules/coffee-script/package.json
+verbose loadDefaults coffee-script@1.3.3
+info preinstall coffee-script@1.3.3
+verbose from cache /home/code/cla/puer/node_modules/coffee-script/package.json
+verbose readDependencies: using package.json deps
+verbose from cache /home/code/cla/puer/node_modules/coffee-script/package.json
+verbose readDependencies: using package.json deps
+silly resolved []
+verbose about to build /home/code/cla/puer/node_modules/coffee-script
+info build /home/code/cla/puer/node_modules/coffee-script
+verbose from cache /home/code/cla/puer/node_modules/coffee-script/package.json
+verbose linkStuff [ false, false, false, '/home/code/cla/puer/node_modules' ]
+info linkStuff coffee-script@1.3.3
+verbose linkBins coffee-script@1.3.3
+verbose bins linking [ { coffee: './bin/coffee', cake: './bin/cake' },
+verbose bins linking   '/home/code/cla/puer/node_modules/.bin',
+verbose bins linking   false ]
+verbose linkMans coffee-script@1.3.3
+verbose rebuildBundles coffee-script@1.3.3
+info install coffee-script@1.3.3
+info postinstall coffee-script@1.3.3
+verbose installOne cb coffee-script@1.3.3
+info build /home/code/cla/puer
+verbose from cache /home/code/cla/puer/package.json
+verbose linkStuff [ false, false, false, '/home/code/cla' ]
+info linkStuff puer@0.0.1
+verbose linkBins puer@0.0.1
+verbose linkMans puer@0.0.1
+verbose rebuildBundles puer@0.0.1
+verbose rebuildBundles [ 'open',
+verbose rebuildBundles   'socket.io',
+verbose rebuildBundles   '.bin',
+verbose rebuildBundles   'express',
+verbose rebuildBundles   'watch-tree-maintained',
+verbose rebuildBundles   'nodeunit',
+verbose rebuildBundles   'marked',
+verbose rebuildBundles   'mkdirp',
+verbose rebuildBundles   'coffee-script' ]
+info install puer@0.0.1
+info postinstall puer@0.0.1
+verbose unsafe-perm in lifecycle true
+silly exec sh "-c" "node setup.js"
+silly spawning [ 'sh', [ '-c', 'node setup.js' ], '/home/code/cla/puer' ]
+info puer@0.0.1 Failed to exec postinstall script
+ERR! puer@0.0.1 postinstall: `node setup.js`
+ERR! `sh "-c" "node setup.js"` failed with 1
+ERR! 
+ERR! Failed at the puer@0.0.1 postinstall script.
+ERR! This is most likely a problem with the puer package,
+ERR! not with npm itself.
+ERR! Tell the author that this fails on your system:
+ERR!     node setup.js
+ERR! You can get their info via:
+ERR!     npm owner ls puer
+ERR! There is likely additional logging output above.
+ERR! 
+ERR! System Linux 3.2.0-27-generic
+ERR! command "node" "/usr/bin/npm" "install"
+ERR! cwd /home/code/cla/puer
+ERR! node -v v0.6.12
+ERR! npm -v 1.1.4
+ERR! code ELIFECYCLE
+ERR! message puer@0.0.1 postinstall: `node setup.js`
+ERR! message `sh "-c" "node setup.js"` failed with 1
+ERR! errno {}
+verbose exit [ 1, true ]

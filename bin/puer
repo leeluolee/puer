@@ -4,8 +4,8 @@ var path = require('path');
 var fs = require('fs');
 
 var lib = path.join(path.dirname(fs.realpathSync(__filename)), '..', 'lib');
-var luobo = require(lib);
+var puer = require(lib);
 
 var args = process.argv.slice(2);
 var pwd = process.env.PWD;
-luobo[args[0]]();
+puer();
