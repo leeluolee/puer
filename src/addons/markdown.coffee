@@ -3,20 +3,13 @@ fs =require "fs"
 marked = require 'marked'
 
 existsSync = fs.existsSync or sysPath.existsSync
-{send} = require("../helper")
 
 module.exports = (app, server, options = {}) ->
-  app.get "/css/markdown.css", (req, res, next)->
-    send sysPath.join(__dirname, "../..", "vendor/css/markdown.css"), res, "text/css"
 
-  app.get "/pretty.js", (req, res, next) -> 
-    send sysPath.join(__dirname, "../..", "vendor/pretty.js"), res, "text/javascript"
-    
   app.get /^\/(.*\.(?:markdown|md|txt))$/, (req, res, next) ->
     path = sysPath.join options.dir, req.params[0]
     if existsSync path
       fs.readFile path, "utf8", (err, data) ->
-        marked.setOp
         markdown = marked data
         resBody = 
           """
@@ -26,7 +19,7 @@ module.exports = (app, server, options = {}) ->
             <meta charset="UTF-8">
             <title>markdown</title>
             <link href='/css/markdown.css' rel='stylesheet'/>
-            <script src='/reload.js'></script>
+            #{if options.reload then "<script src='/js/reload.js'></script>" else ""}
             <script src='/pretty.js'></script>
           </head>
           <body onload="highlight()">
