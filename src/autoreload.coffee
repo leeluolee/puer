@@ -16,5 +16,5 @@ module.exports = (app, server, options) ->
     watcher.on "fileModified" ,(path) ->
       data = "path": path
       # if css file modified   dont't reload page just update the link.href
-      data.css = path.slice pwd.length if ~path.indexOf ".css"
+      data.css = path.slice options.dir.length if ~path.indexOf ".css"
       socket.emit "update", data

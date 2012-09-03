@@ -7,7 +7,7 @@ module.exports = (app, server, options) ->
       filepath = sysPath.join options.dir, req.params[0]
       if existsSync filepath
         file = fs.readFileSync filepath, "utf8"
-        if not ~file.indexOf "/js/reload.js" and options.reload
+        if (not ~file.indexOf "/js/reload.js") and options.reload
           seps = file.split "</head>"  #TODO: change to buffer operation
           seps.splice 1 ,0 ,'<script src="/js/reload.js"></script></head>'
           file = seps.join ""

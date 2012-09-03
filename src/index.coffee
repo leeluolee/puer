@@ -16,7 +16,7 @@ processOptions = (options) ->
     # autemate launch browser
     launch:true
     # plugins (generally, will be some routing rules)
-    addons:[]
+    addons:null
     # ignored watching type
     ignored:[]
     # add watching file
@@ -53,5 +53,5 @@ module.exports = (options = {}) ->
       #  start the server
       startServer server, options.port, ->       
         console.log "server start at localhost:#{options.port}, puer will launch your browser later"
-        (require "open") "http://localhost:#{options.port}"
+        (require "open") "http://localhost:#{options.port}" if options.launch
 

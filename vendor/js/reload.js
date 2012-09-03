@@ -3317,7 +3317,6 @@ var io = ('undefined' === typeof module ? {} : module.exports);
 var autoreload=function(){
       var location = window.location,
           origin = location.protocol+"//"+location.host;
-          console.log(origin)
       var socket = io.connect(origin); 
       var stylesheets = document.getElementsByTagName("link");
       var cacheBuster = function(url){

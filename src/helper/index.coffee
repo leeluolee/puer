@@ -4,25 +4,11 @@ sysPath = require "path"
 # utils 
 pad = (num) ->
   if num<10 then "0"+num else num
-
-
-longReg = /^-([^-]+)\s*((?:[\w\u00a1-\uFFFF])*)?$/
-shortReg = /^--([^-]+)=((?:[\w\u00a1-\uFFFF])*)?$/    #long options (option and arg)
-
-
-class Parser
-  constructor: (config) ->
-
-  options:(options) ->
-
-  on:(config..., callback) ->
-    options = {}
-    config.forEach (line) ->
-  run:(argv) ->
-
-  _output:(usage, options) ->
   
-  
+
+extendOne = (obj, index ,item)->
+  obj[index] = item
+  # ...
 
     
     
@@ -30,8 +16,10 @@ class Parser
   
 
 
-module.exports =
+module.exports = helper =
   colorify :require "./colorify"
+  Parser: require "./parser"
+
   getLocalIP: () ->
 
   # formatting date
@@ -50,9 +38,11 @@ module.exports =
     if obj is null or obj is undefined then String obj 
     else Object::toString.call(obj).slice 8, -1
   # simple extend   
-  extend: (obj1, obj2, override) ->
-    obj1[i] = item for i, item of obj2 when not obj1[i] or override
-  
+  extend: (obj1, obj2, override, callback = extendOne) ->
+    callback(obj1, i, item) for i, item of obj2 when not obj1[i] or override
+  merge: (obj1, obj2)->
+    helper.extend(obj1, obj2, true)
+
   # just for deletting the addons's configure file
   requireFolder: (dir) ->
     files = fs.readdirSync dir
