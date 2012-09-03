@@ -8,7 +8,7 @@ module.exports = (app, server, options) ->
       if existsSync filepath
         file = fs.readFileSync filepath, "utf8"
         if not ~file.indexOf "/js/reload.js" and options.reload
-          seps = file.split "</head>"  #TODO: 直接操作字符串 性能太差
+          seps = file.split "</head>"  #TODO: change to buffer operation
           seps.splice 1 ,0 ,'<script src="/js/reload.js"></script></head>'
           file = seps.join ""
         res.setHeader "Content-Type", "text/html"
