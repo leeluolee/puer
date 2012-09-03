@@ -6,35 +6,41 @@ sysPath = require "path"
 # local module
 helper = require "./helper"
 
+
 # defaults options
 processOptions = (options) ->
   helper.extend options, 
+    # listener port
     port:8000
+    # auto-reload  
     reload:true
     # working folder
     dir:process.cwd()
     # autemate launch browser
     launch:true
-    # plugins (generally, will be some routing rules)
-    addons:null
+    # plugins (generally, will be some route-rules, see src/addons folder to get help)
+    addon:null
     # ignored watching type
-    ignored:[]
-    # add watching file
-    watched:[]
+    matches:['\\.(js|css|html|htm|xhtml|md|markdown|txt|hbs|jade)$']
+    # add watching file *tips:excludes has a priority higher than ex 
+    excludes:['node_modules']
 
-# solve network port conflict
+# solve network port conflict TODO: 这太丑了
 restarted = 0
 startServer = (server, port, callback) ->
   try
     server.listen port, callback
   catch e
-    if restarted < 10 then startServer server, port + (++restarted), callback
+    # max-time 100
+    if restarted < 100 then startServer server, port + (++restarted), callback
     else throw e
 
 module.exports = (options = {}) ->
       # pre options
       processOptions(options)
-      app = do express
+      options.app ?= do express
+      app = options.app
+      
       server = http.createServer app
       # init autoreload
       (require "./autoreload") app, server, options if options.reload
@@ -44,7 +50,6 @@ module.exports = (options = {}) ->
 
       # config express 
       app.configure ->
-        app.use express.bodyParser()
         # first search lib related static folder
         app.use express.static options.dir  
         # then customer's folder

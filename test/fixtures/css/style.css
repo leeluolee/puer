@@ -1,0 +1,15 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#container div{
+  margin-top: 10px;
+}
+#session {
+  border-bottom: 1px solid #333;  
+}
+
+a {
+  color: #00B7FF;
+}

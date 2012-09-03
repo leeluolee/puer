@@ -2,15 +2,13 @@ sysPath = require "path"
 fs =require "fs"
 
 module.exports = (app, server, options) ->
-  # defaults watched file
-  matches = ['js','css', 'less', 'html', 'xhtml', 'htm', 'hbs','md', 'markdown', "txt"]
 
   io = (require 'socket.io').listen server
   io.set("log level", 1)
-
   io.sockets.on "connection" , (socket) ->
     watcher = (require "watch-tree-maintained").watchTree options.dir, 
-      "match" : "\." + matches.join '$|\\.'
+      "ignore": options.excludes.join("|")
+      "match" : options.matches.join("|")
       "sample-rate" : 1 
 
     watcher.on "fileModified" ,(path) ->

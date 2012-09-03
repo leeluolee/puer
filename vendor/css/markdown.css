@@ -1,6 +1,6 @@
 body{
     margin: 0 auto;
-    font-family: Georgia, Palatino, serif;
+    font-family: "微软雅黑",Georgia, Palatino, serif;
     color: #444444;
     line-height: 1;
     max-width: 960px;
@@ -52,7 +52,7 @@ ul, ol {
 li {
     line-height: 24px;
 }
-li ul, li ul {
+li ul, li ol {
     margin-left: 24px;
 }
 p, ul, ol {

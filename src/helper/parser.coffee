@@ -1,6 +1,4 @@
-
-
-class Parser 
+class Parser
   constructor: () ->
     # ...
   on:(options,description,callback) ->
@@ -8,8 +6,6 @@ class Parser
       [description,callback]=["",description]
     @inspect(options)
   inspect: (options) ->
-  
-  
   
 module.exports = Parser
   

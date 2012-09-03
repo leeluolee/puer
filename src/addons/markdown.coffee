@@ -20,7 +20,7 @@ module.exports = (app, server, options = {}) ->
             <title>markdown</title>
             <link href='/css/markdown.css' rel='stylesheet'/>
             #{if options.reload then "<script src='/js/reload.js'></script>" else ""}
-            <script src='/pretty.js'></script>
+            <script src='/js/pretty.js'></script>
           </head>
           <body onload="highlight()">
            #{markdown} 
