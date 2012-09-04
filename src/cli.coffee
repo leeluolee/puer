@@ -9,7 +9,7 @@ exports.run = (args) =>
   parser = new Parser()
   parser.on "-a --addon <file>", "your addon's path", (file) ->
     option.addon = sysPath.resolve pwd, file
-  parser.on "-p --port <file>", "server's listen port, 8000 default", (port) ->
+  parser.on "-p --port <port>", "server's listen port, 8000 default", (port) ->
     option.port = parseInt(port) if port
   parser.on "-d --dir <dir>", "your customer working dir. default current dir ", (dir) ->
     option.dir = sysPath.resolve pwd, dir if dir
@@ -17,9 +17,9 @@ exports.run = (args) =>
     option.reload =false
   parser.on "--no-launch", "close the auto launch feature", () ->
     option.launch =false
-  parser.on "-m --matches <regs>", "some regexp to define your watching file \n\t\t\treg string should escape to convert to regexp,each reg joined by ','", (reg) ->
+  parser.on "-m --matches <regexp>", "some regexp to define your watching file \n\t\t\treg string should escape to convert to regexp,each reg joined by ','", (reg) ->
     option.matches = reg.split(",")
-  parser.on "-e --excludes", "excludes file under watching", (reg) ->
+  parser.on "-e --excludes <regexp>", "excludes file under watching", (reg) ->
     option.excludes = reg.split(",")
   parser.on "-h --help", "help list" ,()->  
     option.help = true

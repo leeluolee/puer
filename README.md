@@ -40,18 +40,70 @@ puer #泡一杯普洱
 ```
 或许你想更__深入__一点...
 ```bash
-luobo > puer -h
+luobo(master) ✗> puer --help
+
+Usage:  puer [options...]
+
+Options:
+  -a,--addon <file>     your addon's path
+  -p,--port <port>      server's listen port, 8000 default
+  -d,--dir <dir>        your customer working dir. default current dir 
+     --no-reload        close  auto-reload feature,(not recommended)
+     --no-launch        close the auto launch feature
+  -m,--matches <regexp> some regexp to define your watching file 
+                        reg string should escape to convert to regexp,each reg joined by ','
+  -e,--excludes <regexp>  excludes file under watching
+  -h,--help             help list
+
 ```
 或许你想扩展功能(Addon)..., 举个例子让你的静态服务器支持less的样式外链(不是简单的插入parser script哦)
-```
+```less
+var less = require('less');
+var fs = require("fs")
+var path = require("path")
+/**
+ * [exports description]
+ * @param  {[type]} app     express(connect) instance
+ * @param  {[type]} server  http server instance
+ * @param  {[type]} options 见下表
+                    # listener port
+                    port:8000
+                    # auto-reload  
+                    reload:true
+                    # working folder
+                    dir:process.cwd()
+                    # autemate launch browser
+                    launch:true
+                    # plugins (generally, will be some route-rules, see src/addons folder to get help)
+                    addon:null
+                    # ignored watching type
+                    matches:['\\.(js|css|html|htm|xhtml|md|markdown|txt|hbs|jade)$']
+                    # add watching file *tips:excludes has a priority higher than ex 
+                    excludes:['node_modules']
+  这些初始参数会与命令行传入的参数进行合并
+ *
+ */
+module.exports = function(app, server , options){
+  app.get(/(.*\.less)/, function(req, res){
+    file = fs.readFileSync(path.join(options.dir,req.params[0]),"utf8")
+    if(!file) return ""
+    less.render(file, function (e, css) {
+      res.setHeader("Content-Type", "text/html")
+        res.setHeader("Content-Length", Buffer.byteLength (css)) 
+        res.send(css)
+    });
+  })
+}
 
 
 ```
+其实就是加入了一些路由规则而已,具体测试请看test目录
 
 ###API
 ```js
 //前提你已经安装了puer
 var puer =require("puer")
+puer(options) //具体看上面的例子
 
 ```
 

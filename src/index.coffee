@@ -47,7 +47,7 @@ module.exports = (options = {}) ->
       
       # inject addon
       addon app, server, options for own key, addon of helper.requireFolder sysPath.join __dirname, "./addons"
-
+      require(options.addon) app, server, options if options.addon
       # config express 
       app.configure ->
         # first search lib related static folder
