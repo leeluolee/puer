@@ -1,38 +1,230 @@
 info it worked if it ends with ok
-verbose cli [ 'node', '/usr/bin/npm', 'test' ]
+verbose cli [ 'node', '/usr/bin/npm', '-g', 'install', 'docco' ]
 info using npm@1.1.4
 info using node@v0.6.12
 verbose config file /home/luobo/.npmrc
 verbose config file /usr/etc/npmrc
 verbose config file /usr/share/npm/npmrc
-verbose caching /home/code/cla/puer/package.json
-verbose loadDefaults puer@0.0.1
-verbose run-script [ 'pretest', 'test', 'posttest' ]
-info pretest puer@0.0.1
-info test puer@0.0.1
-verbose unsafe-perm in lifecycle true
-silly exec sh "-c" "node setup.js test"
-silly spawning [ 'sh', [ '-c', 'node setup.js test' ], '/home/code/cla/puer' ]
-info puer@0.0.1 Failed to exec test script
-ERR! puer@0.0.1 test: `node setup.js test`
-ERR! `sh "-c" "node setup.js test"` failed with 1
+verbose cache add [ 'docco', null ]
+silly cache add: name, spec, args [ undefined, 'docco', [ 'docco', null ] ]
+verbose parsed url { pathname: 'docco', path: 'docco', href: 'docco' }
+verbose addNamed [ 'docco', '' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'docco', '', false ]
+verbose raw, before any munging docco
+verbose url resolving [ 'https://registry.npmjs.org/', './docco' ]
+verbose url resolved https://registry.npmjs.org/docco
+http GET https://registry.npmjs.org/docco
+http 200 https://registry.npmjs.org/docco
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"2KL9Y2N5EAQMLJCTSO52ICQGD"',
+silly get cb     date: 'Tue, 04 Sep 2012 03:29:03 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '3536' } ]
+verbose mkdir (expected) error ENOENT, no such file or directory '/home/luobo/.npm/docco'
+verbose mkdir done: /home/luobo/.npm/docco 755
+silly name, range, hasData 2 [ 'docco', '', true ]
+silly versions [ 'docco', [ '0.2.0', '0.3.0', '0.4.0' ] ]
+verbose bin dist [ '0.6-ares1.7.5-evundefined-openssl1.0.1-v83.7.12.22-linux-x64-3.2.0-27-generic',
+verbose bin dist   { shasum: '41e31889af87e106bd037a17c8c4285f49fea290',
+verbose bin dist     tarball: 'http://registry.npmjs.org/docco/-/docco-0.4.0.tgz' } ]
+verbose addRemoteTarball [ 'https://registry.npmjs.org/docco/-/docco-0.4.0.tgz',
+verbose addRemoteTarball   '41e31889af87e106bd037a17c8c4285f49fea290' ]
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1346729343830'
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1346729343830/1346729343830-0.574000725755468'
+verbose mkdir done: /tmp/npm-1346729343830/1346729343830-0.574000725755468 755
+verbose fetch to /tmp/npm-1346729343830/1346729343830-0.574000725755468/tmp.tgz
+http GET https://registry.npmjs.org/docco/-/docco-0.4.0.tgz
+http 200 https://registry.npmjs.org/docco/-/docco-0.4.0.tgz
+silly updated sha bytes 32135
+info shasum 41e31889af87e106bd037a17c8c4285f49fea290
+info shasum /tmp/npm-1346729343830/1346729343830-0.574000725755468/tmp.tgz
+verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm'
+verbose mkdir done: /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar ok
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/package.json
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/index.html
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/README
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/Cakefile
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/.npmignore
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/lib
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/lib/docco.js
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/pagelet.jst
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/pagelet.css
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/docco.jst
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/languages.json
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/docco.css
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/README.md
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/src
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/src/docco.coffee
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/vendor
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/vendor/showdown.js
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/bin
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/bin/docco
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/tests.coffee
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/c.c
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/coffee-script.coffee
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/comments.jst
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/javascript.js
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/tex.tex
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/python.py
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/ruby.rb
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/c.h
+silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/README.md
+silly chmod package 755
+silly chmod package.json 644
+silly chmod index.html 644
+silly chmod README 644
+silly chmod Cakefile 644
+silly chmod .npmignore 644
+silly chmod lib 755
+silly chmod docco.js 644
+silly chmod resources 755
+silly chmod pagelet.jst 644
+silly chmod pagelet.css 644
+silly chmod docco.jst 644
+silly chmod languages.json 644
+silly chmod docco.css 644
+silly chmod README.md 644
+silly chmod src 755
+silly chmod docco.coffee 644
+silly chmod vendor 755
+silly chmod showdown.js 644
+silly chmod bin 755
+silly chmod docco 755
+silly chmod test 755
+silly chmod tests.coffee 644
+silly chmod comments 755
+silly chmod c.c 644
+silly chmod coffee-script.coffee 644
+silly chmod comments.jst 644
+silly chmod javascript.js 644
+silly chmod tex.tex 644
+silly chmod python.py 644
+silly chmod ruby.rb 644
+silly chmod c.h 644
+silly chmod README.md 644
+verbose gunzed /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package
+verbose rm'ed /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
+verbose renamed [ '/tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package',
+verbose renamed   '/tmp/npm-1346729343830/1346729343830-0.574000725755468/package' ]
+verbose caching /tmp/npm-1346729343830/1346729343830-0.574000725755468/package/package.json
+verbose loadDefaults docco@0.4.0
+verbose tarball contents [ 'package', 'tmp.tgz' ]
+verbose from cache /tmp/npm-1346729343830/1346729343830-0.574000725755468/package/package.json
+verbose pack /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
+verbose pack /tmp/npm-1346729343830/1346729343830-0.574000725755468/package /home/luobo/.npm/docco/0.4.0/package.tgz
+silly makeList /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
+silly dir, dirLen [ '/tmp/npm-1346729343830/1346729343830-0.574000725755468/package',
+silly dir, dirLen   63 ]
+verbose tarball /home/luobo/.npm/docco/0.4.0/package.tgz
+verbose parent /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
+verbose mkdir (expected) error ENOENT, no such file or directory '/home/luobo/.npm/docco/0.4.0/___package.npm'
+verbose mkdir done: /home/luobo/.npm/docco/0.4.0/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /home/luobo/.npm/docco/0.4.0/package
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar ok
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/package.json
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/index.html
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/README
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/Cakefile
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/.npmignore
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/pagelet.jst
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/pagelet.css
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/docco.jst
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/languages.json
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/docco.css
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/README.md
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/src
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/src/docco.coffee
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/lib
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/lib/docco.js
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/vendor
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/vendor/showdown.js
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/bin
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/bin/docco
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/tests.coffee
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/c.c
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/coffee-script.coffee
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/comments.jst
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/javascript.js
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/tex.tex
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/python.py
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/ruby.rb
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/c.h
+silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/README.md
+silly chmod package 755
+verbose gunzed /home/luobo/.npm/docco/0.4.0/___package.npm/package
+verbose rm'ed /home/luobo/.npm/docco/0.4.0/package
+verbose renamed [ '/home/luobo/.npm/docco/0.4.0/___package.npm/package',
+verbose renamed   '/home/luobo/.npm/docco/0.4.0/package' ]
+verbose caching /home/luobo/.npm/docco/0.4.0/package/package.json
+verbose loadDefaults docco@0.4.0
+silly updated sha bytes 32706
+info shasum b6d86a697226126a3981cb51197c979a7d6c89b7
+info shasum /home/luobo/.npm/docco/0.4.0/package.tgz
+verbose from cache /home/luobo/.npm/docco/0.4.0/package/package.json
+verbose chmod /home/luobo/.npm/docco/0.4.0/package.tgz 644
+verbose chown [ '/home/luobo/.npm/docco/0.4.0/package.tgz', 1000, 1000 ]
+silly resolved [ { name: 'docco',
+silly resolved     description: 'The Quick and Dirty Literate Programming Documentation Generator',
+silly resolved     keywords: [ 'documentation', 'docs', 'generator', 'coffeescript' ],
+silly resolved     author: { name: 'Jeremy Ashkenas' },
+silly resolved     version: '0.4.0',
+silly resolved     licenses: 
+silly resolved      [ { type: 'MIT',
+silly resolved          url: 'http://opensource.org/licenses/mit-license.php' } ],
+silly resolved     engines: { node: '>=0.2.0' },
+silly resolved     directories: { lib: './lib' },
+silly resolved     dependencies: { commander: '>=0.5.2' },
+silly resolved     main: './lib/docco',
+silly resolved     bin: { docco: './bin/docco' },
+silly resolved     _npmUser: { name: 'leeluolee', email: '87399126@163.com' },
+silly resolved     _id: 'docco@0.4.0',
+silly resolved     devDependencies: {},
+silly resolved     optionalDependencies: {},
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.1.4',
+silly resolved     _nodeVersion: 'v0.6.12',
+silly resolved     _defaultsLoaded: true,
+silly resolved     dist: { shasum: 'b6d86a697226126a3981cb51197c979a7d6c89b7' },
+silly resolved     _from: 'docco' } ]
+info into /usr/local/lib docco@0.4.0
+info installOne docco@0.4.0
+verbose from cache /home/luobo/.npm/docco/0.4.0/package/package.json
+info unbuild /usr/local/lib/node_modules/docco
+verbose mkdir (expected) error ENOENT, no such file or directory '/usr/local/lib/node_modules/___docco.npm'
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /usr/local/lib/node_modules/docco
+ERR! Could not create /usr/local/lib/node_modules/___docco.npm
+ERR! error installing docco@0.4.0
+info unbuild /usr/local/lib/node_modules/docco
+verbose installOne cb docco@0.4.0
+ERR! Error: EACCES, permission denied '/usr/local/lib/node_modules/___docco.npm'
 ERR! 
-ERR! Failed at the puer@0.0.1 test script.
-ERR! This is most likely a problem with the puer package,
-ERR! not with npm itself.
-ERR! Tell the author that this fails on your system:
-ERR!     node setup.js test
-ERR! You can get their info via:
-ERR!     npm owner ls puer
-ERR! There is likely additional logging output above.
+ERR! Please try running this command again as root/Administrator.
 ERR! 
 ERR! System Linux 3.2.0-27-generic
-ERR! command "node" "/usr/bin/npm" "test"
+ERR! command "node" "/usr/bin/npm" "-g" "install" "docco"
 ERR! cwd /home/code/cla/puer
 ERR! node -v v0.6.12
 ERR! npm -v 1.1.4
-ERR! code ELIFECYCLE
-ERR! message puer@0.0.1 test: `node setup.js test`
-ERR! message `sh "-c" "node setup.js test"` failed with 1
+ERR! path /usr/local/lib/node_modules/___docco.npm
+ERR! code EACCES
+ERR! message EACCES, permission denied '/usr/local/lib/node_modules/___docco.npm'
 ERR! errno {}
 verbose exit [ 1, true ]
