@@ -40,7 +40,7 @@ module.exports = (options = {}) ->
       processOptions(options)
       options.app ?= do express
       app = options.app
-      
+
       server = http.createServer app
       # init autoreload
       (require "./autoreload") app, server, options if options.reload
@@ -56,7 +56,9 @@ module.exports = (options = {}) ->
         app.use express.static sysPath.join __dirname, "..", "vendor"  
 
       #  start the server
-      startServer server, options.port, ->       
-        console.log "server start at localhost:#{options.port}, puer will launch your browser later"
-        (require "open") "http://localhost:#{options.port}" if options.launch
+      startServer server, options.port, ->
+        console.log "server start at localhost:#{options.port}"
+        if options.launch
+          (require "open") "http://localhost:#{options.port}"
+          console.log "puer will launch your browser later"
 

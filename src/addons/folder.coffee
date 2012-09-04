@@ -28,8 +28,6 @@ toHTML = (files, folders, pathname ) ->
   </html> 
   """
 
-
-
 module.exports = (app, server, options) ->
   app.get /(\/.*)/, (req, res, next) ->
     # /public/to/path

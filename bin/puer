@@ -3,9 +3,9 @@
 var path = require('path');
 var fs = require('fs');
 
-var lib = path.join(path.dirname(fs.realpathSync(__filename)), '..', 'lib');
-var puer = require(lib);
+var cli = path.join(path.dirname(fs.realpathSync(__filename)), '..', 'lib',"cli");
 
 var args = process.argv.slice(2);
 
-puer();
+require(cli).run(args)
+// puer();

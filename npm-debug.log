@@ -1,230 +1,61 @@
-info it worked if it ends with ok
-verbose cli [ 'node', '/usr/bin/npm', '-g', 'install', 'docco' ]
-info using npm@1.1.4
-info using node@v0.6.12
-verbose config file /home/luobo/.npmrc
-verbose config file /usr/etc/npmrc
-verbose config file /usr/share/npm/npmrc
-verbose cache add [ 'docco', null ]
-silly cache add: name, spec, args [ undefined, 'docco', [ 'docco', null ] ]
-verbose parsed url { pathname: 'docco', path: 'docco', href: 'docco' }
-verbose addNamed [ 'docco', '' ]
-verbose addNamed [ null, '' ]
-silly name, range, hasData [ 'docco', '', false ]
-verbose raw, before any munging docco
-verbose url resolving [ 'https://registry.npmjs.org/', './docco' ]
-verbose url resolved https://registry.npmjs.org/docco
-http GET https://registry.npmjs.org/docco
-http 200 https://registry.npmjs.org/docco
-silly get cb [ 200,
-silly get cb   { vary: 'Accept',
-silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
-silly get cb     etag: '"2KL9Y2N5EAQMLJCTSO52ICQGD"',
-silly get cb     date: 'Tue, 04 Sep 2012 03:29:03 GMT',
-silly get cb     'content-type': 'application/json',
-silly get cb     'content-length': '3536' } ]
-verbose mkdir (expected) error ENOENT, no such file or directory '/home/luobo/.npm/docco'
-verbose mkdir done: /home/luobo/.npm/docco 755
-silly name, range, hasData 2 [ 'docco', '', true ]
-silly versions [ 'docco', [ '0.2.0', '0.3.0', '0.4.0' ] ]
-verbose bin dist [ '0.6-ares1.7.5-evundefined-openssl1.0.1-v83.7.12.22-linux-x64-3.2.0-27-generic',
-verbose bin dist   { shasum: '41e31889af87e106bd037a17c8c4285f49fea290',
-verbose bin dist     tarball: 'http://registry.npmjs.org/docco/-/docco-0.4.0.tgz' } ]
-verbose addRemoteTarball [ 'https://registry.npmjs.org/docco/-/docco-0.4.0.tgz',
-verbose addRemoteTarball   '41e31889af87e106bd037a17c8c4285f49fea290' ]
-verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1346729343830'
-verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1346729343830/1346729343830-0.574000725755468'
-verbose mkdir done: /tmp/npm-1346729343830/1346729343830-0.574000725755468 755
-verbose fetch to /tmp/npm-1346729343830/1346729343830-0.574000725755468/tmp.tgz
-http GET https://registry.npmjs.org/docco/-/docco-0.4.0.tgz
-http 200 https://registry.npmjs.org/docco/-/docco-0.4.0.tgz
-silly updated sha bytes 32135
-info shasum 41e31889af87e106bd037a17c8c4285f49fea290
-info shasum /tmp/npm-1346729343830/1346729343830-0.574000725755468/tmp.tgz
-verbose mkdir (expected) error ENOENT, no such file or directory '/tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm'
-verbose mkdir done: /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm 755
-verbose unpack_ uid, gid [ undefined, undefined ]
-verbose unpackTarget /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
-silly gunzTarPerm modes [ '755', '644' ]
-silly afterUntar ok
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/package.json
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/index.html
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/README
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/Cakefile
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/.npmignore
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/lib
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/lib/docco.js
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/pagelet.jst
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/pagelet.css
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/docco.jst
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/languages.json
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/docco.css
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/resources/README.md
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/src
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/src/docco.coffee
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/vendor
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/vendor/showdown.js
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/bin
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/bin/docco
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/tests.coffee
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/c.c
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/coffee-script.coffee
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/comments.jst
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/javascript.js
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/tex.tex
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/python.py
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/ruby.rb
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/c.h
-silly asyncMap in gTP /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package/test/comments/README.md
-silly chmod package 755
-silly chmod package.json 644
-silly chmod index.html 644
-silly chmod README 644
-silly chmod Cakefile 644
-silly chmod .npmignore 644
-silly chmod lib 755
-silly chmod docco.js 644
-silly chmod resources 755
-silly chmod pagelet.jst 644
-silly chmod pagelet.css 644
-silly chmod docco.jst 644
-silly chmod languages.json 644
-silly chmod docco.css 644
-silly chmod README.md 644
-silly chmod src 755
-silly chmod docco.coffee 644
-silly chmod vendor 755
-silly chmod showdown.js 644
-silly chmod bin 755
-silly chmod docco 755
-silly chmod test 755
-silly chmod tests.coffee 644
-silly chmod comments 755
-silly chmod c.c 644
-silly chmod coffee-script.coffee 644
-silly chmod comments.jst 644
-silly chmod javascript.js 644
-silly chmod tex.tex 644
-silly chmod python.py 644
-silly chmod ruby.rb 644
-silly chmod c.h 644
-silly chmod README.md 644
-verbose gunzed /tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package
-verbose rm'ed /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
-verbose renamed [ '/tmp/npm-1346729343830/1346729343830-0.574000725755468/___package.npm/package',
-verbose renamed   '/tmp/npm-1346729343830/1346729343830-0.574000725755468/package' ]
-verbose caching /tmp/npm-1346729343830/1346729343830-0.574000725755468/package/package.json
-verbose loadDefaults docco@0.4.0
-verbose tarball contents [ 'package', 'tmp.tgz' ]
-verbose from cache /tmp/npm-1346729343830/1346729343830-0.574000725755468/package/package.json
-verbose pack /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
-verbose pack /tmp/npm-1346729343830/1346729343830-0.574000725755468/package /home/luobo/.npm/docco/0.4.0/package.tgz
-silly makeList /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
-silly dir, dirLen [ '/tmp/npm-1346729343830/1346729343830-0.574000725755468/package',
-silly dir, dirLen   63 ]
-verbose tarball /home/luobo/.npm/docco/0.4.0/package.tgz
-verbose parent /tmp/npm-1346729343830/1346729343830-0.574000725755468/package
-verbose mkdir (expected) error ENOENT, no such file or directory '/home/luobo/.npm/docco/0.4.0/___package.npm'
-verbose mkdir done: /home/luobo/.npm/docco/0.4.0/___package.npm 755
-verbose unpack_ uid, gid [ undefined, undefined ]
-verbose unpackTarget /home/luobo/.npm/docco/0.4.0/package
-silly gunzTarPerm modes [ '755', '644' ]
-silly afterUntar ok
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/package.json
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/index.html
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/README
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/Cakefile
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/.npmignore
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/pagelet.jst
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/pagelet.css
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/docco.jst
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/languages.json
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/docco.css
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/resources/README.md
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/src
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/src/docco.coffee
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/lib
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/lib/docco.js
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/vendor
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/vendor/showdown.js
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/bin
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/bin/docco
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/tests.coffee
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/c.c
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/coffee-script.coffee
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/comments.jst
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/javascript.js
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/tex.tex
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/python.py
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/ruby.rb
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/c.h
-silly asyncMap in gTP /home/luobo/.npm/docco/0.4.0/___package.npm/package/test/comments/README.md
-silly chmod package 755
-verbose gunzed /home/luobo/.npm/docco/0.4.0/___package.npm/package
-verbose rm'ed /home/luobo/.npm/docco/0.4.0/package
-verbose renamed [ '/home/luobo/.npm/docco/0.4.0/___package.npm/package',
-verbose renamed   '/home/luobo/.npm/docco/0.4.0/package' ]
-verbose caching /home/luobo/.npm/docco/0.4.0/package/package.json
-verbose loadDefaults docco@0.4.0
-silly updated sha bytes 32706
-info shasum b6d86a697226126a3981cb51197c979a7d6c89b7
-info shasum /home/luobo/.npm/docco/0.4.0/package.tgz
-verbose from cache /home/luobo/.npm/docco/0.4.0/package/package.json
-verbose chmod /home/luobo/.npm/docco/0.4.0/package.tgz 644
-verbose chown [ '/home/luobo/.npm/docco/0.4.0/package.tgz', 1000, 1000 ]
-silly resolved [ { name: 'docco',
-silly resolved     description: 'The Quick and Dirty Literate Programming Documentation Generator',
-silly resolved     keywords: [ 'documentation', 'docs', 'generator', 'coffeescript' ],
-silly resolved     author: { name: 'Jeremy Ashkenas' },
-silly resolved     version: '0.4.0',
-silly resolved     licenses: 
-silly resolved      [ { type: 'MIT',
-silly resolved          url: 'http://opensource.org/licenses/mit-license.php' } ],
-silly resolved     engines: { node: '>=0.2.0' },
-silly resolved     directories: { lib: './lib' },
-silly resolved     dependencies: { commander: '>=0.5.2' },
-silly resolved     main: './lib/docco',
-silly resolved     bin: { docco: './bin/docco' },
-silly resolved     _npmUser: { name: 'leeluolee', email: '87399126@163.com' },
-silly resolved     _id: 'docco@0.4.0',
-silly resolved     devDependencies: {},
-silly resolved     optionalDependencies: {},
-silly resolved     _engineSupported: true,
-silly resolved     _npmVersion: '1.1.4',
-silly resolved     _nodeVersion: 'v0.6.12',
-silly resolved     _defaultsLoaded: true,
-silly resolved     dist: { shasum: 'b6d86a697226126a3981cb51197c979a7d6c89b7' },
-silly resolved     _from: 'docco' } ]
-info into /usr/local/lib docco@0.4.0
-info installOne docco@0.4.0
-verbose from cache /home/luobo/.npm/docco/0.4.0/package/package.json
-info unbuild /usr/local/lib/node_modules/docco
-verbose mkdir (expected) error ENOENT, no such file or directory '/usr/local/lib/node_modules/___docco.npm'
-verbose unpack_ uid, gid [ undefined, undefined ]
-verbose unpackTarget /usr/local/lib/node_modules/docco
-ERR! Could not create /usr/local/lib/node_modules/___docco.npm
-ERR! error installing docco@0.4.0
-info unbuild /usr/local/lib/node_modules/docco
-verbose installOne cb docco@0.4.0
-ERR! Error: EACCES, permission denied '/usr/local/lib/node_modules/___docco.npm'
-ERR! 
-ERR! Please try running this command again as root/Administrator.
-ERR! 
-ERR! System Linux 3.2.0-27-generic
-ERR! command "node" "/usr/bin/npm" "-g" "install" "docco"
-ERR! cwd /home/code/cla/puer
-ERR! node -v v0.6.12
-ERR! npm -v 1.1.4
-ERR! path /usr/local/lib/node_modules/___docco.npm
-ERR! code EACCES
-ERR! message EACCES, permission denied '/usr/local/lib/node_modules/___docco.npm'
-ERR! errno {}
-verbose exit [ 1, true ]
+0 info it worked if it ends with ok
+1 verbose cli [ 'c:\\Program Files (x86)\\nodejs\\node.exe',
+1 verbose cli   'c:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'adduser' ]
+2 info using npm@1.1.48
+3 info using node@v0.8.6
+4 verbose config file C:\Users\萝卜\.npmrc
+5 verbose config file c:\Program Files (x86)\nodejs\etc\npmrc
+6 verbose config file c:\Program Files (x86)\nodejs\node_modules\npm\npmrc
+7 verbose adduser before first PUT { name: 'leeluolee',
+7 verbose adduser   salt: 'XXXXX',
+7 verbose adduser   password_sha: 'XXXXX',
+7 verbose adduser   email: '87399126@163.com',
+7 verbose adduser   _id: 'org.couchdb.user:leeluolee',
+7 verbose adduser   type: 'user',
+7 verbose adduser   roles: [],
+7 verbose adduser   date: '2012-09-04T15:55:07.762Z' }
+8 verbose url raw /-/user/org.couchdb.user:leeluolee
+9 verbose url resolving [ 'http://registry.npmjs.vitecho.com/',
+9 verbose url resolving   './-/user/org.couchdb.user:leeluolee' ]
+10 verbose url resolved http://registry.npmjs.vitecho.com/-/user/org.couchdb.user:leeluolee
+11 info retry registry request attempt 1 at 23:55:07
+12 http PUT http://registry.npmjs.vitecho.com/-/user/org.couchdb.user:leeluolee
+13 http 409 http://registry.npmjs.vitecho.com/-/user/org.couchdb.user:leeluolee
+14 verbose adduser update existing user
+15 verbose url raw /-/user/org.couchdb.user:leeluolee
+16 verbose url resolving [ 'http://registry.npmjs.vitecho.com/',
+16 verbose url resolving   './-/user/org.couchdb.user:leeluolee' ]
+17 verbose url resolved http://registry.npmjs.vitecho.com/-/user/org.couchdb.user:leeluolee
+18 info retry registry request attempt 1 at 23:55:08
+19 http GET http://registry.npmjs.vitecho.com/-/user/org.couchdb.user:leeluolee
+20 http 401 http://registry.npmjs.vitecho.com/-/user/org.couchdb.user:leeluolee
+21 verbose adduser back [ [Error: unauthorized Name or password is incorrect.: -/user/org.couchdb.user:leeluolee],
+21 verbose adduser   { error: 'unauthorized',
+21 verbose adduser     reason: 'Name or password is incorrect.' },
+21 verbose adduser   '{"error":"unauthorized","reason":"Name or password is incorrect."}\n' ]
+22 warn adduser Incorrect username or password
+22 warn adduser You can reset your account by visiting:
+22 warn adduser
+22 warn adduser     http://admin.npmjs.org/reset
+23 error Error: unauthorized Name or password is incorrect.: -/user/org.couchdb.user:leeluolee
+23 error     at RegClient.<anonymous> (c:\Program Files (x86)\nodejs\node_modules\npm\node_modules\npm-registry-client\lib\request.js:246:14)
+23 error     at Request.init.self.callback (c:\Program Files (x86)\nodejs\node_modules\npm\node_modules\request\main.js:120:22)
+23 error     at Request.EventEmitter.emit (events.js:91:17)
+23 error     at Request.<anonymous> (c:\Program Files (x86)\nodejs\node_modules\npm\node_modules\request\main.js:555:16)
+23 error     at Request.EventEmitter.emit (events.js:88:17)
+23 error     at IncomingMessage.Request.start.self.req.self.httpModule.request.buffer (c:\Program Files (x86)\nodejs\node_modules\npm\node_modules\request\main.js:517:14)
+23 error     at IncomingMessage.EventEmitter.emit (events.js:115:20)
+23 error     at IncomingMessage._emitEnd (http.js:366:10)
+23 error     at HTTPParser.parserOnMessageComplete [as onMessageComplete] (http.js:149:23)
+23 error     at Socket.socketOnData [as ondata] (http.js:1366:20)
+24 error If you need help, you may report this log at:
+24 error     <http://github.com/isaacs/npm/issues>
+24 error or email it to:
+24 error     <npm-@googlegroups.com>
+25 error System Windows_NT 6.1.7600
+26 error command "c:\\Program Files (x86)\\nodejs\\node.exe" "c:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "adduser"
+27 error cwd f:\code\cla\puer
+28 error node -v v0.8.6
+29 error npm -v 1.1.48
+30 verbose exit [ 1, true ]
