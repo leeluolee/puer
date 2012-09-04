@@ -88,7 +88,7 @@ module.exports = function(app, server , options){
     file = fs.readFileSync(path.join(options.dir,req.params[0]),"utf8")
     if(!file) return ""
     less.render(file, function (e, css) {
-      res.setHeader("Content-Type", "text/html")
+      res.setHeader("Content-Type", "text/css")
         res.setHeader("Content-Length", Buffer.byteLength (css)) 
         res.send(css)
     });
