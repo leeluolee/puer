@@ -14,7 +14,7 @@ toHTML = (files, folders, pathname ) ->
   <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <title>目录浏览</title>
+    <title>Puer 目录浏览</title>
     <link rel="stylesheet" type="text/css" href="/css/folder.css">
   </head>
   <body>
