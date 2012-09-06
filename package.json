@@ -1,7 +1,7 @@
 { "name": "puer"
 , "description": "a simple, extensible static server"
 , "author": "leeluolee"
-, "version": "0.0.1"
+, "version": "0.0.2"
 , "repository":
   { "type": "git"
   , "url": "https://github.com/leeluolee/puer"
