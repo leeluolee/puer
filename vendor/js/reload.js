@@ -3315,6 +3315,7 @@ var io = ('undefined' === typeof module ? {} : module.exports);
 })();
 
 var autoreload=function(){
+
       var location = window.location,
           origin = location.protocol+"//"+location.host;
       var socket = io.connect(origin); 
@@ -3337,7 +3338,7 @@ var autoreload=function(){
       })
     }
 if(window.attachEvent){
-  window.attachEvent("load",autoreload);
+  window.attachEvent("onload",autoreload);
 }else{
   window.addEventListener("load",autoreload,false);
 }
