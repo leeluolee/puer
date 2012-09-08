@@ -15,8 +15,10 @@ exports.run = (args) =>
     option.dir = sysPath.resolve pwd, dir if dir
   parser.on "--no-reload", "close  auto-reload feature,(not recommended)", () ->
     option.reload =false
+    console.log option.reload, "reload"
   parser.on "--no-launch", "close the auto launch feature", () ->
     option.launch =false
+    console.log option.launch, "launch"
   parser.on "-m --matches <regexp>", "some regexp to define your watching file \n\t\t\treg string should escape to convert to regexp,each reg joined by ','", (reg) ->
     option.matches = reg.split(",")
   parser.on "-e --excludes <regexp>", "excludes file under watching", (reg) ->

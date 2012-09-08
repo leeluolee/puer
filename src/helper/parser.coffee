@@ -44,7 +44,9 @@ class Parser
     argv = @_preArgv argv
     for option in @options
       for item,index in argv
-        if item.long is option.long or item.short is option.short
+        if item.long is option.long and option.long?
+          @trigger(option, item.arg)
+        else if item.short is option.short and option.short? 
           @trigger(option, item.arg)
           continue
 

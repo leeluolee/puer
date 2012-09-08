@@ -9,7 +9,7 @@ helper = require "./helper"
 
 # defaults options
 processOptions = (options) ->
-  helper.extend options, 
+  helper.merge options, 
     # listener port
     port:8000
     # auto-reload  
@@ -38,9 +38,8 @@ startServer = (server, port, callback) ->
 module.exports = (options = {}) ->
       # pre options
       processOptions(options)
-      options.app ?= do express
-      app = options.app
 
+      app = do express
       server = http.createServer app
       # init autoreload
       (require "./autoreload") app, server, options if options.reload

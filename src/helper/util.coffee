@@ -43,11 +43,13 @@ module.exports = util =
     util.extend obj1, obj2, (obj1, i, item) ->
       switch util.typeOf item
         when "array"
-          obj1[i] = distinct obj1[i].concat item if util.typeOf(obj1[i]) == "array"
+          if util.typeOf(obj1[i]) is "array" then obj1[i] = distinct obj1[i].concat item
+          else obj1[i] = item
         when "object"
-          util.extend obj1[i], item if  util.typeOf(obj1[i])== "object"
+          if util.typeOf(obj1[i]) is "object" then util.extend obj1[i], item
+          else obj1[i] = item
         else 
-          obj1[i] = item if not obj1[i]
+          obj1[i] = item if not obj1[i]?
     return obj1
 
   # just for deletting the addons's configure file
