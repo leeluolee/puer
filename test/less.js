@@ -1,6 +1,7 @@
 var less = require('less');
-var fs = require("fs")
-var path = require("path")
+var fs = require("fs");
+var path = require("path");
+
 /**
  * [exports description]
  * @param  {[type]} app     express(connect) instance
