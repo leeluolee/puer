@@ -1,13 +1,18 @@
+# http://tomkersten.com/articles/server-sent-events-with-node/
 # module 
 http = require 'http'
+path = require 'path'
 express = require 'express'
-sysPath = require "path"
+connectPuer = require './connect-puer'
+
 
 # local module
 helper = require "./helper"
 
+cwd = do process.cwd
 
-# defaults options
+
+
 processOptions = (options) ->
   helper.merge options, 
     # listener port
@@ -20,44 +25,42 @@ processOptions = (options) ->
     launch:true
     # plugins (generally, will be some route-rules, see src/addons folder to get help)
     addon:null
-    # ignored watching type
-    matches:['\\.(js|css|html|htm|xhtml|md|markdown|txt|hbs|jade)$']
-    # add watching file *tips:excludes has a priority higher than ex 
-    excludes:['node_modules']
 
-# solve network port conflict TODO: 这太丑了
-restarted = 0
-startServer = (server, port, callback) ->
-  try
-    server.listen port, callback
-  catch e
-    # max-time 100
-    if restarted < 100 then startServer server, port + (++restarted), callback
-    else throw e
+    ignored: /\.\w*|node_modules.*/
 
-module.exports = (options = {}) ->
+  
+  
+
+
+
+puer = module.exports = (options = {}) ->
       # pre options
       processOptions(options)
 
       app = do express
-      server = http.createServer app
       # init autoreload
-      (require "./autoreload") app, server, options if options.reload
+      # (require "./autoreload") app, server, options if options.reload
       
       # inject addon
-      addon app, server, options for own key, addon of helper.requireFolder sysPath.join __dirname, "./addons"
-      require(options.addon) app, server, options if options.addon
+      # addon app, server, options for own key, addon of helper.requireFolder path.join __dirname, "./addons"
+      # require(options.addon) app, server, options if options.addon
       # config express 
-      app.configure ->
-        # first search lib related static folder
-        app.use express.static options.dir  
-        # then customer's folder
-        app.use express.static sysPath.join __dirname, "..", "vendor"  
+      app.use connectPuer(app, {dir: path.join __dirname, "../vendor" })
+      # first search lib related static folder
+      app.use express.static path.join __dirname, "../vendor" 
+      app.use express.directory options.dir
 
+      # then customer's folder
+      app.use express.static path.resolve cwd, options.dir
+
+     
+      
       #  start the server
-      startServer server, options.port, ->
-        console.log "server start at localhost:#{options.port}"
-        if options.launch
-          (require "open") "http://localhost:#{options.port}"
-          console.log "puer will launch your browser later"
+      server = (http.createServer app).listen options.port, ->
+        helper.log "server start at localhost:#{options.port}"
+        if options.launch then helper.openBrowser "http://localhost:#{options.port}", (err) ->
+          helper.log(err or "puer will lauch your default browser")         
+
+
+puer.connect = connectPuer
 

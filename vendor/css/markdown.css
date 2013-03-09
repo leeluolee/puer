@@ -79,7 +79,6 @@ blockquote {
     border-left:.5em solid #eee;
     padding: 0 2em;
     margin-left:0;
-    max-width: 476px;
 }
 blockquote  cite {
     font-size:14px;
@@ -92,7 +91,6 @@ blockquote cite:before {
 
 blockquote p {  
     color: #666;
-    max-width: 460px;
 }
 hr {
     width: 540px;
@@ -259,62 +257,65 @@ button::-moz-focus-inner {
   border: 0;
 }
 
+body{
+  color: #444;
+  max-width: 1120px;
+}
+h1{color: #333;font-weight: bold;}
+h2{color:#002A54;font-weight: bold;line-height: 1.5em; }
+h3{color:#3B627F;font-weight: bold;}
+h4{color:#2B96b8}
+a{color:#FF7720;text-decoration: none;}
+a:visited{color:#FF7720}
+a:hover{text-decoration: underline;}
+
 /*pretty*/
 
-/* Pretty printing styles. Used with prettify.js. */
-/* Vim sunburst theme by David Leibovic */
+/*prettyprint*/
+.com { color: #93a1a1; }
+.lit { color: #195f91; }
+.pun, .opn, .clo { color: #93a1a1; }
+.fun { color: #dc322f; }
+.str, .atv { color: #D14; }
+.kwd, .prettyprint .tag { color: #1e347b; }
+.typ, .atn, .dec, .var { color: teal; }
+.pln { color: #48484c; }
 
-pre .str, code .str { color: #65B042; } /* string  - green */
-pre .kwd, code .kwd { color: #E28964; } /* keyword - dark pink */
-pre .com, code .com { color: #AEAEAE; font-style: italic; } /* comment - gray */
-pre .typ, code .typ { color: #89bdff; } /* type - light blue */
-pre .lit, code .lit { color: #3387CC; } /* literal - blue */
-pre .pun, code .pun { color: #fff; } /* punctuation - white */
-pre .pln, code .pln { color: #fff; } /* plaintext - white */
-pre .tag, code .tag { color: #89bdff; } /* html/xml tag    - light blue */
-pre .atn, code .atn { color: #bdb76b; } /* html/xml attribute name  - khaki */
-pre .atv, code .atv { color: #65B042; } /* html/xml attribute value - green */
-pre .dec, code .dec { color: #3387CC; } /* decimal - blue */
-
-pre.prettyprint, code.prettyprint {
-        position: relative;
-        overflow: hidden;
-        background-color: #545;
-        border-left: 10px solid #434;
-        border-radius: 4px 0px 4px 0px;
-        -webkit-box-shadow: 0px 1px 1px #fff; 
-        box-shadow:  0px 1px 1px #fff;
-} 
-
-pre.prettyprint {
-        padding: 1em;
-        white-space: pre-wrap;
+.prettyprint {
+  padding: 8px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
 }
-pre.prettyprint:after{
-   content: "代码";
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: 3px 7px;
-    font-size: 12px;
-    font-weight: bold;
-    background-color: rgba(151,151,151,0.7);
-    color: #eee;
-    -webkit-border-radius: 0px 0 0px 4px;
-       -moz-border-radius: 0px 0 0px 4px;
-            border-radius: 0px 0 0px 4px;
-
+.prettyprint.linenums {
+  -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+     -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+          box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
 }
-pre.prettyprint:hover:after{
-  display: none;
+.prettyprint code{
+  padding: 0px;
+  border: none;
 }
-
 
 /* Specify class=linenums on a pre to get line numbering */
-ol.linenums { margin-top: 0; margin-bottom: 0; color: #AEAEAE; } /* IE indents via margin-left */
-li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
-/* Alternate shading for lines */
-li.L1,li.L3,li.L5,li.L7,li.L9 { }
+ol.linenums {
+  list-style: decimal;
+  margin: 0 0 0 33px; /* IE indents via margin-left */
+}
+ol.linenums li {
+  padding-left: 12px;
+  color: #bebec5;
+  line-height: 20px;
+  text-shadow: 0 1px 0 #fff;
+}
+code {
+  padding: 2px 4px;
+  color: #d14;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+}
+
+
+
 
 @media print {
   pre .str, code .str { color: #060; }
