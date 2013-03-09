@@ -10,7 +10,6 @@ var autoreload=function(){
         },Math.random()*100)
       }, false);
       source.addEventListener('css', function(e) {
-        alert("css")
         updateStyle()
       }, false);
 

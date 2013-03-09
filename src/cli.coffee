@@ -16,15 +16,15 @@ exports.run = (args) =>
     option.dir = sysPath.resolve pwd, dir if dir
   parser.on "--no-reload", "close  auto-reload feature,(not recommended)", () ->
     option.reload =false
-    console.log option.reload, "reload"
   parser.on "--no-launch", "close the auto launch feature", () ->
     option.launch =false
-    console.log option.launch, "launch"
-  parser.on "-m --matches <regexp>", "some regexp to define your watching file \n\t\t\treg string should escape to convert to regexp,each reg joined by ','", (reg) ->
-    option.matches = reg.split(",")
-  parser.on "-e --excludes <regexp>", "excludes file under watching", (reg) ->
-    option.excludes = reg.split(",")
-  parser.on "-h --help", "help list" ,()->  
+  parser.on "-i --ignored <regexp>", "ignored file under watching", (reg) ->
+    ignored = reg.replace /^\/|\/$/g, ""
+    option.ignored = new RegExp ignored
+  parser.on "-t --time <ms>", "watching interval time (ms), default 500ms", (time) ->
+    time = parseInt(time)
+    option.interval = time if time > 10
+  parser.on "-h --help", "help list" ,(haha)->  
     option.help = true
     man = """\n
       Usage:\tpuer [options...]\n
@@ -34,6 +34,7 @@ exports.run = (args) =>
     console.log man
   # 传入从命令行提取的
   parser.run args
+  console.log("your option is", option)
   puer(option) if not option.help
   
 

@@ -1633,7 +1633,7 @@ PR['registerLangHandler'](
 function highlight(){
   pres = document.getElementsByTagName("pre");
   for(var i =0,len=pres.length;i<len;i++){
-    pres[i].className+=" prettyprint"
+    pres[i].className+=" prettyprint linenums"
   }
   prettyPrint()
 }

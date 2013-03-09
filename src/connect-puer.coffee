@@ -25,22 +25,30 @@ uid = do () ->
 
 module.exports = (app, options) ->
   app.use express.static path.join __dirname, "../vendor" 
+  options.ignored ?= /(\/|^)\..*|node_modules/
+
+  if(!options.dir) 
+    throw Error("dir option is need to watch")
+
 
   resCache = []
   max = 100
-
+  
   watcher = chokidar.watch options.dir, 
     ignored: options.ignored
     persistent: true
     interval: options.interval
+
+  helper.log "watcher on!!"
   watcher.on 'change', (path, stats) ->
-    helper.log "fileChange #{path}"
+    # helper.log "fileChange #{path}"
     resCache.forEach (res) ->
       res.emit "changeFile", path:path
     
   
   # cache response to emit change event outer closure
   app.use "/puer_server_send", (req, res, next) ->
+    #
     req.socket.setTimeout Infinity
     #不能保存过度的长连接
 
@@ -48,7 +56,7 @@ module.exports = (app, options) ->
       resCache.shift()
       helper.log "resCache.length is more than #{max}, shift the first one", "warn"
     resCache.push res
-    helper.log "sse connect resCache.length is #{resCache.length}"
+    # helper.log "sse connect resCache.length is #{resCache.length}"
     res.sse = (infos) ->
       infos.event or= "update"
       res.write "\n"
@@ -84,7 +92,7 @@ module.exports = (app, options) ->
       index = resCache.indexOf(res)
       if ~index
         resCache.splice(index, 1)
-        helper.log("close req event-stream resCache.length is #{resCache.length}", "warn")
+        # helper.log("close req event-stream resCache.length is #{resCache.length}", "warn")
 
   (req, res, next) ->
     write = res.write
@@ -93,18 +101,25 @@ module.exports = (app, options) ->
     # proxy
     res.write = (chunk, encoding) ->
       header = res.getHeader "content-type"
-      console.log(header)
-      console.log(/^text\/html/.test header)
-      
+      length = res.getHeader "content-length"
       if (/^text\/html/.test header) or not header
         if Buffer.isBuffer(chunk)
           chunk = chunk.toString("utf8")
         chunk = chunk.replace "</head>", "<script src='/js/reload.js'></script></head>"
-        res.setHeader("Content-Length", Buffer.byteLength(chunk))
+        # need set length 
+        length += (Buffer.byteLength "<script src='/js/reload.js'>") if length
+        res.setHeader "content-length", length
+
         write.call res, chunk, "utf8"
       else 
         write.call res, chunk, encoding
 
+    res.end = (chunk, encoding) ->
+      this.write chunk, encoding if chunk?
+      end.call(res)
+
+     
+     
 
     do next
 
