@@ -1,9 +1,11 @@
 fs = require "fs"
 sysPath = require "path"
+exec = (require "child_process").exec
+colorify = require "./colorify"
 
 # utils 
 pad = (num) ->
-  if num<10 then "0"+num else num
+  if num < 10 then "0"+num else ""+num
   
 
 extendOne = (obj, index ,item)->
@@ -21,7 +23,8 @@ distinct = (array) ->
 module.exports = util =
   # formatting date
   formatDate: (d) ->
-    d = new Date parseInt date unless typeOf(date) is "date" 
+    d or = +new Date
+    d = new Date parseInt d unless @typeOf(d) is "date" 
     "#{d.getFullYear()}-#{pad d.getMonth()+1}-#{pad d.getDate()}  #{pad d.getHours()}:#{pad d.getMinutes()}:#{pad d.getSeconds()}"
 
   # direct send static resource if exisits
@@ -63,6 +66,26 @@ module.exports = util =
       $exports[base] = require sysPath.join dir, file
     $exports
 
+  openBrowser: (target, callback) ->
+    map = 
+      'darwin': 'open'
+      'win32': 'start '
+
+    opener = map[process.platform] or 'xdg-open'  
+    exec "#{opener} #{target}",  callback
+  log: (info, level) ->
+    level or= "log"
+    level2color =  
+      "error": "red"
+      "warn": "yellow"
+      "log": "green"
+    color = level2color[level] or "green"
+    console.log "#{colorify level, color}:\t #{info} \t #{colorify @formatDate(), 'cyan'}"
+  
+  
+
+
+    
     
     
 

@@ -121,3 +121,9 @@ puer(options) //具体看上面的例子
 
 ####为什么代码这么烂？
 coffeescript新兵 node api也不熟 基本都得翻手册写 见谅
+
+
+## TODO:
+1. 解除express依赖, 使其成为connect的一个中间件，当然也能独立使用, 放置位置与compress类似
+2. 有主动trigger refresh的接口
+3. 增加chrome扩展

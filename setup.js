@@ -19,6 +19,7 @@ var findCoffeeDir= function(pwd){
   }while((index=pwd.lastIndexOf(sep))>0)
   return coffee
 }
+
 if(mode == "test"){ // test mode
   var reporters = require("nodeunit").reporters;
   process.chdir(__dirname);

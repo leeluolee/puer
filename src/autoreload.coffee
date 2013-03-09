@@ -1,5 +1,6 @@
 sysPath = require "path"
 fs =require "fs"
+{EventEmitter} = require "event"
 
 module.exports = (app, server, options) ->
 
@@ -9,7 +10,7 @@ module.exports = (app, server, options) ->
     watcher = (require "watch-tree-maintained").watchTree options.dir, 
       "ignore": options.excludes.join("|")
       "match" : options.matches.join("|")
-      "sample-rate" : 1 
+      "sample-rate" : 10 
 
     watcher.on "fileModified" ,(path) ->
       data = "path": path
