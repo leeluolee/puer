@@ -107,8 +107,10 @@ module.exports = (app, options) ->
           chunk = chunk.toString("utf8")
         chunk = chunk.replace "</head>", "<script src='/js/reload.js'></script></head>"
         # need set length 
-        length += (Buffer.byteLength "<script src='/js/reload.js'>") if length
-        res.setHeader "content-length", length
+        if length
+          length = parseInt(length)
+          length += (Buffer.byteLength "<script src='/js/reload.js'>")
+          res.setHeader "content-length", length
 
         write.call res, chunk, "utf8"
       else 
