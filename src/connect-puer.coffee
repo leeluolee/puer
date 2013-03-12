@@ -105,6 +105,7 @@ module.exports = (app, options) ->
       if (/^text\/html/.test header) or not header
         if Buffer.isBuffer(chunk)
           chunk = chunk.toString("utf8")
+        return write.call res, chunk, "utf8" if not ~chunk.indexOf("</head>") 
         chunk = chunk.replace "</head>", "<script src='/js/reload.js'></script></head>"
         # need set length 
         if length
