@@ -95,4 +95,7 @@ http.createServer(app).listen(8001, function(){
 
 ###Changlog
 
-1. v0.0.6 可以作为connect 中间件了， 改为使用更简单的HTML5的SSE实现推送, 解决了内存溢出的问题
+1. v0.0.6 可以作为connect中间件了， 改为使用更简单的HTML5的SSE实现推送, 解决了内存溢出的问题
+
+###LICENSE
+MIT

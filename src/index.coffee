@@ -61,7 +61,7 @@ puer = module.exports = (options = {}) ->
       catch err
         
       # folder view
-      app.use express.directory options.dir
+      # app.use express.directory options.dir
       # then customer's folder
       app.use express.static options.dir
 
