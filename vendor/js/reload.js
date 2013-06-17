@@ -417,20 +417,11 @@ var autoreload=function(){
         },Math.random()*100)
       }, false);
 
-      source.addEventListener('interval', function(){
-        console.log(parse(e.data))
-      })
-
+    
       source.addEventListener('css', function(e) {
         updateStyle()
       }, false);
 
-      source.addEventListener('open', function(e) {
-        console.log(e, 'open');
-      }, false);
-      source.addEventListener('error', function(e) {
-        console.log(e);
-      }, false);
 
       var location = window.location,
           origin = location.protocol+"//"+location.host;
