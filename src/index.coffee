@@ -88,15 +88,19 @@ puer = module.exports = (options = {}) ->
           boundHost: '-all-'
           verbose:false
           debug: false
-          readTimeout:5
-          deathTimeout: 5
+          readTimeout: 20
+          deathTimeout: 50 
         options.inject.push(
           """
           <script>
-            var url = location.href.replace(/\:\\d+/, ':9001') + 'target/target-script-min.js#anonymous' 
+            var url = 'http://'+location.host.replace(/\:\\d+/, '') +':9001'+ '/target/target-script-min.js#anonymous' 
             var script = document.createElement('script');
             script.src = url;
-            document.head.appendChild(script);
+            var head = document.head;
+            if(head){
+              head.appendChild(script);
+            }
+            
           </script>
           """
         )

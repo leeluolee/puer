@@ -1,6 +1,6 @@
 body {
   padding: 50px;
-  background-color: #ccc;
+  background-color: #fff;
   font: 21px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -10,7 +10,6 @@ body {
 #session {
   border-bottom: 1px solid #333;  
 }
-
 a {
   color: #00B7FF;
 }

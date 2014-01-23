@@ -2,6 +2,7 @@
 if(document.addEventListener){
   document.addEventListener("touchstart", function(){}, true)
 }
+var slice = [].slice;
 
 function _type(_o) {
     return _o == null /*means null or undefined*/
@@ -40,6 +41,16 @@ var _extend = function(o1, o2, override){
   }
   return o1;
 }
+ // function 
+    _extend(Function.prototype, {
+        bind: function(context, args) {
+            args = slice.call(arguments, 1);
+            var fn = this;
+            return function() {
+                fn.apply(context, args.concat(slice.call(arguments)));
+            }
+        }
+    })
 
 _XHR._process = {
     json: function(_text, _xml) {
@@ -106,11 +117,12 @@ _extend(_XHR.prototype, {
     _send: function(_data) {
         var _xhr = this._xhr,_setting=this._setting;
         _data = _data || _setting._data ||{};
+        _data = _serialize(_data)
         this._setHeader(_setting._headers);
         if(_setting._method.toLowerCase()=="get"){
-            _setting.url+="?"+_serialize(_data)
+            _setting.url+= _data? ('?'+data): '';
         }
-        this._xhr.open(_setting._method.toUpperCase(), _setting.url, _setting._async)
+        _xhr.open(_setting._method.toUpperCase(), _setting.url, _setting._async)
         _xhr.onreadystatechange = this._onStateChange.bind(this);
         
         _xhr.send(_serialize(_data))

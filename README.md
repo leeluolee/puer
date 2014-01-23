@@ -1,27 +1,28 @@
-#Puer 
-一个在当前(或指定目录)开启静态服务器的命令行工具，css刷新样式，其它刷新页面.是的，跟F5差不多
+##Introduction
 
-__新版本去除了socket.io的依赖, 改为使用[SSE](http://en.wikipedia.org/wiki/Server-sent_events)代替, 所以IE不支持了__
+puer —— a easy-use static server with livereload  function。
 
+##Feature
+1. easy-install : `npm install puer -g`
+2. easy-usage: `puer` in 90%
 
-##安装 
+__puer have integretd with weinre now, you can pass `-i` to open inspect__
+
+##install
 `npm -g install puer`
 
-当然你也可以fork一份自己折腾:
 
-`git clone https://github.com/leeluolee/puer`
+##Usage
 
-
-##使用
-
-###命令行
-__90%__的情况下, 你应该是这样用的...
+###Command line
+in most cases
 ```bash
-cd path/to/your/static/dir #到你想去地方
-puer #泡一杯普洱
-
+cd path/to/your/static/dir
+puer 
 ```
-或许你想更__深入__一点...
+
+__full options__
+
 ```bash
 luobo(master) ✗> puer --help
 
@@ -29,18 +30,10 @@ Usage:  puer [options...]
 
 Options:
   -a,--addon <file> your addon's path
-  -p,--port <port>  server's listen port, 8000 default
-  -d,--dir <dir>  your customer working dir. default current dir 
-     --no-reload    close  auto-reload feature,(not recommended)
-     --no-launch    close the auto launch feature
-  -i,--ignored <regexp> ignored file under watching
-  -t,--time <ms>  watching interval time (ms), default 500ms
-  -h,--help     help list
-           help list
 
 ```
 
-其中, __addon__代表你可以传入一个自己的脚本(通常是路由定义用以测试, 也可以拦截.less这些资源请求), 这个模块输出一个函数, 可以获得当前的express的app实例，以及命令行传入的options(一般没啥用)
+__tips__: you can use addon javascript to support
 
 ```javascript
 
@@ -68,6 +61,7 @@ var path = require("path")
 var http = require("http")
 var puer = require("puer")
 var app = connect()
+var server = http.createServer(app)
 
 // 可以配置三个参数, 以下为默认值
 var options = {
@@ -76,13 +70,14 @@ var options = {
     ignored: /(\/|^)\..*|node_modules/  //忽略的监听文件，默认忽略dotfile 和 node_modules
 }
 // app 为你的connect 实例 或者 express 实例
+// server 为 httpServer 实例
 // 这里的options就上面所示的三个参数
-app.use(puer.connect(app, options))   //puer connect 中间件，要在static等可能发送请求的中间件之前
+app.use(puer.connect(app, server ,options))   //puer connect 中间件，要在static等可能发送请求的中间件之前
 app.use("/", connect.static(__dirname))
 
 
 
-http.createServer(app).listen(8001, function(){
+server.listen(8001, function(){
     console.log("listen on 8001 port")
 })
 
@@ -95,7 +90,16 @@ http.createServer(app).listen(8001, function(){
 
 ###Changlog
 
-1. v0.0.6 可以作为connect中间件了， 改为使用更简单的HTML5的SSE实现推送, 解决了内存溢出的问题
+*. v0.1.0 变动较大
+  1. 集成了weinre(参数`-i --inspect`默认端口9001,可在puer folder查看页跳转)
+  2. 加入了本地ip列表
+  3. 支持folder页的二维码扫描
+
+*. v0.0.6 可以作为connect中间件了， 改为使用更简单的HTML5的SSE实现推送, 解决了内存溢出的问题
+
+### TODO
+
+增加Adobe Edge inspect 的scroll、form、navigate的同步功能。由于无法控制屏幕休眠这种同步可能意义并没有直接提供客户端那么大，好处是跨平台。
 
 ###LICENSE
 MIT

@@ -14,7 +14,7 @@
   "dependencies": {
     "coffee-script": "1.4.x",
     "express": "3.0.x",
-    "chokidar": "0.5.3",
+    "chokidar": "0.8.1",
     "socket.io": "0.9.16",
     "weinre": "*",
     "qrcode-npm": "0.0.3"

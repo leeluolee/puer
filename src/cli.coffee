@@ -15,8 +15,12 @@ exports.run = (args) =>
     option.dir = sysPath.resolve pwd, dir if dir
   parser.on "-i --inspect", "start weinre server and debug all puer page", (dir) ->
     option.inspect = true
+  parser.on "-x --exclude", "exclude file under watching(must be a regexp), default: ''", (dir) ->
+    ignored = reg.replace /^\/|\/$/g, ""
+    option.ignored = new RegExp ignored
   parser.on "-a --addon <file>", "your addon's path", (file) ->
     option.addon = sysPath.resolve pwd, file
+
   parser.on "--no-reload", "close  auto-reload feature,(not recommended)", () ->
     option.reload =false
   parser.on "--no-launch", "close the auto launch feature", () ->
