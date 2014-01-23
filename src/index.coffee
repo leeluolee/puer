@@ -62,16 +62,25 @@ puer = module.exports = (options = {}) ->
       
       app.use connectPuer(app, server, options)
       
+      genQr = (content, start) -> 
+        start ?= 2;
+        try
+          qr = qrcode.qrcode start, 'L'
+          qr.addData(content or '')
+          qr.make()
+          return qr;
+        catch err
+          if start> 8
+            throw err
+          else 
+            return genQr(content, start + 2)
+
       # generate qrcode
       app.get '/puer/qrcode', (req, res, next)->
         query = url.parse(req.url,true).query
-        qr = qrcode.qrcode 6, 'H'
-        qr.addData(query.url or '')
-        qr.make()
-
         res.send 
           code: 200
-          result: qr.createImgTag(4)
+          result: genQr(query.url, 2).createImgTag(4)
           
 
 
