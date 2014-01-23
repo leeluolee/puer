@@ -7,11 +7,11 @@ easy-to-use static server has livereload & debug(weinre integrated)  function, c
 
 ##Feature
 
-1. update css when css file changed
-2. refresh page when other filetype changed
-3. weinre integrated : use `-i` options
-4. can use as connect-middleware
-5. can pass addon to support other logic
+1. __update css__ when css file changed
+2. __refresh page__ when other filetype changed
+3. __weinre integrated__  use `-i` options
+4. __connect-middleware__
+5. __easy extend__ by addon
 6. qrcode image at folder page
 7. local ips detect
 
