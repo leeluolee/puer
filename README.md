@@ -1,12 +1,20 @@
 ##Introduction
 
-puer —— a easy-use static server with livereload  function。
-
-##Feature
-1. easy-install : `npm install puer -g`
-2. easy-usage: `puer` in 90%
+puer —— easy-use static server have livereload & debug(weinre integrated)  function, can be used as connect-middleware
 
 __puer have integretd with weinre now, you can pass `-i` to open inspect__
+
+
+##Feature
+
+1. update css when css file changed
+2. refresh page when other filetype changed
+3. weinre integrated : use `-i` options
+4. can use as connect-middleware
+5. can pass addon to support other logic
+6. qrcode image at folder page
+7. local ips detect
+
 
 ##install
 `npm -g install puer`
@@ -15,7 +23,9 @@ __puer have integretd with weinre now, you can pass `-i` to open inspect__
 ##Usage
 
 ###Command line
+
 in most cases
+
 ```bash
 cd path/to/your/static/dir
 puer 
@@ -23,37 +33,41 @@ puer
 
 __full options__
 
+list options use `puer -h`
+
 ```bash
-luobo(master) ✗> puer --help
+ubuntu-21:19 ~ $ puer -h
 
 Usage:  puer [options...]
 
 Options:
+  -p,--port <port>  server's listen port, 8000 default
+  -f,--filetype <typelist>  fileType to watch(split with '|'), defualt 'js|css|html|xhtml'
+  -d,--dir <dir>  your customer working dir. default current dir 
+  -i,--inspect    start weinre server and debug all puer page
+  -x,--exclude    exclude file under watching(must be a regexp), default: ''
   -a,--addon <file> your addon's path
+     --no-reload    close  auto-reload feature,(not recommended)
+     --no-launch    close the auto launch feature
+  -h,--help     help list
 
 ```
 
-__tips__: you can use addon javascript to support
+__tips__: you can use addon javascript to support other mineType, and other logic
 
 ```javascript
 
-
 module.exports = function(app, options){
   app.get(/(.*\.less)/, function(req, res){
-    res.send("less file") // 当然一般会编译了之后发送,这里只是实例
+    res.send("less file") // you can compile your less file
   })
 }
-
 
 ```
 
 
+###use as [connect|express]-middleware
 
-其实就是加入了一些路由规则而已,具体测试请看test目录
-
-###仅作为connect中间件使用(> v0.0.6)
-
-0.0.6版本的puer把监听部分抽了出来作为connect中间件`require("puer").connect`, 与connect.compress一样，因为拦截了res.write 你必须在static等可能发送html的中间件前的use这个中间件，这部分抽里出来主要是为了__自动刷新NodeJS作为后台的动态网站(比如用模版输出)，只要是content-type 是text/html的response就可以自动刷新__
 
 ```javascript
 var connect = require("connect")
@@ -63,43 +77,34 @@ var puer = require("puer")
 var app = connect()
 var server = http.createServer(app)
 
-// 可以配置三个参数, 以下为默认值
 var options = {
-    dir: "path/to/watch/folder", //__与命令行不同的是必须输入__
-    interval: 500, // 监听文件的间隔,同上面的 -t --time参数
-    ignored: /(\/|^)\..*|node_modules/  //忽略的监听文件，默认忽略dotfile 和 node_modules
+    dir: "path/to/watch/folder", 
+    ignored: /(\/|^)\..*|node_modules/  //ignored file
 }
-// app 为你的connect 实例 或者 express 实例
-// server 为 httpServer 实例
-// 这里的options就上面所示的三个参数
-app.use(puer.connect(app, server ,options))   //puer connect 中间件，要在static等可能发送请求的中间件之前
-app.use("/", connect.static(__dirname))
 
+app.use(puer.connect(app, server , options))   //use as puer connect middleware
+// you must use puer middleware before route and static midleware(before any middle may return 'text/html')
+app.use("/", connect.static(__dirname))
 
 
 server.listen(8001, function(){
     console.log("listen on 8001 port")
 })
 
-
-
 ```
-
-
-
 
 ###Changlog
 
-*. v0.1.0 变动较大
-  1. 集成了weinre(参数`-i --inspect`默认端口9001,可在puer folder查看页跳转)
-  2. 加入了本地ip列表
-  3. 支持folder页的二维码扫描
+*. v0.1.0 
+  1. support weinre debug
+  2. support qrcode img generate
+  3. support local ip detect
 
-*. v0.0.6 可以作为connect中间件了， 改为使用更简单的HTML5的SSE实现推送, 解决了内存溢出的问题
+*. v0.0.6 support connect middleware
 
 ### TODO
 
-增加Adobe Edge inspect 的scroll、form、navigate的同步功能。由于无法控制屏幕休眠这种同步可能意义并没有直接提供客户端那么大，好处是跨平台。
+1. sync multiply browser's  action (scroll,form-input,navigate) like Adobe Eadge inspect
 
 ###LICENSE
 MIT
