@@ -1,8 +1,8 @@
 ##Introduction
 
-puer —— easy-use static server have livereload & debug(weinre integrated)  function, can be used as connect-middleware
+easy-to-use static server has livereload & debug(weinre integrated)  function, can be used as connect-middleware
 
-__puer have integretd with weinre now, you can pass `-i` to open inspect__
+
 
 
 ##Feature
@@ -96,7 +96,7 @@ server.listen(8001, function(){
 ###Changlog
 
 *. v0.1.0 
-  1. support weinre debug
+  1. __puer integretd with weinre now, you can pass `-i` to open, every puer page can  inspect at 9001 port__
   2. support qrcode img generate
   3. support local ip detect
 
