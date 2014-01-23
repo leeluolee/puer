@@ -14,7 +14,8 @@ build = (watch, callback) ->
   coffee.stdout.on 'data', (data) -> print data.toString()
   coffee.stderr.on 'data', (data) -> print data.toString()
   coffee.on 'exit', (status) -> callback?() if status is 0
-  
+
+
 
 task 'doc', 'Generate annotated source code with Docco', ()->
   docco = exec 'docco src/*.coffee', (err) ->

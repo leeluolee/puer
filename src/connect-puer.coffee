@@ -10,119 +10,83 @@ chokidar = require 'chokidar'
 express = require 'express'
 helper = require "./helper"
 
+cwd = do process.cwd
 
-uid = do () ->
-  _id = 1
-  -> _id++
 
 # connect middleware
 # =====================================
 # middleware options:
 #
-#   * interval: watcher interval
 #   * dir: watcher dir (defaults process.cwd())
-#   * ignored: ignored file regexp
+#   * fileType: watched fileType(defaults 'js|css|html|xhtml')
 
-module.exports = (app, options) ->
-  app.use express.static path.join __dirname, "../vendor" 
-  options.ignored ?= /(\/|^)\..*|node_modules/
+module.exports = (app, server, options) ->
+  app.use '/puer', express.static path.join __dirname, "../vendor" 
+
+  options.fileType ?= 'js|css|html|xhtml'
+  options.inject ?= []
 
   if(!options.dir) 
     throw Error("dir option is need to watch")
+  if(options.reload)
+    options.inject.push '<script src="/puer/js/reload.js"></script>'
+    watcher = chokidar.watch options.dir, 
+      ignored: new RegExp('\\.(?!(' + options.fileType + ')$)')
+      persistent: true
 
+    helper.log "watcher on!!"
 
-  resCache = []
-  max = 100
+    io = (require 'socket.io').listen server
+    io.set("log level", 1)
+
+    # keep the connect socket instance
+    sockets = []
+    # bind one listener to avoid memory leak
+
+    watcher.on 'change', (path, stats) ->
+      data = "path": path
+      # if css file modified   dont't reload page just update the link.href
+      data.css = path.slice cwd.length if ~path.indexOf ".css"
+
+      for socket in sockets
+        socket.emit "update", data if socket
+
+      # helper.log "fileChange #{path}"
+    io.sockets.on "connection" , (socket) ->
+      sockets.push socket
+      socket.on 'disconnect', ->
+        index = sockets.indexOf socket
+        if index != -1
+          sockets.splice index, 1
   
-  watcher = chokidar.watch options.dir, 
-    ignored: options.ignored
-    persistent: true
-    interval: options.interval
-
-  helper.log "watcher on!!"
-  watcher.on 'change', (path, stats) ->
-    # helper.log "fileChange #{path}"
-    resCache.forEach (res) ->
-      res.emit "changeFile", path:path
-    
-  
-  # cache response to emit change event outer closure
-  app.use "/puer_server_send", (req, res, next) ->
-    #
-    req.socket.setTimeout Infinity
-    #不能保存过度的长连接
-
-    if resCache.length >= max
-      resCache.shift()
-      helper.log "resCache.length is more than #{max}, shift the first one", "warn"
-    resCache.push res
-    # helper.log "sse connect resCache.length is #{resCache.length}"
-    res.sse = (infos) ->
-      infos.event or= "update"
-      res.write "\n"
-      res.write "id: #{uid()}\n" 
-
-      for own key, value of infos 
-        res.write "#{key}: #{value}\n"
-      res.write "\n" 
-
-    res.on "changeFile", (data) ->
-      path = data.path
-      stats = data.stats
-      isCss = ~path.indexOf ".css"
-      infos = data: "#{path}"
-      infos.event = "css" if isCss
-      res.sse infos
-    
-    
-
-    
-
-    # long-live request
-    # send headers for event-stream connection
-    res.writeHead 200, {
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive'
-    }
-    res.write '\n'
-
-
-    req.on "close", ->
-      index = resCache.indexOf(res)
-      if ~index
-        resCache.splice(index, 1)
-        # helper.log("close req event-stream resCache.length is #{resCache.length}", "warn")
 
   (req, res, next) ->
+    # proxy
     write = res.write
     end = res.end
-    
-    # proxy
-    res.write = (chunk, encoding) ->
-      header = res.getHeader "content-type"
-      length = res.getHeader "content-length"
-      if (/^text\/html/.test header) or not header
-        if Buffer.isBuffer(chunk)
-          chunk = chunk.toString("utf8")
-        return write.call res, chunk, "utf8" if not ~chunk.indexOf("</head>") 
-        chunk = chunk.replace "</head>", "<script src='/js/reload.js'></script></head>"
-        # need set length 
-        if length
-          length = parseInt(length)
-          length += (Buffer.byteLength "<script src='/js/reload.js'>")
-          res.setHeader "content-length", length
+    # use res.noinject to forbit relad or weinre inject
+    if res.noinject != true
+      res.write = (chunk, encoding) ->
+        header = res.getHeader "content-type"
+        length = res.getHeader "content-length"
+        if (/^text\/html/.test header) or not header
+          if Buffer.isBuffer(chunk)
+            chunk = chunk.toString("utf8")
+          return write.call res, chunk, "utf8" if not ~chunk.indexOf("</head>") 
+          chunk = chunk.replace "</head>", options.inject.join('') + "</head>"
+          # need set length 
+          if length
+            length = parseInt(length)
+            length += Buffer.byteLength options.inject.join('')
+            res.setHeader "content-length", length
 
-        write.call res, chunk, "utf8"
-      else 
-        write.call res, chunk, encoding
+          write.call res, chunk, "utf8"
+        else 
+          write.call res, chunk, encoding
 
-    res.end = (chunk, encoding) ->
-      this.write chunk, encoding if chunk?
-      end.call(res)
-
-     
-     
+      res.end = (chunk, encoding) ->
+        this.write chunk, encoding if chunk?
+        end.call(res)
 
     do next
 

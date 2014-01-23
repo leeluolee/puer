@@ -4,6 +4,13 @@ http = require 'http'
 path = require 'path'
 express = require 'express'
 connectPuer = require './connect-puer'
+require 'coffee-script'
+weinre = require 'weinre'
+os = require 'os'
+qrcode = require 'qrcode-npm'
+url = require 'url'
+
+
 
 
 # local module
@@ -26,12 +33,6 @@ processOptions = (options) ->
     # plugins (generally, will be some route-rules, see src/addons folder to get help)
     addon: null
 
-    # dotfile  node_modules
-    ignored: /(\/|^)\..*|node_modules/
-
-    interval: 600
-
-    manual: false
 
   
   
@@ -43,15 +44,36 @@ puer = module.exports = (options = {}) ->
       processOptions(options)
 
       options.dir = path.resolve cwd, options.dir
+      options.ips = []
+      options.inject=[]
+
+      ifaces = os.networkInterfaces()
+      for dev of ifaces
+        ifaces[dev].forEach (details) ->  
+          if (details.family=='IPv4' and details.address != '127.0.0.1')
+            options.ips.push(details.address);
+            
+
 
       app = do express
+      server = http.createServer app         
       # init autoreload
       # (require "./autoreload") app, server, options if options.reload
       
+      app.use connectPuer(app, server, options)
+      
+      # generate qrcode
+      app.get '/puer/qrcode', (req, res, next)->
+        query = url.parse(req.url,true).query
+        qr = qrcode.qrcode 6, 'H'
+        qr.addData(query.url or '')
+        qr.make()
 
-    
-        
-      app.use connectPuer(app, options) if options.reload
+        res.send 
+          code: 200
+          result: qr.createImgTag(4)
+          
+
 
       # only one addon(markdown) is default provide
       addon app, options for own key, addon of helper.requireFolder path.join __dirname, "./addons"
@@ -59,19 +81,41 @@ puer = module.exports = (options = {}) ->
       try 
         require(path.resolve __dirname, options.addon)(app, options) if options.addon
       catch err
+
+      if options.inspect
+        weinre.run 
+          httpPort: 9001
+          boundHost: '-all-'
+          verbose:false
+          debug: false
+          readTimeout:5
+          deathTimeout: 5
+        options.inject.push(
+          """
+          <script>
+            var url = location.href.replace(/\:\\d+/, ':9001') + 'target/target-script-min.js#anonymous' 
+            var script = document.createElement('script');
+            script.src = url;
+            document.head.appendChild(script);
+          </script>
+          """
+        )
+          
         
+        
+
       # folder view
       # app.use express.directory options.dir
       # then customer's folder
-      app.use express.static options.dir
 
+      app.use express.static options.dir
      
       #  start the server
-      server = (http.createServer app).listen options.port, (err)->
+      server.listen options.port, (err)->
         if(err) then return helper.log "port confict, please change port use -h to show the help", "err"
         helper.log "server start at localhost:#{options.port}"
         if options.launch then helper.openBrowser "http://localhost:#{options.port}", (err) ->
-          helper.log(err or "puer will lauch your default browser")         
+          helper.log(err or "puer will lauch your default browser")
 
 
 puer.connect = connectPuer
