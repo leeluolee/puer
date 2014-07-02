@@ -1,7 +1,3 @@
-# 职责是
-# 1. 插入script节点
-# 2. 读取参数ignored,
-# 3. 读取/reload---uid.js 等信息 ,并及时反馈
 
 path = require 'path'
 

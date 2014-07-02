@@ -8,7 +8,7 @@ weinre = (inspect) ->
   if(inspect)
     """
     <div class="weinre" >
-      <a class="u-ebtn" id='weinre' href='#' target='_blank'>跳转到weinre控制台</a>
+      <a class="u-ebtn" id='weinre' href='#' target='_blank'>nav to weinre terminal</a>
     </div>
     """
   else
@@ -22,21 +22,21 @@ listips = (ips, port)->
 toHTML = (files, folders, pathname ,options) ->
   prevpath = pathname.replace /\/[\w-.$]*$/, "" unless pathname is "/"
   prevpath = "/" +prevpath if prevpath? and prevpath.indexOf("/") is -1
-  prelink = if prevpath? then "<a class='prevpath' href='#{prevpath}' title='#{prevpath}'>[上级目录]</a>" else ""
+  prelink = if prevpath? then "<a class='prevpath' href='#{prevpath}' title='#{prevpath}'>[up folder]</a>" else ""
 
   """
   <!DOCTYPE HTML>
   <html lang="en-US">
   <head>
     <meta charset="UTF-8">
-    <title>Puer 目录浏览</title>
+    <title>Puer-view folder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" user-scalable="no">
     <link rel="stylesheet" type="text/css" href="/puer/css/folder.css">
     #{weinre options.weinre}
   </head>
   <body>
     <div class="g-doc">
-      <h2>当前目录:<strong id="dir">#{pathname}</strong></h2>
+      <h2>current dir:<strong id="dir">#{pathname}</strong></h2>
       #{prelink}
       #{list 'folder', folders, pathname}
       #{list 'file', files, pathname}
@@ -44,9 +44,9 @@ toHTML = (files, folders, pathname ,options) ->
       <div class="m-qrcode">
         <div id="qrcode">
         </div>
-        <h3 class="title">扫描二维码打开本页</h3>
+        <h3 class="title">scan qrcode to open</h3>
         <div class="m-ips">
-          <h3>切换到可用ip地址:</h3>
+          <h3>switch ips:</h3>
           <ul>
             #{listips options.ips, options.port}
           </ul>

@@ -3323,8 +3323,11 @@ function addListener(el, type, cb) {
 var autoreload=function(){
       var location = window.location,
           origin = location.protocol+"//"+location.host;
+
       var socket = io.connect(origin); 
+
       var stylesheets = document.getElementsByTagName("link");
+
       var cacheBuster = function(url){
           var date = Math.round(+new Date/1000).toString();
           url = url.replace(/(\\&|\\\\?)cacheBuster=\\d*/, '');
@@ -3337,6 +3340,7 @@ var autoreload=function(){
         }
         return true;
       }
+      
       socket.on('update', function(data){
         if(data.css && updateStyle(data.css)) return true;
         window.location.reload();     
