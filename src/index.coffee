@@ -3,6 +3,7 @@
 http = require 'http'
 path = require 'path'
 express = require 'express'
+httpProxy = require 'http-proxy'
 connectPuer = require './connect-puer'
 require 'coffee-script'
 weinre = require 'weinre'
@@ -32,6 +33,7 @@ processOptions = (options) ->
     launch: true
     # plugins (generally, will be some route-rules, see src/addons folder to get help)
     addon: null
+    proxy:null
 
 
   
@@ -61,6 +63,18 @@ puer = module.exports = (options = {}) ->
       # (require "./autoreload") app, server, options if options.reload
       
       app.use connectPuer(app, server, options)
+
+
+      if options.proxy
+        proxy = httpProxy.createProxyServer {}
+        proxy.on "error", (err, req, res)->
+          res.writeHead(500, {
+            "Content-Type": 'text/plain'
+          })
+         
+
+
+
       
       genQr = (content, start) -> 
         start ?= 2;
@@ -85,7 +99,7 @@ puer = module.exports = (options = {}) ->
 
 
       # only one addon(markdown) is default provide
-      addon app, options for own key, addon of helper.requireFolder path.join __dirname, "./addons"
+      # addon app, options for own key, addon of helper.requireFolder path.join __dirname, "./addons"
         # config express 
       try 
         require(path.resolve __dirname, options.addon)(app, options) if options.addon
@@ -114,15 +128,23 @@ puer = module.exports = (options = {}) ->
           """
         )
           
-        
+      
         
 
       # folder view
       # app.use express.directory options.dir
       # then customer's folder
 
-      app.use express.static options.dir
-     
+
+      if not options.proxy 
+        app.use express.static options.dir
+      else 
+        app.use (req, res, next)->
+          proxy.web req, res, { target: options.proxy }, (err)-> 
+            if err then console.error("some error occurs")
+
+
+
       #  start the server
       server.listen options.port, (err)->
         if(err) then return helper.log "port confict, please change port use -h to show the help", "err"

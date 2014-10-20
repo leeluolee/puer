@@ -2,7 +2,7 @@
   "name": "puer",
   "description": "a tool to build static autoreload(livereload) server",
   "author": "leeluolee",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/leeluolee/puer"
@@ -17,9 +17,10 @@
     "chokidar": "0.8.1",
     "socket.io": "0.9.16",
     "weinre": "*",
-    "qrcode-npm": "0.0.3"
+    "qrcode-npm": "0.0.3",
+    "http-proxy": "~1.5.3"
   },
-  "devDependencies": {
+  "devDependencies": 
     "nodeunit": ">=0.5.0"
   },
   "engines": {
