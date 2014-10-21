@@ -64,18 +64,6 @@ puer = module.exports = (options = {}) ->
       
       app.use connectPuer(app, server, options)
 
-
-      if options.proxy
-        proxy = httpProxy.createProxyServer {}
-        proxy.on "error", (err, req, res)->
-          res.writeHead(500, {
-            "Content-Type": 'text/plain'
-          })
-         
-
-
-
-      
       genQr = (content, start) -> 
         start ?= 2;
         try
@@ -99,11 +87,6 @@ puer = module.exports = (options = {}) ->
 
 
       # only one addon(markdown) is default provide
-      # addon app, options for own key, addon of helper.requireFolder path.join __dirname, "./addons"
-        # config express 
-      try 
-        require(path.resolve __dirname, options.addon)(app, options) if options.addon
-      catch err
 
       if options.inspect
         weinre.run 
@@ -134,20 +117,32 @@ puer = module.exports = (options = {}) ->
       # folder view
       # app.use express.directory options.dir
       # then customer's folder
+      if options.proxy
+        proxy = httpProxy.createProxyServer {}
+
+
+      if !options.proxy
+        addon app, options for own key, addon of helper.requireFolder path.join __dirname, "./addons"
+        # config express 
+      try 
+        require(path.resolve __dirname, options.addon)(app, options) if options.addon
+      catch err
 
 
       if not options.proxy 
         app.use express.static options.dir
       else 
+        proxy.on 'proxyRes', (proxyRes, req, res, options)-> 
+           
         app.use (req, res, next)->
-          proxy.web req, res, { target: options.proxy }, (err)-> 
-            if err then console.error("some error occurs")
+          proxy.web req, res, { target: options.proxy } , (err)->
+            console.log(err)
 
 
 
       #  start the server
       server.listen options.port, (err)->
-        if(err) then return helper.log "port confict, please change port use -h to show the help", "err"
+        if(err) then return helper.log "port conflict, please change port use -h to show the help", "err"
         helper.log "server start at localhost:#{options.port}"
         if options.launch then helper.openBrowser "http://localhost:#{options.port}", (err) ->
           helper.log(err or "puer will lauch your default browser")

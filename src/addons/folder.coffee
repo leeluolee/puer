@@ -54,7 +54,6 @@ toHTML = (files, folders, pathname ,options) ->
       </div>
     </div>
     <script src="/puer/js/folder.js"></script>
-
   </body>
   </html> 
   """
