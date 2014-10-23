@@ -156,7 +156,9 @@ puer = module.exports = (options = {}) ->
                   path = tmp[0]
                   method = 'GET'
                 addon.router.route(method, path, callback)
+              helper.log("addon update !!!" + addon.name)
             catch e
+              helper.log(e.message, "error")
 
 
             watchFile addon.name, restRoute
