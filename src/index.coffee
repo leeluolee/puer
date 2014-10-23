@@ -1,5 +1,6 @@
 # http://tomkersten.com/articles/server-sent-events-with-node/
 # module 
+fs = require 'fs'
 http = require 'http'
 path = require 'path'
 express = require 'express'
@@ -10,6 +11,8 @@ weinre = require 'weinre'
 os = require 'os'
 qrcode = require 'qrcode-npm'
 url = require 'url'
+Router = require 'express/lib/router/index'
+
 
 
 
@@ -19,6 +22,10 @@ helper = require "./helper"
 
 cwd = do process.cwd
 
+
+watchFile = (filename, callback) ->
+  fs.watch filename, (event) -> 
+      if event == 'change' then callback(filename)
 
 
 processOptions = (options) ->
@@ -55,6 +62,8 @@ puer = module.exports = (options = {}) ->
           if (details.family=='IPv4' and details.address != '127.0.0.1')
             options.ips.push(details.address);
             
+
+
 
 
       app = do express
@@ -124,9 +133,50 @@ puer = module.exports = (options = {}) ->
       if !options.proxy
         addon app, options for own key, addon of helper.requireFolder path.join __dirname, "./addons"
         # config express 
-      try 
-        require(path.resolve __dirname, options.addon)(app, options) if options.addon
-      catch err
+
+      if options.addon
+          addon = name: path.resolve __dirname, options.addon
+
+
+          #TODO
+          restRoute = ()->
+            # change the cache routes
+            try
+              addon.router = new Router app;
+
+              delete require.cache[addon.name];
+              addon.routes = require addon.name;
+
+              for own path, callback of addon.routes
+                tmp = path.split /\s+/  
+                if tmp.length > 1
+                  path = tmp[1]
+                  method = tmp[0]
+                else
+                  path = tmp[0]
+                  method = 'GET'
+                addon.router.route(method, path, callback)
+            catch e
+
+
+            watchFile addon.name, restRoute
+
+          restRoute();
+          
+
+
+          app.use (req, res, next)->
+            if addon.router
+              route = addon.router.matchRequest(req)
+              if route && route.callbacks && route.callbacks[0]
+                req.params = route.params
+                route.callbacks[0].call(app, req, res, next)
+              else 
+                next()
+            else 
+              next()
+
+
 
 
       if not options.proxy 
@@ -136,7 +186,7 @@ puer = module.exports = (options = {}) ->
            
         app.use (req, res, next)->
           proxy.web req, res, { target: options.proxy } , (err)->
-            console.log(err)
+            # console.log(err)
 
 
 

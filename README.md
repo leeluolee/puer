@@ -3,6 +3,10 @@
 easy-to-use static server has livereload & debug(weinre integrated)  function, can be used as connect-middleware
 
 
+## Document
+
+[]
+
 
 
 ##Feature
@@ -11,7 +15,7 @@ easy-to-use static server has livereload & debug(weinre integrated)  function, c
 2. __refresh page__ when other filetype changed
 3. __weinre integrated__  use `-i` options
 4. __connect-middleware__
-5. __easy extend__ by addon
+5. __http request mock__ by mock  (after version 1.0.4)
 6. qrcode image at folder page
 7. local ips detect
 
@@ -46,24 +50,33 @@ Options:
   -d,--dir <dir>  your customer working dir. default current dir 
   -i,--inspect    start weinre server and debug all puer page
   -x,--exclude    exclude file under watching(must be a regexp), default: ''
-  -a,--addon <file> your addon's path
+  -a,--mock <file> your mock's path
+  -t,--target <url> remote proxy server
      --no-reload    close  auto-reload feature,(not recommended)
      --no-launch    close the auto launch feature
   -h,--help     help list
 
 ```
 
-__tips__: you can use addon javascript to support other mineType, and other logic
+
+__mock request__
+
 
 ```javascript
 
-module.exports = function(app, options){
-  app.get(/(.*\.less)/, function(req, res){
-    res.send("less file") // you can compile your less file
-  })
-}
 
 ```
+
+
+__proxy support__
+
+you can use `-t` or `--target` to use the proxy
+
+```javascript
+puer -t 'localhost:8008'
+
+```
+then then request will proxy to other service localhost:8008
 
 
 ###use as [connect|express]-middleware
