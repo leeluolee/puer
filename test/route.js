@@ -3,13 +3,10 @@ module.exports = {
 
   },
   "POST /home/code/:id": function(){
-
   },
   "/test/:id/home": function(req, res, next){
     res.send("hleeluaildd")
-  }
-
-  
+  },
 
 }
 

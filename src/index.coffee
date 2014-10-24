@@ -24,8 +24,13 @@ cwd = do process.cwd
 
 
 watchFile = (filename, callback) ->
-  fs.watch filename, (event) -> 
-      if event == 'change' then callback(filename)
+  isWin = process.platform == 'win32'
+  if isWin
+    fs.watch filename, (event) -> 
+        if event == 'change' then callback(filename)
+  else 
+    fs.watchFile filename, {interval: 200}, (curr, prev)->
+        if curr.mtime > prev.mtime then callback(filename);
 
 
 processOptions = (options) ->
@@ -161,9 +166,9 @@ puer = module.exports = (options = {}) ->
               helper.log(e.message, "error")
 
 
-            watchFile addon.name, restRoute
 
           restRoute();
+          watchFile addon.name, restRoute
           
 
 
