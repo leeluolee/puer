@@ -101,7 +101,7 @@ module.exports = {
 
 It is just a  config for routers, you need export a [Object] contains router config. the keys is join with 【METHOD】 and 【PATH】, and the  values represent the callback。this function is based on [express](http://expressjs.com)'s router, you can check its document for more help。
 
-__[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-4.gif)__
+__[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-2.gif)__
 
 once the `route.js` changed, puer will hot refresh it. there is no need to restart puer.
 
