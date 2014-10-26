@@ -1,9 +1,8 @@
 
 
 
-##Introduction
 
-Puer - more than a live-reload server for efficient frontend development 。
+> __Puer - more than a live-reload server , built for efficient frontend development__
 
 
 [中文指南](http://leeluolee.github.io/2014/10/24/use-puer-helpus-developer-frontend/)
