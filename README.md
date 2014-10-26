@@ -1,23 +1,23 @@
+
+
+
 ##Introduction
 
-easy-to-use static server has livereload & debug(weinre integrated)  function, can be used as connect-middleware
+Puer - more than a live-reload server for efficient frontend development 。
 
 
-## Document
-
-[]
-
+[中文指南](http://leeluolee.github.io/2014/10/24/use-puer-helpus-developer-frontend/)
 
 
 ##Feature
 
-1. __update css__ when css file changed
-2. __refresh page__ when other filetype changed
+
+1. __create static server__ at target dir (default in current dir)
+2. __auto reload__ : css will update style, other file will reload the page.
 3. __weinre integrated__  use `-i` options
-4. __connect-middleware__
-5. __http request mock__ by mock  (after version 1.0.4)
-6. qrcode image at folder page
-7. local ips detect
+4. __proxy server mode__, use it with exsiting server
+5. __http request mock__ by `-a` addon，the addon is also __live reload__
+6. __connect-middleware__ support
 
 
 ##install
@@ -35,7 +35,11 @@ cd path/to/your/static/dir
 puer 
 ```
 
-__full options__
+![puer-step-1](http://leeluolee.github.io/attach/2014-10/puer-step-1.gif)
+
+puer will launch the browser for you. all pages is __live-reload__
+
+### __full options__
 
 list options use `puer -h`
 
@@ -59,25 +63,76 @@ Options:
 ```
 
 
-__mock request__
+###__mock request__
 
+during development ，you may need mock request . use `-a <addon>` to help you mock dynamic api
+
+```shell
+puer -a route.js
+```
+
+the `route.js` seems like
 
 ```javascript
+// use addon to mock http request
+module.exports = {
+  // GET
+  "GET /v1/posts/:id": function(req, res, next){
+	// response json format
+    res.send({
+      title: "title changed",
+      content: "tow post hahahah"
+    })
 
+  },
+  // PUT POST DELETE is the same
+  "PUT /v1/posts/:id": function(){
+
+  },
+  "POST /v1/posts": function(){
+
+  },
+  "DELETE /v1/posts/:id": function(){
+
+  }
+}          
 
 ```
 
+It is just a  config for routers, you need export a [Object] contains router config. the keys is join with 【METHOD】 and 【PATH】, and the  values represent the callback。this function is based on [express](http://expressjs.com)'s router, you can check its document for more help。
 
-__proxy support__
+__[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-4.gif)__
 
-you can use `-t` or `--target` to use the proxy
+once the `route.js` changed, puer will hot refresh it. there is no need to restart puer.
+
+
+
+###__proxy support__
+
+you can use `-t` or `--target` to use puer with exsiting server, image that you already have a server run at 8020 port. 
 
 ```javascript
-puer -t 'localhost:8008'
+puer -t http://localhost:8020
+```
+
+__[【check the recor for proxy mode】](http://leeluolee.github.io/attach/2014-10/puer-step-3.gif)__
+
+you can use 【addon】 with【 target】 for more powerful usage。
 
 ```
-then then request will proxy to other service localhost:8008
+puer -t http://localhost:8020 -a route.js
+```
+__[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-4.gif)__
 
+
+### use the builtin debugger (through weinre)
+
+type `-i` to bootstrap the weinre, the client script is injected for you in every page through puer, click the 【nav to weinre terminal 】button or find the weinre server directly at 9001 port
+
+```shell
+puer -i
+```
+__[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-5.gif)__
 
 ###use as [connect|express]-middleware
 
@@ -105,19 +160,7 @@ server.listen(8001, function(){
 })
 
 ```
-
-###Changlog
-
-*. v0.1.0 
-  1. __puer integretd with weinre now, you can pass `-i` to open, every puer page can  inspect at 9001 port__
-  2. support qrcode img generate
-  3. support local ip detect
-
-*. v0.0.6 support connect middleware
-
-### TODO
-
-1. sync multiply browser's  action (scroll,form-input,navigate) like Adobe Eadge inspect
+you must use puer middleware before route and static midleware(before any middle may return 'text/html')
 
 ###LICENSE
 MIT

@@ -1,6 +1,6 @@
 body {
-  padding: 50px;
-  background-color: #eee;
+  padding: 30px;
+  background-color: #fff;
   font: 21px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -8,7 +8,7 @@ body {
   margin-top: 10px;
 }
 #session {
-  border-bottom: 1px solid #333;  
+  border-bottom: 1px solid #000;
 }
 a {
   color: #00B7FF;
