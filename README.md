@@ -9,6 +9,7 @@
 
 
 ##Feature
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/leeluolee/puer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 1. __create static server__ at target dir (default in current dir)
