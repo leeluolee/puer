@@ -10,7 +10,7 @@ exports.run = (args) =>
   parser = new Parser()
   parser.on "-p --port <port>", "server's listen port, 8000 default", (port) ->
     option.port = parseInt(port) if port
-  parser.on "-f --filetype <typelist>", "fileType to watch(split with '|'), defualt 'js|css|html|xhtml'", (typelist) ->
+  parser.on "-f --filetype <typelist>", "fileType to watch(split with '|'), default 'js|css|html|xhtml'", (typelist) ->
     option.filetype = typelist
   parser.on "-d --dir <dir>", "your customer working dir. default current dir ", (dir) ->
     option.dir = sysPath.resolve pwd, dir if dir
