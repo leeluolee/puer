@@ -50,7 +50,7 @@ Usage:  puer [options...]
 
 Options:
   -p,--port <port>  server's listen port, 8000 default
-  -f,--filetype <typelist>  fileType to watch(split with '|'), defualt 'js|css|html|xhtml'
+  -f,--filetype <typelist>  fileType to watch(split with '|'), default 'js|css|html|xhtml'
   -d,--dir <dir>  your customer working dir. default current dir 
   -i,--inspect    start weinre server and debug all puer page
   -x,--exclude    exclude file under watching(must be a regexp), default: ''
