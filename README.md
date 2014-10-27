@@ -14,7 +14,7 @@
 1. __create static server__ at target dir (default in current dir)
 2. __auto reload__ : css will update style, other file will reload the page.
 3. __weinre integrated__  use `-i` options
-4. __proxy server mode__, use it with exsiting server
+4. __proxy server mode__, use it with existing server
 5. __http request mock__ by `-a` addon，the addon is also __live reload__
 6. __connect-middleware__ support
 
