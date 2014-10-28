@@ -34,9 +34,7 @@ exports.run = (args) =>
       #{parser.output()}  
     """
     console.log man
-  # 传入从命令行提取的
   parser.run args
-  console.log JSON.stringify(option)
   puer(option) if not option.help
   
 
