@@ -4,12 +4,12 @@
 
 > __Puer - more than a live-reload server , built for efficient frontend development__
 
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/leeluolee/puer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [中文指南](http://leeluolee.github.io/2014/10/24/use-puer-helpus-developer-frontend/)
 
 
 ##Features
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/leeluolee/puer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 1. __create static server__ at target dir (default in current dir)

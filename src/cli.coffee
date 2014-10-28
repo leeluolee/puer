@@ -16,7 +16,7 @@ exports.run = (args) =>
   parser.on "-i --inspect", "start weinre server and debug all puer page", (dir) ->
     option.inspect = true
   parser.on "-x --exclude", "exclude file under watching(must be a regexp), default: ''", (dir) ->
-    ignored = reg.replace /^\/|\/$/g, ""
+    ignored = dir.replace /^\/|\/$/g, ""
     option.ignored = new RegExp ignored
   parser.on "-a --addon <file>", "your addon's path", (file) ->
     option.addon = sysPath.resolve pwd, file
@@ -35,6 +35,7 @@ exports.run = (args) =>
     """
     console.log man
   parser.run args
+  console.log(option)
   puer(option) if not option.help
   
 

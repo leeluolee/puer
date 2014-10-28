@@ -1,12 +1,19 @@
 {
   "name": "puer",
-  "description": "a tool to build static autoreload(livereload) server",
+  "description": "more than a live-reload server , built for efficient frontend development",
   "author": "leeluolee",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "repository": {
     "type": "git",
     "url": "https://github.com/leeluolee/puer"
   },
+  "keywords": [
+    "live-reload",
+    "server",
+    "proxy",
+    "frontend",
+    "tool"
+  ],
   "main": "./lib/index.js",
   "bin": {
     "puer": "./bin/puer"
