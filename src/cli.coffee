@@ -5,7 +5,6 @@ puer = require "./index"
 pwd = process.cwd()
 
 exports.run = (args) =>
-  console.log(args)
   option = {}
   parser = new Parser()
   parser.on "-p --port <port>", "server's listen port, 8000 default", (port) ->
@@ -21,8 +20,8 @@ exports.run = (args) =>
     option.ignored = new RegExp ignored
   parser.on "-a --addon <file>", "your addon's path", (file) ->
     option.addon = sysPath.resolve pwd, file
-  parser.on "-t --target <target>", "proxy url", (file) ->
-    option.proxy = file
+  parser.on "-t --target <target>", "proxy url", (target) ->
+    option.proxy = target
   parser.on "--no-reload", "close  auto-reload feature,(not recommended)", () ->
     option.reload =false
   parser.on "--no-launch", "close the auto launch feature", () ->
@@ -37,6 +36,7 @@ exports.run = (args) =>
     console.log man
   # 传入从命令行提取的
   parser.run args
+  console.log JSON.stringify(option)
   puer(option) if not option.help
   
 

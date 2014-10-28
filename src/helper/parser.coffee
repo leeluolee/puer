@@ -1,5 +1,5 @@
 # Option Parser 简陋版
-lReg =/--([^-](?:\w|[^=\<\>])+)(?:[\s=]\<([^\s]+)\>)?/#long flag or switch
+lReg =/--([^-][-\w]+)/#long flag or switch
 sReg =/-((?:\w|[^-=\<\>]))(?:\s<([^\s]+)>)?/
 argReg = ///
   --([^-](?:\w|[^-=\<\>])+)(?:[\s=]\<([^\s]+)\>)?
