@@ -8,14 +8,15 @@
 [中文指南](http://leeluolee.github.io/2014/10/24/use-puer-helpus-developer-frontend/)
 
 
-##Feature
+##Features
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/leeluolee/puer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 1. __create static server__ at target dir (default in current dir)
-2. __auto reload__ : css will update style, other file will reload the page.
+2. __auto reload__ : editing css will update styles only, other files will reload the whole page.
 3. __weinre integrated__  use `-i` options
-4. __proxy server mode__, use it with exsiting server
-5. __http request mock__ by `-a` addon，the addon is also __live reload__
+4. __proxy server mode__, use it with an existing server
+5. __http request mock__ by `-a` addon，the addon is also __live reloaded__
 6. __connect-middleware__ support
 
 
@@ -36,11 +37,11 @@ puer
 
 ![puer-step-1](http://leeluolee.github.io/attach/2014-10/puer-step-1.gif)
 
-puer will launch the browser for you. all pages is __live-reload__
+puer will launch the browser for you. all pages will reload when you edit them
 
 ### __full options__
 
-list options use `puer -h`
+To list all of puer's options use `puer -h`
 
 ```bash
 ubuntu-21:19 ~ $ puer -h
@@ -49,7 +50,7 @@ Usage:  puer [options...]
 
 Options:
   -p,--port <port>  server's listen port, 8000 default
-  -f,--filetype <typelist>  fileType to watch(split with '|'), defualt 'js|css|html|xhtml'
+  -f,--filetype <typelist>  fileType to watch(split with '|'), default 'js|css|html|xhtml'
   -d,--dir <dir>  your customer working dir. default current dir 
   -i,--inspect    start weinre server and debug all puer page
   -x,--exclude    exclude file under watching(must be a regexp), default: ''
@@ -64,13 +65,13 @@ Options:
 
 ###__mock request__
 
-during development ，you may need mock request . use `-a <addon>` to help you mock dynamic api
+During development，you may need to mock a request . use `-a <addon>` to help you mock a dynamic api
 
 ```shell
 puer -a route.js
 ```
 
-the `route.js` seems like
+a sample `route.js` looks like:
 
 ```javascript
 // use addon to mock http request
@@ -98,25 +99,25 @@ module.exports = {
 
 ```
 
-It is just a  config for routers, you need export a [Object] contains router config. the keys is join with 【METHOD】 and 【PATH】, and the  values represent the callback。this function is based on [express](http://expressjs.com)'s router, you can check its document for more help。
+It is just a  config for routers, you need export an [Object] containing router config. The keys join with 【METHOD】 and 【PATH】, and the  values represent the callback。This function is based on [express](http://expressjs.com)'s router, you can check its documentation for more help。
 
 __[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-2.gif)__
 
-once the `route.js` changed, puer will hot refresh it. there is no need to restart puer.
+Once `route.js` is changed, puer will refresh it. There is no need to restart puer.
 
 
 
 ###__proxy support__
 
-you can use `-t` or `--target` to use puer with exsiting server, image that you already have a server run at 8020 port. 
+you can use `-t` or `--target` to use puer with an exsiting server. For example, say you already have a server running at port 8020. 
 
 ```javascript
 puer -t http://localhost:8020
 ```
 
-__[【check the recor for proxy mode】](http://leeluolee.github.io/attach/2014-10/puer-step-3.gif)__
+__[【check the record for proxy mode】](http://leeluolee.github.io/attach/2014-10/puer-step-3.gif)__
 
-you can use 【addon】 with【 target】 for more powerful usage。
+You can use 【addon】 with【 target】 for more powerful usage。
 
 ```
 puer -t http://localhost:8020 -a route.js
@@ -126,7 +127,7 @@ __[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/pue
 
 ### use the builtin debugger (through weinre)
 
-type `-i` to bootstrap the weinre, the client script is injected for you in every page through puer, click the 【nav to weinre terminal 】button or find the weinre server directly at 9001 port
+type `-i` to bootstrap the weinre, the client script is injected for you in every page through puer, click the 【nav to weinre terminal 】button or find the weinre server directly at port 9001
 
 ```shell
 puer -i
@@ -159,7 +160,7 @@ server.listen(8001, function(){
 })
 
 ```
-you must use puer middleware before route and static midleware(before any middle may return 'text/html')
+You must use puer middleware before route and static middleware(before any middle may return 'text/html')
 
 ###LICENSE
 MIT
