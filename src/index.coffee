@@ -212,7 +212,7 @@ puer = module.exports = (options = {}) ->
         if(err) then return helper.log "port conflict, please change port use -h to show the help", "err"
         helper.log "server start at localhost:#{options.port}"
         if options.launch then helper.openBrowser "http://localhost:#{options.port}", (err) ->
-          helper.log(err or "puer will lauch your default browser")
+          helper.log(err or "puer will launch your default browser")
 
 
 puer.connect = connectPuer
