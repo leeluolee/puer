@@ -1,4 +1,5 @@
 module.exports = {
+  "GET /home2/**": "fixtures/index.html",
   "GET /home/code/:id": function(req, res, next){
 
   },

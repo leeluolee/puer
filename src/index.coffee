@@ -137,11 +137,13 @@ puer = module.exports = (options = {}) ->
 
       if !options.proxy
         addon app, options for own key, addon of helper.requireFolder path.join __dirname, "./addons"
+        app.use express.static options.dir
         # config express 
+
+
 
       if options.addon
           addon = name: path.resolve __dirname, options.addon
-
 
           #TODO
           restRoute = ()->
@@ -152,15 +154,25 @@ puer = module.exports = (options = {}) ->
               delete require.cache[addon.name];
               addon.routes = require addon.name;
 
-              for own path, callback of addon.routes
-                tmp = path.split /\s+/  
+              for own pt, callback of addon.routes
+                tmp = pt.split /\s+/  
                 if tmp.length > 1
-                  path = tmp[1]
+                  pt = tmp[1]
                   method = tmp[0]
                 else
-                  path = tmp[0]
+                  pt = tmp[0]
                   method = 'GET'
-                addon.router.route(method, path, callback)
+                if typeof callback is "string"
+                  callback = do (callback)->
+                    return (req, res, next)->
+                      fs.readFile path.join( path.dirname(options.addon), callback), 'utf8', (err, content)->
+                        if not err 
+                          res.send content
+                        else
+                          next()
+
+
+                addon.router.route(method, pt, callback)
               helper.log("addon update !!!" + addon.name)
             catch e
               helper.log(e.message, "error")
@@ -186,9 +198,7 @@ puer = module.exports = (options = {}) ->
 
 
 
-      if not options.proxy 
-        app.use express.static options.dir
-      else 
+      if options.proxy 
         proxy.on 'proxyRes', (proxyRes, req, res, options)-> 
            
         app.use (req, res, next)->
