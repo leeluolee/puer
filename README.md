@@ -99,12 +99,53 @@ module.exports = {
 
 ```
 
-It is just a  config for routers, you need export an [Object] containing router config. The keys join with 【METHOD】 and 【PATH】, and the  values represent the callback。This function is based on [express](http://expressjs.com)'s router, you can check its documentation for more help。
 
 __[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-2.gif)__
 
+It is just a  config for routers, you need export an [Object] containing router config. The keys join with 【METHOD】 and 【PATH】, and the  values represent the callback。This function is based on [express](http://expressjs.com)'s router, you can check its documentation for more help。
+
+example from above is just equal code in express like:
+
+```javascript
+app.get("/v1/posts/:id", function(req, res, next){
+  // response json format
+  res.send({
+    title: "title changed",
+    content: "tow post hahahah"
+  })
+})
+
+app.put("/v1/posts/:id", function(){})
+app.post("/v1/posts", function(){})
+app.delete("/v1/posts/:id", function(){})
+```
+
+
 Once `route.js` is changed, puer will refresh it. There is no need to restart puer.
 
+
+__the route.js style__
+
+__Function __ : just like showed before, you can use the express's Response and Request Method
+
+__String__: if the passin is a [String], puer will find the File first, if file is not exsit, will directly response with the origin [String]
+
+```javascript
+{
+  "GET /v1/posts/:id": "hello.html" 
+}
+```
+
+__Object | Array__: will respone a json format. 
+
+```javascript
+  
+  {
+    "GET /v1/posts/:id": {message: "some message"}
+    "GET /v1/posts": [{message: "some message"}]
+  }
+
+```
 
 
 ###__proxy support__
@@ -161,6 +202,34 @@ server.listen(8001, function(){
 
 ```
 You must use puer middleware before route and static middleware(before any middle may return 'text/html')
+
+
+### Other
+
+<a name="client-event"></a>
+#### client event
+
+puer will inject a namespace __`puer` in global__. it is a Emitter instance. has `on`, `off` and  `emit`.
+
+you can register `update` event to control the reload logic
+
+
+```javascript
+
+puer.on("update", function(ev){
+  console.log(ev.path) // the absolute path , the file change
+  console.log(ev.css) // whether css file is change
+  if(ev.path.match(/\.js$/)){
+    ev.stop = true; // if you set ev.stop = true.  the reload will be stoped;
+  }
+ 
+})
+
+```
+
+Example above means that: if js file is changed,  reloading won't be actived.
+
+
 
 ###LICENSE
 MIT

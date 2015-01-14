@@ -1,5 +1,7 @@
 module.exports = {
   "GET /home2/**": "fixtures/index.html",
+  "GET /testarray": [{array:1}],
+  "GET /testobject": {object:1},
   "GET /home/code/:id": function(req, res, next){
 
   },

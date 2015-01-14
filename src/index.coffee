@@ -155,6 +155,7 @@ puer = module.exports = (options = {}) ->
               addon.routes = require addon.name;
 
               for own pt, callback of addon.routes
+                type = typeof callback;
                 tmp = pt.split /\s+/  
                 if tmp.length > 1
                   pt = tmp[1]
@@ -162,7 +163,7 @@ puer = module.exports = (options = {}) ->
                 else
                   pt = tmp[0]
                   method = 'GET'
-                if typeof callback is "string"
+                if type is "string"
                   callback = do (callback)->
                     return (req, res, next)->
                       fs.readFile path.join( path.dirname(options.addon), callback), 'utf8', (err, content)->
@@ -170,7 +171,10 @@ puer = module.exports = (options = {}) ->
                           res.send content
                         else
                           next()
-
+                if type is "array" or type is 'object'
+                  callback = do (callback)->
+                    return (req, res, next)->
+                      res.send(callback)
 
                 addon.router.route(method, pt, callback)
               helper.log("addon update !!!" + addon.name)
