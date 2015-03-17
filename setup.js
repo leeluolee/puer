@@ -13,6 +13,8 @@ var findCoffeeDir= function(pwd){
   var index = pwd.length,coffee;
   do {
     pwd = pwd.slice(0,index)
+    pwd = pwd.replace(" ", "\\ ")
+    console.log(pwd)
     if(existsSync(coffee = sysPath.join(pwd,'node_modules', 'coffee-script', 'bin',"coffee"))){
       return coffee
     }
