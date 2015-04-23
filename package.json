@@ -25,7 +25,7 @@
     "socket.io": "0.9.16",
     "weinre": "*",
     "qrcode-npm": "0.0.3",
-    "http-proxy": "~1.5.3"
+    "http-proxy": "~1.10.0"
   },
   "devDependencies": {
     "nodeunit": ">=0.5.0"
