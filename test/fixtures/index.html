@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>helo-1</title>
+</head>
+<body>
+  
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+
+<script>
+  $.ajax('/path/to',{
+    method: 'post',
+    data: {name: 1},
+    success: function(d){
+      console.log(d)
+    }
+  })
+</script>
+</body>
+</html>

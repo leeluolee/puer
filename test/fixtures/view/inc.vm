@@ -1,0 +1,3 @@
+$name
+<script src="https://rawgit.com/regularjs/regular/master/build/regular.js"></script>
+<script src="https://rawgit.com/flatiron/director/master/build/director.js"></script>
