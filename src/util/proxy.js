@@ -10,6 +10,15 @@ var proxy = {
 };
 
 
+proxy.http.on("proxyRes", function(){
+  // console.log(arguments)
+})
+
+proxy.http.on('proxyReq', function(proxyReq, req, res, options) {
+  proxyReq.setHeader('X-Special-Proxy-Header', 'puer');
+});
+
+
 module.exports = function( req, res, options ){
   options = options || {};
   if( typeof options === 'string' ) options = { target: options }
@@ -21,18 +30,19 @@ module.exports = function( req, res, options ){
     'accept-encoding': 'identity',
     'host': url.host
   })
-
-  return proxy[isHttps?'https': 'http'].web(req, res, options);
+  console.log(options, req.url)
+  return proxy[ (isHttps?'https': 'http') ].web(req, res, options);
 }
 
 
-function createServer(ssl){
+function createServer(ssl, notPrepend){
   var options = { secure: false }
 
   if( ssl ) options.ssl = {
     key: fs.readFileSync(libPath.join( __dirname, '../resource/cert', 'proxy-key.pem'), 'utf8'),
     cert: fs.readFileSync(libPath.join( __dirname, '../resource/cert', 'proxy-cert.pem'), 'utf8')
   }
+
 
   return httpProxy.createServer( options )
 

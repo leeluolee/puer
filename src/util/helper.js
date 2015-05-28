@@ -1,9 +1,10 @@
 
 var isWin = process.platform === 'win32';
 var exec = require('child_process').exec;
+var qrcode = require('qrcode-npm');
 var chalk = require('chalk');
 var os = require('os');
-var qrcode = require('qrcode-npm');
+var fs = require('fs');
 
 
 
@@ -30,8 +31,10 @@ var helper = module.exports = {
   },
   extend: function( o1, o2 , override ){
     if (!o2) return o1;
-    for( var i in o2 ) if( override || o1[i] == undefined){
-      o1[i] = o2[i]
+    for( var i in o2 ) {
+      if( override===true || o1[i] == undefined ){
+        o1[i] = o2[i]
+      }
     }
     return o1;
   },
@@ -50,7 +53,7 @@ var helper = module.exports = {
   },
   encode: function(path, params){
     params = params || {};
-    return path.replace(/\$\{(\w*)?\}/g, function(all, name){
+    return path.replace(/\{(\w*)?\}/g, function(all, name){
       return params[name];
     })
   },
@@ -114,12 +117,43 @@ var helper = module.exports = {
 
     console.log( chalk.white['bg' + color]( helper.expand(label, 11)), message );
   },
+
+  isArgvLengthy: function(){
+    var argv = process.argv.slice(2);
+    if(argv.length > 6 || argv.join('').length > 24) {
+      return true
+    }
+  },
+
+  normalize: function( url ){
+    return url.replace(/\/+/g, '/');
+  },
   expand: function( str, width){
     var blank = width - str.length;
     if(blank < 0) return str;
     var left = Math.ceil(blank / 2);
     var right = Math.floor(blank / 2);
     return new Array(left).join(' ') + str + new Array(right).join(' ');
+  },
+  // getConfigFile: function(config){
+  //   var testconfig = path.join( process.cwd(), 'puerfile.js');
+  //   if(!config) {
+  //     if( fs.existsSync(testconfig) ){
+  //     }
+  //   }else{
+  //   }
+  // },
+  // avoid memory leak
+  // @TODO;
+  findInList: function(id, list, key){
+    var index = -1;
+    list.some(function(item, i){
+
+     if( item[key || 'id'] ==  id){
+      index = i;
+     }
+    })
+    return index;
   }
   
 }

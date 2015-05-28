@@ -1,5 +1,4 @@
-var socket = require("socket.io-client");
-var Regular = require('regularjs');
+var io = require("socket.io-client");
 
 
 var extend = function(o1, o2, override){

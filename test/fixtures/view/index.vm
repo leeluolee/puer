@@ -1,20 +1,31 @@
+<head>
+<link rel="stylesheet" href="/fixtures/style.css">
+</head>
+<body>
+  
+
 <!-- the container -->
+
 <div id="app"></div>
+
 
 <!-- Regular template container(optional) -->
 <!-- if you need this component used in other component, you can specify name in the tag-->
 <script id="helloword" type="text/regular" name="helloword">
   Hello 
-  {{\#if user}}
-    <strong> &cent; {{user}}</strong>, <a href='#' on-click={{user = null}}>logout</a>
-  {{\#else}}
-    Friend, please <a href='#' on-click={{this.login()}}>login</a>
-  {{/if}}
+  {\#if user}
+    <strong> &cent; {user}</strong>, <a href='#' on-click={user = null}>logout</a>
+  {\#else}
+    Friend, please <a href='#' on-click={this.login()}>login</a>
+
+  {/if}
 </script>
 <!-- include regular.js -->
 
 #parse("./inc.vm")
 
+
+<h2>$hello.world</h2>
 
 <ul>
      <li><a href="#/author">#/author</a></li>
@@ -37,7 +48,8 @@ var LoginApp = Regular.extend({
   }
 });
 
-var application = new LoginApp().inject('#app');
+var application = new LoginApp().\$inject('#app');
+
 // you can also inject the component at other position, for example `inject('#app', 'bottom' | 'top' | 'after' | 'before')`, the default is 'bottom'
 
 
@@ -83,3 +95,4 @@ router.init();
 
 </script>
 
+</body>

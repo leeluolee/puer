@@ -1,6 +1,7 @@
 
 var proxy = require("../util/proxy");
 
+
 module.exports = function injectify( options ){
 
   var excludes = options.excludes || [];
@@ -11,6 +12,9 @@ module.exports = function injectify( options ){
     var oWriteHead = res.writeHead;
     var oWrite = res.write;
     var oEnd = res.end;
+
+
+    res.injector = [];
 
     res.proxy = function( options ){
       proxy(req, res, options);
@@ -43,8 +47,8 @@ module.exports = function injectify( options ){
       res.push(chunk);
       res.write = oWrite;
       chunk = res.data
-      if( (chunk || !isHtml(res))  ){
-        chunk = wrap(res.data);
+      if( (chunk || isHtml(res))  ){
+        chunk = wrap(res.data, res.injector);
         if(res._header){
           res.addTrailers({ 'content-length': Buffer.byteLength( chunk, encoding) });
         }else{
@@ -65,9 +69,9 @@ module.exports = function injectify( options ){
  * @param  {[type]} trunk [description]
  * @return {[type]}       [description]
  */
-function wrap( trunk ){
+function wrap( trunk , injector){
   return trunk.replace(/\<body[\s\S]*?\>/, function(all){
-    return all + "<h2>Title</h2>"
+    return all + (Array.isArray(injector)? injector.join(""): injector || '');
   })
 }
 

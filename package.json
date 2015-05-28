@@ -6,6 +6,9 @@
   "scripts": {
     "test": "npm test"
   },
+  "bin": {
+    "puer": "./bin/puer"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/NeteaseWD/wdp"
@@ -21,6 +24,7 @@
   },
   "homepage": "https://github.com/NeteaseWD/wdp",
   "dependencies": {
+    "async": "^1.0.0",
     "chalk": "^1.0.0",
     "chokidar": "^1.0.1",
     "commander": "^2.8.0",
@@ -28,10 +32,13 @@
     "express-velocity": "^1.0.0",
     "glob": "^5.0.6",
     "http-proxy": "^1.11.0",
+    "inquirer": "^0.8.4",
     "node-notifier": "^4.2.1",
     "path-to-regexp": "^1.0.3",
     "qrcode-npm": "0.0.3",
-    "socket.io": "^1.3.5"
+    "save-file": "^0.1.0",
+    "socket.io": "^1.3.5",
+    "weinre": "^2.0.0-pre-I0Z7U9OV"
   },
   "optionalDependencies": {},
   "devDependencies": {
