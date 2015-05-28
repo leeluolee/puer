@@ -1,7 +1,7 @@
 {
-  "name": "wdp",
-  "version": "1.0.0",
-  "description": "web develop platform",
+  "name": "puer",
+  "version": "2.0.0",
+  "description": "more than a live-reload server, built for efficient frontend development",
   "main": "libs/index.js",
   "scripts": {
     "test": "npm test"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NeteaseWD/wdp"
+    "url": "https://github.com/leeluolee/puer"
   },
   "keywords": [
     "develop",
@@ -20,15 +20,14 @@
   "author": "@leeluolee",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NeteaseWD/wdp/issues"
+    "url": "https://github.com/leeluolee/puer/issues"
   },
-  "homepage": "https://github.com/NeteaseWD/wdp",
+  "homepage": "https://github.com/leeluolee/puer",
   "dependencies": {
     "async": "^1.0.0",
     "chalk": "^1.0.0",
     "chokidar": "^1.0.1",
     "commander": "^2.8.0",
-    "ejs": "^2.3.1",
     "express-velocity": "^1.0.0",
     "glob": "^5.0.6",
     "http-proxy": "^1.11.0",
@@ -38,12 +37,11 @@
     "qrcode-npm": "0.0.3",
     "save-file": "^0.1.0",
     "socket.io": "^1.3.5",
-    "weinre": "^2.0.0-pre-I0Z7U9OV"
+    "weinre": "^2.0.0"
   },
   "optionalDependencies": {},
   "devDependencies": {
     "browserify": "^10.1.0",
-    "cssify": "^0.7.0",
     "gulp": "^3.8.11",
     "gulp-jshint": "~1.5.3",
     "gulp-mocha": "~0.4.1",
