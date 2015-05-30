@@ -1,8 +1,11 @@
 
 module.exports = {
   "POST /path/to": function( req, res ){
-    res.send( req.query );
+    res.send({
+
+    });
   },
+  'GET /homepage': "./template/index.html",
   'GET /api/(.*)': "get/{0}.json",
   'POST /api/(.*)': "post/{0}.json",
   "GET /raw": {code: 100, result: 200},
@@ -22,8 +25,9 @@ module.exports = {
       ]
     })
   },
-  'ALL /q/:id': 'http://segmentfault.com/',
-  'ALL /(pub|img)/(.*)': 'http://nec.netease.com',
+  'ALL /q/:id': ['http://segmentfault.com/', function(content, done){
+    done(content)
+  }],
   'ALL /p/(.*)': 'http://nec.netease.com/plugin/{0}',
   'ALL (.*)': 'http://nec.netease.com/',
   "/blog/get": "xxx.html"
