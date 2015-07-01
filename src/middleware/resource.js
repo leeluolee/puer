@@ -1,104 +1,62 @@
 
 var path2reg = require("path-to-regexp");
 var helper = require('../util/helper');
-var saveFile = require('save-file');
 var chokidar = require('chokidar');
+var fstorm = require('fstorm');
 var libPath = require('path');
 var async = require('async');
 var libUrl = require('url');
 var glob = require('glob');
+var express = require('express');
 var fs = require('fs');
 
-
-var RESOURCE_NAME = "__resource__";
-var PARENT_NAME = "__parent__";
-var ID_NAME = "__id__";
+var RESOURCE_NAME = "__resource__" ;
+var PARENT_NAME = "__parent__" ;
+var ID_NAME = "__id__" ;
 
 
 module.exports = function(options){
-  var resource = options.resource;
-  var resourceCache = {};
-  var ruleList = [];
-
-  var onePath = ["", RESOURCE_NAME, ID_NAME].join("/")
-  var nestPath = ["", PARENT_NAME, ID_NAME, RESOURCE_NAME ].join("/")
-  var allPath = ["", RESOURCE_NAME].join("/");
-
-  var nestReg = path2reg( nestPath );
 
   processResourcePattern(resource, resourceCache);
 
-  return function resourceMiddleware( req, res, next){
+  function resourceMiddleware( req, res, next){
+
     var resourceName = req.params[RESOURCE_NAME];
     var parentName = req.params[PARENT_NAME];
-    if(!resourceName || !findResource(resourceName, resourceCache) || 
-        (parentName && !findResource(parentName, resouceCache） )  
+    var resobj, parentObj;
+
+    if( !resourceName || !( resobj = findResource(resourceName, resourceCache) ) || 
+        (parentName && !(parentObj = findResource(parentName, resouceCache）) )  
       ) return next();
 
-    for(var i = 0){
-
-    }
+    return router(req, res, next)
   };
+
+  function list(){
+    
+  }
+  function create(){
+
+  }
+  return resourceMiddleware;
 }
 
 function findResource(resourceName, id , resourceCache){
   for（ var i in resouceCache）{
     var store = resourceCache[i]
     if( store && Array.isArray(store[resourceName]) ) {
-      return {
-        filename: i,
-        resource: store[resouceName]
-      }
+      return i;
     }
   }
 }
 
 
 
-
-
-function processResourcePattern( pattern, resourceCache, ruleCache ){
-
-  if( typeof pattern === 'string' ){
-
-    glob(pattern, {}, function(err, files){
-
-      if(err) return helper.log(err, 'error')
-      async.map( files, function(file, callback){
-
-        fs.readFile( file, 'utf8', callback ); 
-
-      }, function(err, results){
-
-        if(err) return helper.log(err, 'error');
-
-        results.forEach(function(content, index){
-          var filename = files[index];
-          try{
-            var json = JSON.parse(content);
-          }catch( e ){
-            return helper.log("Some 【Syntax Error】 in " + files[index], 'error')
-          }
-          resourceCache[filename] = json;
-          processResource(json, filename, ruleCache);
-        })
-      });
-
-    })
-  }else{
-    resRules["$default"] = pattern;
-  }
-
-
-
-}
-
-
 function processResource(json, filename, ruleCache){
 
-  Object.keys(json).forEach(function(resouceName, index){
+  Object.keys(json).forEach(function(resourceName, index){
 
-    var onePath = "/" + resouceName + "/:id";
+    var onePath = "/" + resourceName + "/:id";
     var allPath = "/" + resourceName;
 
     var oneReg = path2reg( onePath );
@@ -106,28 +64,28 @@ function processResource(json, filename, ruleCache){
 
     var rules = [
       { 
-        description: 'get single resource'
+        description: 'get single resourceName'
         method: 'GET',
         path: onePath,
         regexp: oneReg,
         keys: oneReg.keys,
         handle: function(req, res, next ){
           var id = req.params.id;
-          var resouce = findResource(resouceName, resouceCache） )
+          var resouce = findResource(resourceName, resouceCache） )
           var index = helper.findInList(id, resouce);
           if( ~index ) return res.send(resouce[index])
           else next();
         }
       },
       {
-        description: 'update single resource'
+        description: 'update single resourceName'
         method: 'PUT',
         path: onePath,
         regexp: oneReg,
         keys: oneReg.keys,
         handle: function(req, res, next ){
           var id = req.params.id;
-          var resouce = findResource(resouceName, resouceCache） 
+          var resouce = findResource(resourceName, resouceCache） 
           var index = helper.findInList(id, resouce);
           var body = 
         }
@@ -139,7 +97,7 @@ function processResource(json, filename, ruleCache){
         keys: oneReg.keys,
         handle: function(req, res, next ){
           var id = req.params.id;
-          var resouce = findResource( resouceName, resouceCache）; 
+          var resouce = findResource( resourceName, resouceCache）; 
           var index = helper.findInList(id, resouce);
           if(!index) splice(  )
         }
@@ -186,3 +144,4 @@ function processResource(json, filename, ruleCache){
   })
 
 }
+

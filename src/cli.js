@@ -63,6 +63,7 @@ program.once('done', function(createFile){
     engine: program.engine
   }
 
+
   if(createFile){
     fs.writeFileSync(program.config, 'module.exports=' + JSON.stringify(options, null, 2));
   }
@@ -87,14 +88,12 @@ if(program.config){
 
       var configOptions = require(program.config);
       helper.extend( program, configOptions );
-      program.emit('done')
-
     }catch(e){
 
       helper.log('Some Error occurs in ' + program.config + '\n' + e.message, 'error')
       process.exit(1); 
-
     }
+    program.emit('done')
   }else{
 
     helper.log( program.config + ' is not exsits. \n', 'warn')

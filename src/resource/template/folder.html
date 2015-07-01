@@ -137,10 +137,13 @@
         <h3>switch ips:</h3>
         <ul>
           <% ips.forEach(function(ip){ %>
-          <li><a href='http://<%= ip + ':' + options.port + pathname %>'><%= ip + ':' + options.port %></a></li>
+          <li><a  href='http://<%= ip + ':' + options.port + pathname %>'><%= ip + ':' + options.port %></a></li>
           <% }) %>
         </ul>
       </div>
+      <% if (!!inspectHost){  %>
+        <a target='_blank' href="<%= inspectHost %>" class="u-ebtn">Weinre Dashboard</a>
+      <% } %>
     </div>
   </div>
 </body>

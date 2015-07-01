@@ -11,7 +11,6 @@ module.exports = function ( opt ) {
 
   return function ( req, res, next ){
 
-    
     var slen = sequence.length;
     var index = 0;
 

@@ -6,5 +6,9 @@ module.exports={
   },
   "rules": "mock_*.js",
   "reload": true,
-  "launch": true
+  "launch": true,
+  "throttle": 10 // kb
 }
+
+
+

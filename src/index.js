@@ -3,15 +3,20 @@ var livereload = require('./middleware/livereload.js');
 var injector = require('./middleware/injector.js');
 var rewrite = require('./middleware/rewrite.js');
 var folder = require('./middleware/folder.js');
-var helper = require('./util/helper.js');
 var velocity = require('express-velocity');
+var helper = require('./util/helper.js');
+var bodyParser = require('body-parser');
 var chokidar = require('chokidar');
+var weinre = require('weinre');
 var socket = require('socket.io');
 var express = require('express');
 var morgan = require('morgan')
 var path = require('path');
 var http = require('http');
 var chalk = require('chalk')
+
+var puer = require('./puer');
+
 
 
 /**
@@ -38,8 +43,10 @@ var puer = module.exports = function ( options ){
     engine: { },
     port: 8000,
     app: app,
-    dir: process.cwd()
+    dir: process.cwd(),
+    injector: []
   })
+
   var base = options.config? path.resolve( options.dir , path.dirname(options.config)): options.dir;
 
   options.views = path.resolve(base, options.views);
@@ -48,20 +55,50 @@ var puer = module.exports = function ( options ){
     options.rules = path.resolve( options.dir, options.rules )
   } 
 
+
+
   app.set('views', options.views);
   
   // engine
   var engine = options.engine;
   engine.vm = velocity({root: [options.views]});
 
-  console.log(engine)
   for(var i in engine) if (engine.hasOwnProperty(i)){
     app.engine(i, engine[i])
   }
 
-  app.use( 
-    injector(options) 
-  );
+  app.use( injector(options) );
+  app.use( bodyParser.json() );
+  app.use( bodyParser.urlencoded({ extended: false }))
+
+  if(options.inspect === true) options.inspect = 9000;
+  var inspect = options.inspect;
+  if( inspect ){
+
+    app.use(function(req, res, next){
+      res.injector.push('<script type="text/javascript" src="http://' + 
+          req.get('host').replace(/:\d+/,'') + ':' + 
+          inspect + '/target/target-script-min.js#anonymous"></script>');
+      next();
+    })
+
+    // Thx for browsyer-sync for solving the headache with weinre
+    // https://github.com/BrowserSync/UI/blob/baa9407ee2ace8dd575dc464c46e6d6ab547219e/lib/plugins/remote-debug/weinre.js#L166
+    var logger   = require(path.resolve(__dirname, "../node_modules/weinre/lib/utils.js"));
+
+    logger.log = function (message) {
+        helper.log( "【weinre】-" + message);
+    };
+
+    weinre.run({
+      httpPort:  inspect,
+      boundHost: '-all-',
+      verbose: false,
+      debug: false,
+      readTimeout: 20,
+      deathTimeout: 50
+    });
+  }
 
   if(options.reload){
     options.server = server;
@@ -72,7 +109,6 @@ var puer = module.exports = function ( options ){
   if(options.rules){ app.use( rewrite( options ) ); }
   app.use( folder( options ) );
   app.use( express.static( options.dir )  );
-
   server.on('error', function (e) {
     // if listen port is in using
     if (e.code == 'EADDRINUSE') {
@@ -84,17 +120,20 @@ var puer = module.exports = function ( options ){
       throw e;
     }
   });
+
+
   server.on('listening', function(){
     var url = 'http://localhost:' + options.port;
-    helper.log("puer successfully started at " + chalk.underline.bold( url ), 'success')
+    helper.log("puer successfully started at " + chalk.underline.magenta.bold( url ), 'success')
     if(options.launch) helper.openBrowser( url );
   })
 
+
   var tries = 1;
   function start(){
-    if(tries++ >= 10 ) {
+    if( tries++ >= 10 ) {
       helper.log("Too many attempts, please try other ports", 'error') 
-      return process.exit(0);
+      return process.exit( 0 );
     }
     server.listen( options.port );
   }

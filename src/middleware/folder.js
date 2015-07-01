@@ -14,6 +14,7 @@ var render = ejs.compile(tpl);
 module.exports = function(options) {
   var app = options.app;
 
+
   return function(req, res, next) {
     var pathname = libUrl.parse(req.url).pathname;
     var path = libPath.join( options.dir, pathname );
@@ -50,6 +51,7 @@ module.exports = function(options) {
           files: files,
           folders: folders,
           prevpath: prevpath,
+          inspectHost: getInspectUrl(req, options.inspect),
           pathname: pathname,
           options: options,
           ips: helper.getIPs(),
@@ -64,3 +66,8 @@ module.exports = function(options) {
   };
 };
 
+
+function getInspectUrl(req, inspect){
+  if(!inspect) return null;
+  return 'http://' + req.get('host').replace(/\:\d+/, '') + ":" + inspect + "/client/#anonymous";
+}

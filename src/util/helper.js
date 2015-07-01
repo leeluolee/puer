@@ -38,6 +38,9 @@ var helper = module.exports = {
     }
     return o1;
   },
+  typeOf: function( o ){
+    return o == null ? String(o) : ({}).toString.call(o).slice(8, -1).toLowerCase();
+  },
   // get param from reg2path
   getParam: function(reg, path){
 
@@ -104,18 +107,16 @@ var helper = module.exports = {
 
   log: function(message, label){
     var labelColor = {
-      info: 'Cyan',
+      info: 'White',
       error: 'Red',
       warn: 'Yellow',
       success: 'Green'
-
     }
     label = label || 'info';
 
     var color = labelColor[label];
-    if( !color ) color = 'Cyan';
 
-    console.log( chalk.white['bg' + color]( helper.expand(label, 11)), message );
+    console.log( (color? chalk[label==='info'? 'gray': 'white']['bg' + color]( helper.expand(label, 11)): label) , message );
   },
 
   isArgvLengthy: function(){

@@ -32,7 +32,6 @@ module.exports = function(options){
   return function livereload(req, res, next){
     var clientname = 'puer.client.js';
     if(res.injector) res.injector.push('<script src="/' + clientname + '"></script>')
-
     if(req.url === '/' + clientname ) {
       return res.sendFile( libPath.join(__dirname, '../client/bundle.js'))
     }

@@ -5,6 +5,7 @@ var notifier = require('node-notifier');
 var helper = require('../util/helper');
 var saveFile = require('save-file');
 var chokidar = require('chokidar');
+var request = require('request');
 var libPath = require('path');
 var chalk = require('chalk');
 var async = require('async');
@@ -30,17 +31,30 @@ function processHandle( handle, rulePath ){
         // todo
         var relUrl = helper.encode( handle, req.params );
 
+        // var target = relUrl !== handle? relUrl:  libUrl.resolve(relUrl, req.url);
+        // var stream = request({
+        //   uri: target,
+        //   method: req.method
+        // }, function (error, response, body) {
+        //   if (error) {
+        //     return console.error('upload failed:', error);
+        //   }
+
+        // });
+        // stream.pipe(res);
+        // req.pipe(stream);
+
+        // fix target path
         if(relUrl !== handle){
           req.url = libUrl.parse(relUrl).path;
         }
+
         return proxy( req, res, {
           target: relUrl,
           prependPath: relUrl === handle
-
         }) 
       }
     }
-    // if( fs.existsSync( filepath ) ){
     return function( req, res, next){
       var relativePath =  helper.encode( handle, req.params)
       var filepath = libPath.resolve( ruleDir, relativePath );
@@ -51,11 +65,25 @@ function processHandle( handle, rulePath ){
       }
     }
   }
-  if(type !== 'function' ){
+
+  // {
+  //  handle: 'xx',
+  //  transform: xx
+  // }
+  if( helper.typeOf(handle) === 'object' ){
+    var realHandle = processHandle(handle.handle, rulePath);
+    return function(req, res, next){
+      res.puer_transform = handle.transform
+      realHandle(req, res, next);
+    }
+  }
+
+  if(typeof handle !== 'function'){
     return function(req, res){
       res.send(handle)
     }
   }
+
   return handle;
 }
 function processRule(rules, rulePath){
@@ -63,7 +91,7 @@ function processRule(rules, rulePath){
   for(var i in rules) if ( rules.hasOwnProperty(i) ){
     rst.push(createRule(i, rules[i], rulePath) )
   }
-  return rst;
+  return rst  ;
 }
 function createRule( path, handle, rulePath){
   var tmp = path.split(/\s+/), method = "all";
@@ -94,6 +122,7 @@ function rewriteMiddleware( options ){
 
     var url = libUrl.parse( req.url );
     var method = req.method.toLowerCase();
+    var applied = [];
 
     // checking ruleCache
     for(var i in ruleCache){
@@ -108,16 +137,28 @@ function rewriteMiddleware( options ){
 
           if(params && rule.handle) {
 
-            req.params = params;
-            return rule.handle(req, res, next);
+            applied.push({
+              params: params,
+              handle: rule.handle
+            })
           }
 
         }
       }
     }
 
-    // checking resource 
-    next();
+    var alen = applied.length;
+    if( !alen ) return next();
+
+    var cursor = -1;
+    function nextStep(){
+      cursor++ 
+      if(cursor === alen) return next();
+      var step = applied[cursor];
+      req.params = step.params;
+      step.handle(req, res, nextStep)
+    }
+    nextStep();
   }
 }
 

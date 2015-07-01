@@ -68,7 +68,6 @@ gulp.task('watch', ["client", 'jshint'], function() {
 gulp.task('default', ['watch']);
 
 gulp.task('mocha', function() {
-
   return gulp.src(['test/spec/*.js'])
     .pipe(mocha({ reporter: 'spec' }))
     .on('error', function() {
