@@ -23,7 +23,7 @@
     "express": "3.0.x",
     "chokidar": "0.8.1",
     "socket.io": "0.9.16",
-    "weinre": "*",
+    "weinre": "^2.0.0-pre-I0Z7U9OV",
     "qrcode-npm": "0.0.3",
     "http-proxy": "~1.10.0"
   },
