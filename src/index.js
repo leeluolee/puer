@@ -10,7 +10,6 @@ var chokidar = require('chokidar');
 var weinre = require('weinre');
 var socket = require('socket.io');
 var express = require('express');
-var morgan = require('morgan')
 var path = require('path');
 var http = require('http');
 var chalk = require('chalk')
