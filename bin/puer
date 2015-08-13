@@ -7,4 +7,5 @@ var cli = path.join(path.dirname(fs.realpathSync(__filename)), '..', 'src',"cli"
 
 var args = process.argv.slice(2);
 
+
 require(cli);

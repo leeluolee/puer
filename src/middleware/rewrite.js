@@ -3,7 +3,6 @@ var path2reg = require("path-to-regexp");
 var proxy = require('../util/proxy.js');
 var notifier = require('node-notifier');
 var helper = require('../util/helper');
-var saveFile = require('save-file');
 var chokidar = require('chokidar');
 var request = require('request');
 var libPath = require('path');

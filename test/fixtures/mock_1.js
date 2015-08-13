@@ -7,7 +7,7 @@ module.exports = {
   "POST /path/to": function( req, res, next ,$proxy ){
     res.send(JSON.stringify(req.body, null ,2));
   },
-  "ALL /posts": function( req, res ){
+  "ALL /posts/:id": function( req, res ){
     posts.push({id:posts.length, name: 'post' + posts.length});
     var json = JSON.stringify(posts, null, 2);
 
@@ -43,7 +43,7 @@ module.exports = {
     })
   },  
   'GET /ftl': function(req, res){
-    res.render('view/index.ftl', {
+    res.render('index.ftl', {
       name: 'zhenghaibo',
       flowers: [
         ["zhenghaibo", 'hello' ,100],

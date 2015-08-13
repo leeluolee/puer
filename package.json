@@ -36,7 +36,6 @@
     "glob": "^5.0.6",
     "http-proxy": "^1.11.0",
     "inquirer": "^0.8.4",
-    "nedb": "^1.1.2",
     "node-notifier": "^4.2.1",
     "path-to-regexp": "^1.0.3",
     "pluralize": "^1.1.2",

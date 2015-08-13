@@ -3,7 +3,6 @@ var helper = require('./helper.js');
 var libPath = require('path');
 var libUrl = require('url');
 var fs = require('fs');
-var concat = require('concat-stream');
 
 var proxy = {
   http: createServer(),

@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<#include "../inc/inc.ftl" >
+<#include "./inc.ftl" >
   
 </body>
 </html>
