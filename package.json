@@ -30,7 +30,7 @@
     "chokidar": "^1.0.1",
     "commander": "^2.8.0",
     "ejs": "^2.3.1",
-    "express": "^4.13.1",
+    "express": "~4.10.0",
     "express-velocity": "^1.0.0",
     "fstorm": "^0.1.1",
     "glob": "^5.0.6",

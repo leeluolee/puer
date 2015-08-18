@@ -43,7 +43,7 @@ module.exports = {
     })
   },  
   'GET /ftl': function(req, res){
-    res.render('index.ftl', {
+    res.render('ftl/index.ftl', {
       name: 'zhenghaibo',
       flowers: [
         ["zhenghaibo", 'hello' ,100],

@@ -5,10 +5,8 @@
   <title>Document</title>
 </head>
 <body>
+
+<#include "./inc.ftl" >
   
 </body>
 </html>
-<body>
-
-<h2>idaaaaaaadadjaksaaandex2</h2>
-</body>

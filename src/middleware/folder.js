@@ -28,7 +28,7 @@ module.exports = function(options) {
       if ((err != null) || !stats.isDirectory()) {
         return next();
       }
-      res.noinject = true;
+      // res.non_inject = true;
       files = [];
       folders = [];
       return fs.readdir( path, function ( err, subs ) {

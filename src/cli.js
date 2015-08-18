@@ -30,6 +30,7 @@ program
   .option('-r, --rules <glob>', 'filepath that containes rewrite rules')
   .option('-t, --target <url>', 'target proxy server, it is a shortcut for proxy rule')
   .option('-i, --inspect [port]', 'use weinre to inspect all puer page, default 9000')
+  .option('-d, --dir [path]', 'working dir, default process.cwd()')
   .option('--file <glob>', 'file pattern for watching. use glob pattern')
   .option('--exclude <pattern>', 'use regexp to exclude file from watching', convert.regexp)
   .option('--views <path>', 'change the template\' folder, default is ./views')
@@ -54,6 +55,7 @@ program.once('done', function(createFile){
     port: program.port,
     rules: program.rules,
     target: program.target,
+    dir: program.dir,
     inspect: program.inspect,
     file: program.file,
     exclude: program.exclude,
@@ -93,6 +95,9 @@ if(program.config){
       helper.log('Some Error occurs in ' + program.config + '\n' + e.message, 'error')
       process.exit(1); 
     }
+
+    process.chdir(path.dirname(program.config))
+
     program.emit('done')
   }else{
 

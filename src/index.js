@@ -51,7 +51,7 @@ var puer = module.exports = function ( options ){
   options.views = path.resolve(base, options.views);
 
   if( typeof options.rules === 'string') {
-    options.rules = path.resolve( options.dir, options.rules )
+    options.rules = path.resolve( options.rules )
   } 
 
 
@@ -67,6 +67,7 @@ var puer = module.exports = function ( options ){
   }
 
   app.use( injector(options) );
+
   app.use( bodyParser.json() );
   app.use( bodyParser.urlencoded({ extended: false }))
 
