@@ -111,13 +111,13 @@ var puer = module.exports = function ( options ){
   app.use( express.static( options.dir )  );
   server.on('error', function (e) {
     // if listen port is in using
+    return ;
     if (e.code == 'EADDRINUSE') {
       // server.close();
       helper.log('port ' + chalk.bold(options.port)+ ' is in use, retrying port ... ' + chalk.bold("" + (++options.port) ), 'warn');
       setTimeout( start, 1000);
     }else{
       helper.log(e.message, 'error');
-      throw e;
     }
   });
 

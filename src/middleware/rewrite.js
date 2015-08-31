@@ -138,7 +138,8 @@ function rewriteMiddleware( options ){
 
             applied.push({
               params: params,
-              handle: rule.handle
+              handle: rule.handle,
+              path: rule.path
             })
           }
 
@@ -155,7 +156,16 @@ function rewriteMiddleware( options ){
       if(cursor === alen) return next();
       var step = applied[cursor];
       req.params = step.params;
-      step.handle(req, res, nextStep)
+      try{
+        step.handle(req, res, nextStep)
+      }catch(e){
+        notifier.notify({
+          title: 'some error occurs in route: ' + step.path,
+          message: e.message
+        })
+        helper.log( 'some error occurs in route: ' + step.path + '\n' + e.message, 'error') 
+        next()
+      }
     }
     nextStep();
   }
