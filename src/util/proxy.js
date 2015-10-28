@@ -13,17 +13,17 @@ var proxy = {
 
 
 function handleError( err, req, res ){
-  if(err && err.code === 'ECONNRESET') return;
+  if(err && err.code === 'ECONNRESET') return res.send('end');
   else{
     res.writeHead(500, {
       'Content-Type': 'text/plain'
     });
-    res.end('Something went wrong with proxy request, 【url】 ' + req.url);
+    res.end('Something went wrong with proxy request, url ' + req.url);
   }
 }
 
 function attachHeader(proxyReq){
-  proxyReq.setHeader('X-Special-Proxy-Header', 'puer');
+  proxyReq.setHeader('X-Special-Proxy-Header', 'PUER');
 }
 
 
@@ -33,25 +33,20 @@ proxy.https.on('error', handleError)
 proxy.https.on('proxyReq', attachHeader);
 proxy.http.on('proxyReq', attachHeader);
 
-proxy.http.on('proxyRes', function(proxyRes, req, res){
+// proxy.http.on('proxyRes', function(proxyRes, req, res){
+//   console.log('proxyRes')
+//   // console.log('proxyRes', req.url)
 
-  // console.log('proxyRes', req.url)
-
-});
+// });
 
 
 module.exports = function( req, res, options ){
   options = options || {};
   if( typeof options === 'string' ) options = { target: options }
 
-
   var url = libUrl.parse( options.target);
   var isHttps = url.protocol === "https";
 
-  options.headers = helper.extend( options.headers || {}, {
-    'accept-encoding': 'identity',
-    'host': url.host
-  })
 
   if(options.onload) req.onload = options.onload;
   return proxy[ (isHttps?'https': 'http') ].web(req, res, options);

@@ -4,9 +4,8 @@
 
 
 module.exports = {
-  "POST /path/to": function( req, res, next ,$proxy ){
-    res.send(JSON.stringify(req.body, null ,2));
-  },
+  "POST /path/to": "http://127.0.0.1:8002" ,
+  "GET /hogan.html": "http://127.0.0.1:8002" ,
   "ALL /posts/:id": function( req, res ){
     posts.push({id:posts.length, name: 'post' + posts.length});
     var json = JSON.stringify(posts, null, 2);
@@ -19,10 +18,11 @@ module.exports = {
   },
   "GET /html/(.*).html": function(req, res, next, $proxy){
     res.proxy( 'http://nev.netease.com' , function(err, content){
-      console.log(content)
+      console.log(content);
     });
   },
   "GET /get/page": function(req, res, next){
+    console.log(req.body, req.query)
     res.send({
       code: 200,
       left: 20
@@ -35,13 +35,6 @@ module.exports = {
   'GET /api/(.*)': "get/{0}.json",
   'POST /api/(.*)': "post/{0}.json",
   "GET /raw": {code: 100, result: 200},
-  'GET /': function(req, res){
-    res.render('index.vm', {
-      hello: {
-        world: 'HZzhenghaibo郑海波哈'
-      }
-    })
-  },  
   'GET /ftl': function(req, res){
     res.render('ftl/index.ftl', {
       name: 'zhenghaibo',
@@ -50,6 +43,9 @@ module.exports = {
         ["zhenghaibo2", 'hello2' ,200]
       ]
     })
+  },
+  "GET /ftl": function(req, res){
+    res.json({code:1})
   },
   'ALL /p/(.*)': 'http://nec.netease.com/plugin/{0}',
   "GET /blog": "./index.html",

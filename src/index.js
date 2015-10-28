@@ -32,10 +32,10 @@ var puer = require('./puer');
 
 
 var puer = module.exports = function ( options ){
+
   options = options || {}
   var app = express();
   var server = http.createServer( app );
-
 
   helper.extend(options, {
     views: 'views',
@@ -55,7 +55,6 @@ var puer = module.exports = function ( options ){
   } 
 
 
-
   app.set('views', options.views);
   
   // engine
@@ -68,8 +67,8 @@ var puer = module.exports = function ( options ){
 
   app.use( injector(options) );
 
-  app.use( bodyParser.json() );
-  app.use( bodyParser.urlencoded({ extended: false }))
+  // app.use( bodyParser.json() );
+  // app.use( bodyParser.urlencoded({ extended: false }))
 
   if(options.inspect === true) options.inspect = 9000;
   var inspect = options.inspect;
@@ -109,9 +108,12 @@ var puer = module.exports = function ( options ){
   if(options.rules){ app.use( rewrite( options ) ); }
   app.use( folder( options ) );
   app.use( express.static( options.dir )  );
+  app.use(function(err, req, res, next) {
+    helper.log(err.message, 'error');
+    res.status(500).send('Something is broken!');
+  });
   server.on('error', function (e) {
     // if listen port is in using
-    return ;
     if (e.code == 'EADDRINUSE') {
       // server.close();
       helper.log('port ' + chalk.bold(options.port)+ ' is in use, retrying port ... ' + chalk.bold("" + (++options.port) ), 'warn');
@@ -120,6 +122,8 @@ var puer = module.exports = function ( options ){
       helper.log(e.message, 'error');
     }
   });
+
+
 
 
   server.on('listening', function(){

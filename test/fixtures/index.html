@@ -3,64 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>helo-1</title>
-  <link rel="stylesheet" href="/fixtures1/style.css">
 </head>
 <body>
   
 <h2>djaldjlkasd的骄傲了肯德基阿里斯顿djalkdjlsadjal</h2>
-<script src="https://rawgit.com/ded/reqwest/master/reqwest.js"></script>
+
+<script></script>
 
 <script>
 
-function Tree(data, left, right){
-  this.data = data;
-  this.left = left;
-  this.right = right;
-}
+var xhr = new XMLHttpRequest();
 
 
-Tree.prototype.inverse = function(){
-  var left = this.left;
-  this.left = this.right;
-  this.right = left;
-
-  this.left.inverse && this.left.inverse();
-  this.right.inverse && this.right.inverse();
-  return this;
-}
-
-Tree.prototype.toString = function(){
-  return 'node(\n'+
-            ('' + this.left.toString() + ',')  + 
-            ('' + this.right.toString()) + 
-          ('\n)')
-}
+xhr.open('POST', "/path/to" );
+xhr.setRequestHeader('Content-Type','application/json')
 
 
+xhr.send('{"code":1}');
 
 
-
-
-var tree = new Tree(
-  new Tree(
-    new Tree('1', '2'),
-    new Tree('3', '4')
-  ),
-  new Tree(
-    new Tree('5', '6'),
-    new Tree('7', '8')
-  )
-)
-
-console.log(tree.toString())
-
-console.log(tree.inverse().toString())
-  
-  console.log(tree)
-
-</script>
-
-<script>
   // reqwest({
   //   url: 'http://hongbao.163.com:8001/posts',
   //   method: 'post',

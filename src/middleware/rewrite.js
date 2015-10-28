@@ -1,6 +1,8 @@
 
 var path2reg = require("path-to-regexp");
 var proxy = require('../util/proxy.js');
+var jsonParser = require('body-parser').json();
+var urlencoded = require('body-parser').urlencoded({ extended: false });
 var notifier = require('node-notifier');
 var helper = require('../util/helper');
 var chokidar = require('chokidar');
@@ -48,9 +50,9 @@ function processHandle( handle, rulePath ){
           req.url = libUrl.parse(relUrl).path;
         }
 
+
         return proxy( req, res, {
-          target: relUrl,
-          prependPath: relUrl === handle
+          target: relUrl
         }) 
       }
     }
@@ -83,7 +85,15 @@ function processHandle( handle, rulePath ){
     }
   }
 
-  return handle;
+  return function(req, res, next){
+    // https://github.com/nodejitsu/node-http-proxy/issues/180#issuecomment-97702206
+    // Fix body Parser error
+    jsonParser(req, res, function(){
+      urlencoded(req, res, function(){
+        handle(req, res, next)
+      })
+    });
+  }
 }
 function processRule(rules, rulePath){
   var rst = []
