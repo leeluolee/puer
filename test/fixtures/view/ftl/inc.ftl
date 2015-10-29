@@ -1,6 +1,6 @@
 dajdklajsdklajldks
 
-${name}
+${name!}
 
 <#include "../common.ftl" >
 

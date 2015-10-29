@@ -109,7 +109,7 @@ var puer = module.exports = function ( options ){
   app.use( folder( options ) );
   app.use( express.static( options.dir )  );
   app.use(function(err, req, res, next) {
-    helper.log(err.message, 'error');
+    helper.log(err.message || err, 'error');
     res.status(500).send('Something is broken!');
   });
   server.on('error', function (e) {

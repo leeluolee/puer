@@ -4,7 +4,7 @@
 
 
 module.exports = {
-  "POST /path/to": "http://127.0.0.1:8002" ,
+  "POST /path/*": "http://127.0.0.1:8002" ,
   "GET /hogan.html": "http://127.0.0.1:8002" ,
   "ALL /posts/:id": function( req, res ){
     posts.push({id:posts.length, name: 'post' + posts.length});
@@ -37,15 +37,43 @@ module.exports = {
   "GET /raw": {code: 100, result: 200},
   'GET /ftl': function(req, res){
     res.render('ftl/index.ftl', {
-      name: 'zhenghaibo',
+      "data":{
+        user1: JSON.stringify({
+            "nickname": "caijf",
+            "theme": 0,
+            "onlineStatus": 1,
+            "password": "e10adc3949ba59abbe56e057f20f883e",
+            "portrait": "",
+            "id": 415,
+            "username": "caijf123456",
+            "role": 0,
+            "realname": "caijf",
+            "pinyin": "caijf",
+            "mobile": ""
+        }),
+        "user": {
+            "nickname": "caijf",
+            "theme": 0,
+            "onlineStatus": 1,
+            "password": "e10adc3949ba59abbe56e057f20f883e",
+            "portrait": "",
+            "id": 415,
+            "username": "caijf123456",
+            "role": 0,
+            "realname": "caijf",
+            "pinyin": "caijf",
+            "mobile": ""
+        },
+        "yunxin": {
+            "token": "afb7a94ae16746709a9db0529aa9e0e3",
+            "account": "ad60bc4cc82bea43541c5f55902e@kf@",
+            "appKey": "044865c94981c048609d5c94c1ae9c6d"
+        }
+      },
       flowers: [
-        ["zhenghaibo", 'hello' ,100],
-        ["zhenghaibo2", 'hello2' ,200]
+        ['1','2','3','4']
       ]
     })
-  },
-  "GET /ftl": function(req, res){
-    res.json({code:1})
   },
   'ALL /p/(.*)': 'http://nec.netease.com/plugin/{0}',
   "GET /blog": "./index.html",
