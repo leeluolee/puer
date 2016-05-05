@@ -13,8 +13,9 @@ module.exports = function(options){
   var io = (require('socket.io')).listen(options.server);
   var watcher = chokidar.watch(options.file || options.dir, {
     persistent: true,
-    ignored: [options.ignored,  /node_modules/ ]
+    ignored: [options.exclude,  /node_modules/ ]
   }).on('change', function( path ){
+
 
     var data = { "path": path }; 
 
