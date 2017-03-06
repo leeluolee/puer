@@ -16,7 +16,7 @@
   ],
   "main": "./lib/index.js",
   "bin": {
-    "puer": "./bin/puer"
+    "puer-proxy": "./bin/puer-proxy"
   },
   "dependencies": {
     "coffee-script": "1.4.x",
