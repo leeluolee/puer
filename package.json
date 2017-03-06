@@ -35,7 +35,6 @@
     "node": ">0.8"
   },
   "scripts": {
-    "prepublish": "coffee -o lib/ src/",
     "test": "node setup.js test"
   }
 }
