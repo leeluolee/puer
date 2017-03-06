@@ -1,11 +1,11 @@
 {
-  "name": "puer",
-  "description": "more than a live-reload server , built for efficient frontend development",
-  "author": "leeluolee",
-  "version": "1.1.1",
+  "name": "puer-proxy",
+  "description": "more than a live-reload server , built for efficient frontend development. base on puer add proxy context",
+  "author": "leeluolee Sun",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/leeluolee/puer"
+    "url": "https://github.com/ufologist/puer-proxy"
   },
   "keywords": [
     "live-reload",
@@ -25,7 +25,8 @@
     "socket.io": "0.9.16",
     "weinre": "^2.0.0-pre-I0Z7U9OV",
     "qrcode-npm": "0.0.3",
-    "http-proxy": "~1.10.0"
+    "http-proxy": "~1.10.0",
+    "http-proxy-middleware": "^0.17.3"
   },
   "devDependencies": {
     "nodeunit": ">=0.5.0"

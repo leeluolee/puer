@@ -1,235 +1,50 @@
+# puer-proxy
 
+> __more than a live-reload server , built for efficient frontend development__
 
+在 `puer@1.1.1` 的基础上添加了自定义代理上下文的功能, 主要是为了实现[#36](https://github.com/leeluolee/puer/issues/36 "能否让代理功能和静态服务功能同时开启?")的需求, 与 [puer-mock](https://github.com/ufologist/puer-mock) 配合来使用(必须规范所有的 mock api 都在一个根路径下, 例如 `/api/`)
 
-
-> __Puer - more than a live-reload server , built for efficient frontend development__
-
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/leeluolee/puer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[中文指南](http://leeluolee.github.io/2014/10/24/use-puer-helpus-developer-frontend/)
-
-
-##Features
-
-
-1. __create static server__ at target dir (default in current dir)
-2. __auto reload__ : editing css will update styles only, other files will reload the whole page.
-3. __weinre integrated__  use `-i` options
-4. __proxy server mode__, use it with an existing server
-5. __http request mock__ by `-a` addon，the addon is also __live reloaded__
-6. __connect-middleware__ support
-
-
-##install
-`npm -g install puer`
-
-
-##Usage
-
-###Command line
-
-in most cases
+添加了如下命令行参数(都是针对代理功能的)
 
 ```bash
-cd path/to/your/static/dir
-puer 
+  -c,--context <proxyContext>     proxy context
+  -r,--rewrite <pathRewrite>      proxy pathRewrite
 ```
 
-![puer-step-1](http://leeluolee.github.io/attach/2014-10/puer-step-1.gif)
+PS: 只修改了 `lib` 目录的代码, 没有同步修改 `src` 目录中的 `.coffee` 源码...
 
-puer will launch the browser for you. all pages will reload when you edit them
+## puer-proxy 增强功能的使用方法
 
-### __full options__
-
-To list all of puer's options use `puer -h`
-
-```bash
-ubuntu-21:19 ~ $ puer -h
-
-Usage:  puer [options...]
-
-Options:
-  -p,--port <port>  server's listen port, 8000 default
-  -f,--filetype <typelist>  fileType to watch(split with '|'), default 'js|css|html|xhtml'
-  -d,--dir <dir>  your customer working dir. default current dir 
-  -i,--inspect    start weinre server and debug all puer page
-  -x,--exclude    exclude file under watching(must be a regexp), default: ''
-  -a,--mock <file> your mock's path
-  -t,--target <url> remote proxy server
-     --no-reload    close  auto-reload feature,(not recommended)
-     --no-launch    close the auto launch feature
-  -h,--help     help list
-
-```
-
-
-###__mock request__
-
-During development，you may need to mock a request . use `-a <addon>` to help you mock a dynamic api
+假设你要代理的后端接口在 `http://localhost:8080`, 一般的使用方法为同时指定代理的上下文并使用路径重写功能
 
 ```shell
-puer -a route.js
+puer -c /api/ -r -t http://localhost:8080
 ```
 
-a sample `route.js` looks like:
+这样达到的效果是: 当请求 `http://localhost:8000/api/path/to/something` 时将请求代理给 `http://localhost:8080/path/to/something` 来处理, 默认的 `-r` 参数会将上下文路径(即这里的 `/api/`)重写为空字符串再提交给代理的服务器
 
-```javascript
-// use addon to mock http request
-module.exports = {
-  // GET
-  "GET /v1/posts/:id": function(req, res, next){
-	// response json format
-    res.send({
-      title: "title changed",
-      content: "tow post hahahah"
-    })
+下面详情解释每个参数的含义
 
-  },
-  // PUT POST DELETE is the same
-  "PUT /v1/posts/:id": function(){
+* 自定义代理的上下文(`-c,--context`), 默认为 `/api/`
 
-  },
-  "POST /v1/posts": function(){
+  ```shell
+  puer -c /api/ -t http://localhost:8080
+  ```
 
-  },
-  "DELETE /v1/posts/:id": function(){
+  即当请求 `http://localhost:8000/api/path/to/something` 时将请求代理给 `http://localhost:8080/api/path/to/something` 来处理
 
-  }
-}          
+  注意: **以斜杠结尾, 否则会匹配到 /api123 这样的路径**
+* 关闭路径重写功能
 
-```
+  不要在命令行传入 `-r` 参数, 即达到上面"自定义代理的上下文"例子中的效果
+* 自定义路径重写功能(`-r,--rewrite`)
 
+  ```shell
+  puer -c /api/ -r /abc/ -t http://localhost:8080
+  ```
 
-__[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-2.gif)__
+  即当请求 `http://localhost:8000/api/path/to/something` 时将请求代理给 `http://localhost:8080/abc/path/to/something` 来处理
 
-It is just a  config for routers, you need export an [Object] containing router config. The keys join with 【METHOD】 and 【PATH】, and the  values represent the callback。This function is based on [express](http://expressjs.com)'s router, you can check its documentation for more help。
+## puer 原本功能的使用方法
 
-example from above is just equal code in express like:
-
-```javascript
-app.get("/v1/posts/:id", function(req, res, next){
-  // response json format
-  res.send({
-    title: "title changed",
-    content: "tow post hahahah"
-  })
-})
-
-app.put("/v1/posts/:id", function(){})
-app.post("/v1/posts", function(){})
-app.delete("/v1/posts/:id", function(){})
-```
-
-
-Once `route.js` is changed, puer will refresh it. There is no need to restart puer.
-
-
-__the route.js style__
-
-__Function __ : just like showed before, you can use the express's Response and Request Method
-
-__String__: if the passin is a [String], puer will find the File first, if file is not exsit, will directly response with the origin [String]
-
-```javascript
-{
-  "GET /v1/posts/:id": "hello.html" 
-}
-```
-
-__Object | Array__: will respone a json format. 
-
-```javascript
-  
-  {
-    "GET /v1/posts/:id": {message: "some message"}
-    "GET /v1/posts": [{message: "some message"}]
-  }
-
-```
-
-
-###__proxy support__
-
-you can use `-t` or `--target` to use puer with an exsiting server. For example, say you already have a server running at port 8020. 
-
-```javascript
-puer -t http://localhost:8020
-```
-
-__[【check the record for proxy mode】](http://leeluolee.github.io/attach/2014-10/puer-step-3.gif)__
-
-You can use 【addon】 with【 target】 for more powerful usage。
-
-```
-puer -t http://localhost:8020 -a route.js
-```
-__[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-4.gif)__
-
-
-### use the builtin debugger (through weinre)
-
-type `-i` to bootstrap the weinre, the client script is injected for you in every page through puer, click the 【nav to weinre terminal 】button or find the weinre server directly at port 9001
-
-```shell
-puer -i
-```
-__[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-5.gif)__
-
-###use as [connect|express]-middleware
-
-
-```javascript
-var connect = require("connect")
-var path = require("path")
-var http = require("http")
-var puer = require("puer")
-var app = connect()
-var server = http.createServer(app)
-
-var options = {
-    dir: "path/to/watch/folder", 
-    ignored: /(\/|^)\..*|node_modules/  //ignored file
-}
-
-app.use(puer.connect(app, server , options))   //use as puer connect middleware
-// you must use puer middleware before route and static midleware(before any middle may return 'text/html')
-app.use("/", connect.static(__dirname))
-
-
-server.listen(8001, function(){
-    console.log("listen on 8001 port")
-})
-
-```
-You must use puer middleware before route and static middleware(before any middle may return 'text/html')
-
-
-### Other
-
-<a name="client-event"></a>
-#### client event
-
-puer will inject a namespace __`puer` in global__. it is a Emitter instance. has `on`, `off` and  `emit`.
-
-you can register `update` event to control the reload logic
-
-
-```javascript
-
-puer.on("update", function(ev){
-  console.log(ev.path) // the absolute path , the file change
-  console.log(ev.css) // whether css file is change
-  if(ev.path.match(/\.js$/)){
-    ev.stop = true; // if you set ev.stop = true.  the reload will be stoped;
-  }
- 
-})
-
-```
-
-Example above means that: if js file is changed,  reloading won't be actived.
-
-
-
-###LICENSE
-MIT
+其他使用说明请参考官网文档 [leeluolee/puer](https://github.com/leeluolee/puer), 非常感谢 [leeluolee/puer](https://github.com/leeluolee/puer) 给我们带来了很多效率的提升.
