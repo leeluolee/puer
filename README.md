@@ -65,6 +65,11 @@ puer-proxy -r -t http://localhost:8080
   ```
 
   即当请求 `http://localhost:8000/api/path/to/something` 时将请求代理给 `http://localhost:8080/abc/path/to/something` 来处理
+* 与 `puer-mock` 搭配使用的例子
+
+  ```shell
+  puer-proxy -a _mockserver.js -c /api/ -r -t http://localhost:8080
+  ```
 
 ## puer 原本功能的使用方法
 
