@@ -45,6 +45,6 @@
   ```
 * 随时切换假接口和真实的后端接口
 
-  通过切换 `disabled` 的值, `false` 为使用假接口, `true` 为使用真实的后端接口, 相当于一键切换了
+  通过切换 `disabled` 的值, `false` 为使用假接口, `true` 为使用真实的后端接口, 相当于一键切换了, 接口联调 so easy
 
 更多详细的参数配置和使用手册, 请参考 [puer-proxy](https://github.com/ufologist/puer-proxy) 和 [puer-mock](https://github.com/ufologist/puer-mock) 的官方文档.
