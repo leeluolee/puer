@@ -76,3 +76,7 @@ puer-proxy -r -t http://localhost:8080
 ## puer 原本功能的使用方法
 
 其他使用说明请参考官网文档 [leeluolee/puer](https://github.com/leeluolee/puer), 非常感谢 [leeluolee/puer](https://github.com/leeluolee/puer) 给我们带来了很多效率的提升.
+
+## 原来的实现方式
+
+* [dev-serv](https://github.com/ufologist/dev-serv "开发时使用的专属服务器")
