@@ -51,7 +51,7 @@ module.exports = (app, server, options) ->
     helper.log "watcher on!!"
 
     io = (require 'socket.io').listen server
-    io.set("log level", 1)
+    # io.set("log level", 1)
 
     # keep the connect socket instance
     sockets = []
