@@ -54,10 +54,10 @@ puer-proxy -r -t http://localhost:8080
 
   即当请求 `http://localhost:8000/api/path/to/something` 时将请求代理给 `http://localhost:8080/api/path/to/something` 来处理
 
-  注意: **以斜杠结尾, 否则会匹配到 /api123 这样的路径**
+  注意: **以斜杠结尾, 否则会匹配到 /apipath/to/something 这样的路径**
 * 关闭路径重写功能
 
-  不要在命令行传入 `-r` 参数, 即达到上面"自定义代理的上下文"例子中的效果
+  不在命令行传入 `-r` 参数, 则请求的路径给代理时不会被重写
 * 自定义路径重写功能(`-r,--rewrite`)
 
   ```shell
