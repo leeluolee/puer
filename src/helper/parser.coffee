@@ -69,7 +69,7 @@ class Parser
       return char.join " " 
     option = option.replace /\=/g," "
     result = []
-    option.replace /--([^-][\w-]*)(\s[^\s-]+)?|-\w(\s[^\s-]+)?/g, (a) ->
+    option.replace /--([^-][\w-]*)(\s[^\s]+)?|-\w(\s[^\s]+)?/g, (a) ->
       # 第一个是flag 第二个是参数
       cur = {}
       seps = a.split(/\s+/)
