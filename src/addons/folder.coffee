@@ -2,7 +2,7 @@ sysPath = require "path"
 fs =require "fs"
 
 list = (klass, links, pathname) ->
-  ("<a class='#{klass}' href='#{sysPath.join pathname, link}'>#{link}</a>" for link in links).join("\n")
+  ("<div><a class='#{klass}' href='#{sysPath.join pathname, link}'>#{link}</a></div>" for link in links).join("\n")
 
 weinre = (inspect) ->
   if(inspect)
@@ -55,7 +55,7 @@ toHTML = (files, folders, pathname ,options) ->
     </div>
     <script src="/puer/js/folder.js"></script>
   </body>
-  </html> 
+  </html>
   """
 
 module.exports = (app, options) ->
@@ -80,9 +80,5 @@ module.exports = (app, options) ->
         body = toHTML(files, folders, pathname, options)
         res.setHeader "Content-Type", "text/html"
         # not charlength  but bytelength
-        res.setHeader "Content-Length", Buffer.byteLength body 
+        res.setHeader "Content-Length", Buffer.byteLength body
         res.send body
-        
-
-      
-      
