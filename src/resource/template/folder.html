@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>PUER: folder viewer </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" user-scalable="no">
+  <style type="text/css">
+  /* reset */
+  body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;} 
+  table{border-collapse:collapse;border-spacing:0;} 
+  caption,th{text-align:left;} 
+  fieldset,img,a img,iframe,html,body{border:0;} 
+  li{list-style:none;} 
+  address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;} 
+  h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;} 
+  [hidefocus]{outline:0;} 
+  body{word-wrap:break-word;font:18/normal "微软雅黑",arial,simsun;color:#333;background:#fff;} 
+  h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;} 
+  a,button{cursor:pointer;text-decoration: none;}
+  a:hover{color:#888;text-decoration: underline;} 
+  a:visited{color: #888;}
+
+  .g-doc {padding: 20px 40px 0px 20px;}
+  a {margin-bottom: 5px;}
+  a {display:block;padding-left: 20px;}
+  h2 {border-bottom:3px dotted #ccc;font-size: 36px;margin-bottom: 10px;}
+
+  .prevpath {background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAmlJREFUeNpsU0toU0EUPfPysx/tTxuDH9SCWhUDooIbd7oRUUTMouqi2iIoCO6lceHWhegy4EJFinWjrlQUpVm0IIoFpVDEIthm0dpikpf3ZuZ6Z94nrXhhMjM3c8895977BBHB2PznK8WPtDgyWH5q77cPH8PpdXuhpQT4ifR9u5sfJb1bmw6VivahATDrxcRZ2njfoaMv+2j7mLDn93MPiNRMvGbL18L9IpF8h9/TN+EYkMffSiOXJ5+hkD+PdqcLpICWHOHc2CC+LEyA/K+cKQMnlQHJX8wqYG3MAJy88Wa4OLDvEqAEOpJd0LxHIMdHBziowSwVlF8D6QaicK01krw/JynwcKoEwZczewroTvZirlKJs5CqQ5CG8pb57FnJUA0LYCXMX5fibd+p8LWDDemcPZbzQyjvH+Ki1TlIciElA7ghwLKV4kRZstt2sANWRjYTAGzuP2hXZFpJ/GsxgGJ0ox1aoFWsDXyyxqCs26+ydmagFN/rRjymJ1898bzGzmQE0HCZpmk5A0RFIv8Pn0WYPsiu6t/Rsj6PauVTwffTSzGAGZhUG2F06hEc9ibS7OPMNp6ErYFlKavo7MkhmTqCxZ/jwzGA9Hx82H2BZSw1NTN9Gx8ycHkajU/7M+jInsDC7DiaEmo1bNl1AMr9ASFgqVu9MCTIzoGUimXVAnnaN0PdBBDCCYbEtMk6wkpQwIG0sn0PQIUF4GsTwLSIFKNqF6DVrQq+IWVrQDxAYQC/1SsYOI4pOxKZrfifiUSbDUisif7XlpGIPufXd/uvdvZm760M0no1FZcnrzUdjw7au3vu/BVgAFLXeuTxhTXVAAAAAElFTkSuQmCC ") left top no-repeat}
+  .folder{background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAd5JREFUeNqMU79rFUEQ/vbuodFEEkzAImBpkUabFP4ldpaJhZXYm/RiZWsv/hkWFglBUyTIgyAIIfgIRjHv3r39MePM7N3LcbxAFvZ2b2bn22/mm3XMjF+HL3YW7q28YSIw8mBKoBihhhgCsoORot9d3/ywg3YowMXwNde/PzGnk2vn6PitrT+/PGeNaecg4+qNY3D43vy16A5wDDd4Aqg/ngmrjl/GoN0U5V1QquHQG3q+TPDVhVwyBffcmQGJmSVfyZk7R3SngI4JKfwDJ2+05zIg8gbiereTZRHhJ5KCMOwDFLjhoBTn2g0ghagfKeIYJDPFyibJVBtTREwq60SpYvh5++PpwatHsxSm9QRLSQpEVSd7/TYJUb49TX7gztpjjEffnoVw66+Ytovs14Yp7HaKmUXeX9rKUoMoLNW3srqI5fWn8JejrVkK0QcrkFLOgS39yoKUQe292WJ1guUHG8K2o8K00oO1BTvXoW4yasclUTgZYJY9aFNfAThX5CZRmczAV52oAPoupHhWRIUUAOoyUIlYVaAa/VbLbyiZUiyFbjQFNwiZQSGl4IDy9sO5Wrty0QLKhdZPxmgGcDo8ejn+c/6eiK9poz15Kw7Dr/vN/z6W7q++091/AQYA5mZ8GYJ9K0AAAAAASUVORK5CYII= ") left top no-repeat}
+  .file{background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABnRSTlMAAAAAAABupgeRAAABHUlEQVR42o2RMW7DIBiF3498iHRJD5JKHurL+CRVBp+i2T16tTynF2gO0KSb5ZrBBl4HHDBuK/WXACH4eO9/CAAAbdvijzLGNE1TVZXfZuHg6XCAQESAZXbOKaXO57eiKG6ft9PrKQIkCQqFoIiQFBGlFIB5nvM8t9aOX2Nd18oDzjnPgCDpn/BH4zh2XZdlWVmWiUK4IgCBoFMUz9eP6zRN75cLgEQhcmTQIbl72O0f9865qLAAsURAAgKBJKEtgLXWvyjLuFsThCSstb8rBCaAQhDYWgIZ7myM+TUBjDHrHlZcbMYYk34cN0YSLcgS+wL0fe9TXDMbY33fR2AYBvyQ8L0Gk8MwREBrTfKe4TpTzwhArXWi8HI84h/1DfwI5mhxJamFAAAAAElFTkSuQmCC ") left top no-repeat}
+
+
+  .u-ebtn{
+    display: inline-block;
+    padding: .5em .8em;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #34495e;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .u-ebtn:hover{
+    background-color: #455a6f;
+  }
+  .weinre{
+    display: none;
+  }
+
+  .weinre .u-ebtn{
+    margin-top: 20px;
+  }
+  a.u-ebtn,a.u-ebtn:hover, a.u-ebtn:active{
+    text-decoration: none;
+    color: #fff;
+  }
+
+
+
+  .m-qrcode{
+    display: none;
+  }
+
+  .m-qrcode .title{
+    text-align: center;
+  }
+
+  @media (min-width: 800px){
+    .m-qrcode{
+      position: fixed;
+      display: block;
+      top: 20px;
+      right: 20px;
+      padding: 20px;
+      background-color: #fefefe;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      -webkit-box-shadow: 1px 1px 3px #aaa;
+      -moz-box-shadow: 1px 1px 3px #aaa;
+      box-shadow: 1px 1px 3px #aaa;
+    }
+    .m-qrcode img{
+      width: 200px;
+      height: 200px;
+    }
+    .weinre{
+      display: block;
+    }
+  }
+
+  .m-ips{
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+  .m-ips   h3{
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .m-ips a{
+    text-decoration: underline;
+    font-weight: bold;
+    color: #16a085;
+  }
+  </style>
+</head>
+<body>
+  <div class="g-doc">
+
+    <h2>current dir:<strong id="dir">/</strong></h2>
+    <ul class='m-folder'>
+      <% if (prevpath != undefined) { %> 
+        <li><a href="<%= join('/', prevpath) %>" class='prevpath'>Upper Folder</a></li>
+      <% } %>
+      <% folders.forEach(function(folder){ %>
+        <li>
+          <a href="<%= join(pathname,folder) %>" class='folder'><%= folder %></a>
+        </li>
+      <% }) %>
+      <% files.forEach(function(file){ %>
+        <li>
+          <a href="<%= join(pathname,file) %>" class='file' ><%= file %></a>
+        </li>
+      <% }) %>
+    </ul>
+    
+    <div class="m-qrcode">
+      <div id="qrcode">
+        <%- qrcode %>
+      </div>
+      <h3 class="title">scan qrcode to open</h3>
+      <div class="m-ips">
+        <h3>switch ips:</h3>
+        <ul>
+          <% ips.forEach(function(ip){ %>
+          <li><a  href='http://<%= ip + ':' + options.port + pathname %>'><%= ip + ':' + options.port %></a></li>
+          <% }) %>
+        </ul>
+      </div>
+      <% if (!!inspectHost){  %>
+        <a target='_blank' href="<%= inspectHost %>" class="u-ebtn">Weinre Dashboard</a>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html> 
