@@ -58,6 +58,7 @@ Options:
   -t,--target <url> remote proxy server
      --no-reload    close  auto-reload feature,(not recommended)
      --no-launch    close the auto launch feature
+     --allow-cors   allow cross origin resource sharing
   -h,--help     help list
 
 ```
