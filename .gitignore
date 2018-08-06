@@ -4,4 +4,7 @@ node_modules/
 src2
 test/tmp/
 *.mcss
+*tmp/
+
+npm-debug.log
 

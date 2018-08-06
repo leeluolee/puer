@@ -4,12 +4,12 @@
 
 > __Puer - more than a live-reload server , built for efficient frontend development__
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/leeluolee/puer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/JoinChat.svg)](https://gitter.im/leeluolee/puer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [中文指南](http://leeluolee.github.io/2014/10/24/use-puer-helpus-developer-frontend/)
 
 
-##Features
+## Features
 
 
 1. __create static server__ at target dir (default in current dir)
@@ -20,13 +20,13 @@
 6. __connect-middleware__ support
 
 
-##install
+## Install
 `npm -g install puer`
 
 
-##Usage
+## Usage
 
-###Command line
+### Command line
 
 in most cases
 
@@ -63,7 +63,7 @@ Options:
 ```
 
 
-###__mock request__
+### __mock request__
 
 During development，you may need to mock a request . use `-a <addon>` to help you mock a dynamic api
 
@@ -148,7 +148,7 @@ __Object | Array__: will respone a json format.
 ```
 
 
-###__proxy support__
+### __proxy support__
 
 you can use `-t` or `--target` to use puer with an exsiting server. For example, say you already have a server running at port 8020. 
 
@@ -175,7 +175,7 @@ puer -i
 ```
 __[【check the  usage record 】](http://leeluolee.github.io/attach/2014-10/puer-step-5.gif)__
 
-###use as [connect|express]-middleware
+### use as [connect|express]-middleware
 
 
 ```javascript
@@ -231,5 +231,5 @@ Example above means that: if js file is changed,  reloading won't be actived.
 
 
 
-###LICENSE
+### LICENSE
 MIT

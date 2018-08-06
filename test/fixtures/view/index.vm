@@ -1,0 +1,98 @@
+<head>
+<link rel="stylesheet" href="/fixtures/style.css">
+</head>
+<body>
+  
+
+<!-- the container -->
+
+<div id="app"></div>
+
+
+<!-- Regular template container(optional) -->
+<!-- if you need this component used in other component, you can specify name in the tag-->
+<script id="helloword" type="text/regular" name="helloword">
+  Hello 
+  {\#if user}
+    <strong> &cent; {user}</strong>, <a href='#' on-click={user = null}>logout</a>
+  {\#else}
+    Friend, please <a href='#' on-click={this.login()}>login</a>
+
+  {/if}
+</script>
+<!-- include regular.js -->
+
+#parse("./inc.vm")
+
+
+<h2>$hello.world</h2>
+
+<ul>
+     <li><a href="#/author">#/author</a></li>
+     <li><a href="#/books/books">#/books</a></li>
+     <li><a href="#/books/view/1">#/books/view/1</a></li>
+   </ul>
+
+
+<!-- Define your Own Component -->
+<script>
+var LoginApp = Regular.extend({
+  // name: 'helloword',  if this component need used in other component , you need specify name
+  // you can pass [String| preparsed AST | node selector]
+  template: '#helloword', //if es6 released,  multi-line string is 
+  login: function(){
+    // all data is store in the plain object `this.data`;
+    var data = this.data;
+    // just like angular, if trigger by the ui , the $digest phase will automate triggerd;
+    data.user = prompt("Please Enter you name", "");
+  }
+});
+
+var application = new LoginApp().\$inject('#app');
+
+// you can also inject the component at other position, for example `inject('#app', 'bottom' | 'top' | 'after' | 'before')`, the default is 'bottom'
+
+
+
+var author = function () { console.log("author"); };
+var books = function () { console.log("books"); };
+var viewBook = function (bookId) {
+  console.log("viewBook: bookId is populated: " + bookId);
+};
+
+var routes = {
+  '/author': author,
+  '/books' :{
+    books:function(){
+      console.log('hahaha')
+    },
+  },
+  "/:id/books": function(){
+    console.log(arguments, "haha")
+  },
+  '/books/:bookId': viewBook,
+  'notfound': function(){
+
+  }
+};
+
+var router = Router(routes).configure({
+  after: function(){
+    console.log(arguments, 'after')
+  },
+  before: function(){
+    console.log(arguments, 'before')
+  },
+  notfound: function(){
+    console.log(arguments, 'notfound')
+  }
+});
+
+router.init();
+
+
+
+
+</script>
+
+</body>
