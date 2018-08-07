@@ -103,7 +103,15 @@ var puer = module.exports = function ( options ){
     options.server = server;
     app.use( livereload (options))
   }
-  
+
+  if (options.allowCORS) {
+    // Allow Cross Origin Resource Sharing
+    // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    app.use(function (req, res, next) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      return next();
+    });
+  }
 
   if(options.rules){ app.use( rewrite( options ) ); }
   app.use( folder( options ) );

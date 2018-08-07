@@ -36,6 +36,7 @@ program
   .option('--views <path>', 'change the template\' folder, default is ./views')
   .option('--no-reload', 'stop livereload')
   .option('--no-launch', 'stop autolaunch page in browser')
+  .option('--allow-cors', 'allow CORS for all origins')
 
 
 
@@ -62,7 +63,8 @@ program.once('done', function(createFile){
     views: program.views,
     reload: program.reload,
     launch: program.launch,
-    engine: program.engine
+    engine: program.engine,
+    allowCORS: program.allowCors,
   }
 
 
