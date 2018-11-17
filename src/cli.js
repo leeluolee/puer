@@ -92,6 +92,7 @@ if(program.config){
 
       var configOptions = require(program.config);
       helper.extend( program, configOptions, true );
+      program.parse(process.argv);
     }catch(e){
 
       helper.log('Some Error occurs in ' + program.config + '\n' + e.message, 'error')
