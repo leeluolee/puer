@@ -1,6 +1,20 @@
 
+> ## This Project is Planning to Archive ...  
+
+# ⚠️ Server-X: Puer's rebirth, next generation dev-server
+
+Although puer is still very easy to use in a simple development, There is no doubt that it is out of date.
+After investigating the flaws of Puer and its Competing products
+(like lite-server、browser-sync), our team redesigned a new project named [svrx(server-x)](https://github.com/svrxjs/svrx)
 
 
+
+You can [read documentation here](https://docs.svrx.io/en/) ([中文文档](https://docs.svrx.io/zh/)).
+
+The biggest feature is the decentralized plug-in architecture but also very easy to use.  Happy to use it !
+
+
+-------------------  
 
 > __Puer - more than a live-reload server , built for efficient frontend development__
 
