@@ -15,6 +15,10 @@ var logo = fs .readFileSync(
   path.join(__dirname, './resource/template/logo.txt'), 'utf8'
 ).replace('{version}', pkg.version);
 
+var svrx = fs .readFileSync( 
+  path.join(__dirname, './resource/template/svrx.txt'), 'utf8'
+) 
+
 var convert = {
   'int': function(num){
     return parseInt(num, 10);
@@ -44,6 +48,7 @@ var preHelp = program.outputHelp;
 
 program.outputHelp = function(){
   console.log(logo)
+  console.log(svrx)
   preHelp.apply(program, arguments);
 }
 

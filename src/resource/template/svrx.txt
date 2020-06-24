@@ -1,0 +1,11 @@
+⚠ Warning: Puer is planning to stop updating,  we recommend an amazing alternative:
+
+      Server-X: Puer's rebirth, next generation dev-server
+
+Get it via: `npm install -g @svrx/cli`
+For more details: https://github.com/svrxjs/svrx
+
+Although puer is still very easy to use in a simple development, There is no doubt that it is out of date. After investigating the flaws of Puer and its Competing products (like lite-server、browser-sync), our team redesigned a new project named svrx(server-x)
+
+The biggest feature of Server-X is the decentralized plug-in architecture but also very easy to use. Happy to use it !
+

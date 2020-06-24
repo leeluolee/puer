@@ -16,6 +16,9 @@ var chalk = require('chalk')
 
 var puer = require('./puer');
 
+var svrx = require('fs').readFileSync( 
+  path.join(__dirname, './resource/template/svrx.txt'), 'utf8'
+) 
 
 
 /**
@@ -135,6 +138,7 @@ var puer = module.exports = function ( options ){
 
 
   server.on('listening', function(){
+    console.log(svrx)
     var url = 'http://localhost:' + options.port;
     helper.log("puer successfully started at " + chalk.underline.magenta.bold( url ), 'success')
     if(options.launch) helper.openBrowser( url );
