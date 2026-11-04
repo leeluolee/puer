@@ -1,6 +1,6 @@
 
 var isWin = process.platform === 'win32';
-var exec = require('child_process').exec;
+var execFile = require('child_process').execFile;
 var qrcode = require('qrcode-npm');
 var chalk = require('chalk');
 var os = require('os');
@@ -61,13 +61,15 @@ var helper = module.exports = {
     })
   },
   openBrowser: function(target, callback) {
-    var map, opener;
-    map = {
-      'darwin': 'open',
-      'win32': 'start '
-    };
-    opener = map[process.platform] || 'xdg-open';
-    return exec("" + opener + " " + target, callback);
+    if (isWin) {
+      // Open the target with the default handler via rundll32, which is started
+      // directly as a normal program. Unlike invoking cmd.exe (a command
+      // interpreter, as `exec` and `'start'` do), nothing re-parses `target` as
+      // shell syntax, so shell metacharacters stay literal.
+      return execFile('rundll32', ['url.dll,FileProtocolHandler', target], callback);
+    }
+    var opener = process.platform === 'darwin' ? 'open' : 'xdg-open';
+    return execFile(opener, [target], callback);
   },
   getIPs: function(){
     var ifaces = os.networkInterfaces();
@@ -84,7 +86,7 @@ var helper = module.exports = {
 
   getQRCode: function(content, start){
     var qr;
-    if (start == null)  start = 2; 
+    if (start == null)  start = 2;
     try {
       qr = qrcode.qrcode(start, 'L');
       qr.addData(content || '');
@@ -101,7 +103,7 @@ var helper = module.exports = {
 
   // express only
   getFullUrl: function(req){
-    
+
     return req.protocol + '://' + req.get('host') + req.originalUrl;
   },
 
@@ -156,5 +158,5 @@ var helper = module.exports = {
     })
     return index;
   }
-  
+
 }
